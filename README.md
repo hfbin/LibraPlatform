@@ -4,7 +4,7 @@
 ![相关功能](./docs/img/Libra-Platform平台规划.png)
 
 ## 总体架构图
-
+![相关功能](./docs/img/libra-架构图.jpg)
 
 ## 模块说明
 ```lua
