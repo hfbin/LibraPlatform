@@ -28,6 +28,23 @@ libra-platform -- 父项目
 
 ```
 
+## 相关工具截图
+
+### APM Skywalking 
+拓扑图
+![Skywalking](./docs/img/skywaling.png)
+仪表盘
+![Skywalking](./docs/img/skywaling-1.png)
+调用链路
+![Skywalking](./docs/img/skywaling-2.png)
+
+### Sentinel 熔断限流
+![Sentinel](./docs/img/sentinel.png)
+
+### Prometheus + Grafana 监控
+服务监控
+![Prometheus](./docs/img/服务监控.png)
+
 ## Libra-Platform 功能说明
 
 ### 租户配置
@@ -47,9 +64,9 @@ libra-platform -- 父项目
 - 菜单模板修改时候不会将关联此菜单模板的租户权限同步到默认角色里，需要另外操作一下权限同步功能，将此菜单权限同步到租户管理员角色
 
 ##### 菜单模板列表
-![租户列表](./docs/img/tenant-menu-listt.png)
+![菜单模板列表](./docs/img/tenant-menu-listt.png)
 ##### 新增菜单模板
-![新增租户](./docs/img/tenant-menu-add.png)
+![新增菜单模板](./docs/img/tenant-menu-add.png)
 
 
 ### 组织管理
@@ -59,27 +76,27 @@ libra-platform -- 父项目
 - 新增员工的账号和手机号做为账号的唯一标识，部门和角色为必填
 
 ##### 员工管理列表
-![租户列表](./docs/img/p-emp-list.png)
+![员工管理列表](./docs/img/p-emp-list.png)
 ##### 新增员工
-![新增租户](./docs/img/p-emp-add.png)
+![新增员工](./docs/img/p-emp-add.png)
 
 #### 部门管理
 部门管理功能包括新增、查询、修改、删除等功能。
 - 当部门有关联了用户对应的部门是无法删除
 - 系统默认部门无法删除，可修改，创建租户时候默认以租户名称创建默认部门
 ##### 部门管理列表
-![租户列表](./docs/img/p-dept-list.png)
+![部门管理列表](./docs/img/p-dept-list.png)
 
 #### 角色管理
 角色管理功能包括新增、查询、修改、删除等功能。
 - 角色组及角色在创建租户时候会默认创建，对应的权限无法编辑及删除
 ##### 角色管理列表
-![租户列表](./docs/img/p-role-list.png)
+![角色管理列表](./docs/img/p-role-list.png)
 
 #### 岗位管理
 岗位管理功能包括新增、查询、修改、删除等功能。
 ##### 岗位管理列表
-![租户列表](./docs/img/p-position-list.png)
+![岗位管理列表](./docs/img/p-position-list.png)
 
 ### 系统设置
 系统设置包括了菜单管理、接口管理、版本管理、终端管理、操作日志、登录日志
@@ -88,46 +105,46 @@ libra-platform -- 父项目
 - 接口权限配置是用来做接口管理的接口绑定，后端在验证接口权限鉴权时候使用此关联关联数据做校验。此模块设计初衷，当业务线较为复杂时候很多接口会在不同功能模块调用，此时就可以灵活配置接口权限了
 - 菜单可以根据不通的应用端去配置
 ##### 菜单管理列表
-![租户列表](./docs/img/system-menu-list.png)
+![菜单管理列表](./docs/img/system-menu-list.png)
 ##### 新增菜单
-![新增租户](./docs/img/system-menu-add.png)
+![新增菜单](./docs/img/system-menu-add.png)
 ##### 接口权限配置
-![新增租户](./docs/img/system-menu-interface-add.png)
+![接口权限配置](./docs/img/system-menu-interface-add.png)
 
 #### 接口管理
 接口管理功能包括新增、查询、修改、删除等功能。
 - 接口管理可以区分不同应用端的接口，这样更有效管理
 ##### 接口管理列表
-![租户列表](./docs/img/system-interface-list.png)
+![接口管理列表](./docs/img/system-interface-list.png)
 
 #### 应用管理
 应用管理功能包括新增、查询、修改、删除等功能。
 - 菜单模块与接口模块需要与应用关联，在不用的应用端只会返回对应端菜单
 
 ##### 应用管理列表
-![租户列表](./docs/img/system-client-list.png)
+![应用管理列表](./docs/img/system-client-list.png)
 
 #### 操作日志
 操作日志模块目前只提供两种类型，操作日志及登录日志，如果需要扩展可对`libra-common-log`组件进行类型扩展。
 
 ##### 操作日志列表
-![租户列表](./docs/img/system-loglist.png)
+![操作日志列表](./docs/img/system-loglist.png)
 
 ### 开发工具
 开发工具模块包括数据源管理、代码生成、版本管理。
 
 #### 数据源管理
 提供不同数据源配置便捷代码生成模块
-![租户列表](./docs/img/code-ds.png)
+![数据源管理](./docs/img/code-ds.png)
 
 #### 代码生成
 可切换不同数据源生成代码，代码生成会生成前端页面代码、后端代码、菜单接口sql
-![租户列表](./docs/img/code-gen-list.png)
+![代码生成](./docs/img/code-gen-list.png)
 
 #### 版本管理
 版本管理模块的主要目的是在迭代推进的过程中我们菜单和接口可能一直在变，此时在切到对应环境时候无需重新添加菜单及接口，此模块会提供一个一键导出当前版本菜单及接口变动的sql文件。
 ##### 版本管理列表
-![租户列表](./docs/img/code-version-list.png)
+![版本管理列表](./docs/img/code-version-list.png)
 
 
 
