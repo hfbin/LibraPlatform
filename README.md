@@ -41,7 +41,7 @@ libra-platform -- 父项目
 
 ```
 # 后端工程
-git clone https://gitee.com/huangfubin/LibraPlatform.g
+git clone https://gitee.com/huangfubin/LibraPlatform.git
 
 # 前端工程
 git clone https://gitee.com/huangfubin/LibraPlatformUi.git
