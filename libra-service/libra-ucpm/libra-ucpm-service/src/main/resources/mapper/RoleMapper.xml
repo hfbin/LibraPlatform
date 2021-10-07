@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.hfbin.ucpm.mapper.RoleMapper">
+
+  <resultMap id="baseRoleMap" type="cn.hfbin.ucpm.entity.Role">
+          <id property="id" column="id"/>
+              <result property="roleName" column="role_name"/>
+              <result property="roleCode" column="role_code"/>
+              <result property="enabled" column="enabled"/>
+              <result property="groupId" column="group_id"/>
+              <result property="sortNo" column="sort_no"/>
+              <result property="description" column="description"/>
+              <result property="systemDefault" column="system_default"/>
+              <result property="tenantCode" column="tenant_code"/>
+              <result property="createBy" column="create_by"/>
+              <result property="createTime" column="create_time"/>
+              <result property="updateBy" column="update_by"/>
+              <result property="updateTime" column="update_time"/>
+              <result property="delFlag" column="del_flag"/>
+        </resultMap>
+
+    <select id="selectListIgnoreTr" resultType="cn.hfbin.ucpm.entity.Role">
+        select * from ucpm_role
+        <where>
+            <if test="params.systemDefault != null">
+                and system_default = #{params.systemDefault}
+            </if>
+            <if test="params.tenantCodes != null and params.tenantCodes.size() > 0">
+                and tenant_code in
+                <foreach collection="params.tenantCodes" item="item" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
+</mapper>

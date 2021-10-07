@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.hfbin.base.mapper.BaseTenantMenuRefMapper">
+
+  <resultMap id="baseTenantMenuRefMap" type="cn.hfbin.tenant.entity.TrMenuTemplateRef">
+          <id property="id" column="id"/>
+              <result property="menuTemplateId" column="menu_template_id"/>
+              <result property="menuId" column="menu_id"/>
+              <result property="createBy" column="create_by"/>
+              <result property="createTime" column="create_time"/>
+              <result property="updateBy" column="update_by"/>
+              <result property="updateTime" column="update_time"/>
+              <result property="delFlag" column="del_flag"/>
+        </resultMap>
+</mapper>

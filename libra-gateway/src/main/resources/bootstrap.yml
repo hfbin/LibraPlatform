@@ -1,0 +1,25 @@
+server:
+  port: 9999
+
+spring:
+  profiles:
+    active: dev
+  # 服务名
+  application:
+    name: libra-gateway
+  cloud:
+    nacos:
+      # nacos 地址
+      server-addr: http://127.0.0.1:8848
+      config:
+        namespace: ${spring.profiles.active}
+        file-extension: yml
+        shared-configs:
+          - dataId: sentinel.yml
+            group: COMMON
+          - dataId: prometheus.yml
+            group: COMMON
+      discovery:
+        namespace: ${spring.profiles.active}
+        metadata:
+          version: 1.0

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.hfbin.ucpm.mapper.RelationRoleMapper">
+
+    <resultMap id="baseRelationRoleMap" type="cn.hfbin.ucpm.entity.RelationRole">
+        <id property="id" column="id"/>
+        <result property="roleId" column="role_id"/>
+        <result property="relationType" column="relation_type"/>
+        <result property="relationId" column="relation_id"/>
+        <result property="tenantCode" column="tenant_code"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="delFlag" column="del_flag"/>
+    </resultMap>
+    <select id="selectRoleListByEmpId" parameterType="cn.hfbin.ucpm.params.RelationRoleParams"
+            resultType="cn.hfbin.ucpm.vo.RelationRoleVo">
+        select br.id, br.role_name
+        from ucpm_relation_role brr
+        LEFT JOIN ucpm_role br on br.id = brr.role_id and br.del_flag = 0
+        <where> brr.del_flag = 0
+            <if test="params.id != null">
+                and brr.relation_id= #{params.id}
+            </if>
+            <if test="params.relationTypeEnum != null">
+                and brr.relation_type= #{params.relationTypeEnum.code}
+            </if>
+        </where>
+    </select>
+</mapper>

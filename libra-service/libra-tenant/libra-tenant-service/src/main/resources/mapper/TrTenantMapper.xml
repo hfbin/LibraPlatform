@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.hfbin.tenant.mapper.TrTenantMapper">
+
+  <resultMap id="baseTenantMap" type="cn.hfbin.tenant.entity.TrTenant">
+          <id property="id" column="id"/>
+              <result property="tenantCode" column="tenant_code"/>
+              <result property="tenantName" column="tenant_name"/>
+              <result property="beginDate" column="begin_date"/>
+              <result property="endDate" column="end_date"/>
+              <result property="status" column="status"/>
+              <result property="identityId" column="identity_id"/>
+              <result property="menuTemplateId" column="menu_template_id"/>
+              <result property="level" column="level"/>
+              <result property="createBy" column="create_by"/>
+              <result property="createTime" column="create_time"/>
+              <result property="updateBy" column="update_by"/>
+              <result property="updateTime" column="update_time"/>
+              <result property="delFlag" column="del_flag"/>
+        </resultMap>
+
+    <select id="selectPageList" resultType="cn.hfbin.tenant.vo.TrTenantVo" parameterType="cn.hfbin.tenant.entity.TrTenant">
+        select tt.id, tt.tenant_code, tt.tenant_name, tt.begin_date, tt.end_date, tt.status, tt.menu_template_id, tt.identity_id, tt.level, tt.create_by,
+                tt.create_time, tt.update_by, tt.update_time, tt.del_flag, tmt.id, tmt.template_name FROM tr_tenant tt
+        INNER join tr_menu_template tmt on tmt.id = tt.menu_template_id
+        <where>
+            <if test="params.tenantCode != null and params.tenantCode != ''">
+                tt.tenant_code like CONCAT('%', #{params.tenantCode}, '%')
+            </if>
+            <if test="params.tenantName != null and params.tenantName != ''">
+                tt.tenant_name like CONCAT('%', #{params.tenantName}, '%')
+            </if>
+            <if test="params.menuTemplateId != null">
+                tmt.id = #{params.menuTemplateId}
+            </if>
+        </where>
+    </select>
+    <select id="selectMenu" resultType="java.lang.Long">
+        select tmtr.menu_id from tr_tenant tt
+        left join tr_menu_template_ref tmtr on tt.menu_template_id = tmtr.menu_template_id and tmtr.del_flag = 0
+        where tt.tenant_code = #{tenantCode}
+    </select>
+
+</mapper>

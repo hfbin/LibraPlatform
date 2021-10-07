@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.hfbin.ucpm.mapper.DepartMapper">
+
+  <resultMap id="baseDepartMap" type="cn.hfbin.ucpm.entity.Depart">
+          <id property="id" column="id"/>
+              <result property="parentId" column="parent_id"/>
+                <result property="parentIds" column="parent_ids"/>
+              <result property="deptName" column="dept_name"/>
+              <result property="deptCode" column="dept_code"/>
+              <result property="deptType" column="dept_type"/>
+              <result property="bizType" column="biz_type"/>
+              <result property="sortNo" column="sort_no"/>
+              <result property="description" column="description"/>
+              <result property="systemDefault" column="system_default"/>
+              <result property="enabled" column="enabled"/>
+              <result property="tenantCode" column="tenant_code"/>
+              <result property="createBy" column="create_by"/>
+              <result property="createTime" column="create_time"/>
+              <result property="updateBy" column="update_by"/>
+              <result property="updateTime" column="update_time"/>
+              <result property="delFlag" column="del_flag"/>
+        </resultMap>
+<!--    <insert id="insertIgnoreTr" parameterType="BaseDepart" useGeneratedKeys="true" keyProperty="id">-->
+<!--        insert into ucpm_depart (id, parent_id, parent_ids, dept_name, dept_code, dept_type, biz_type, sort_no, description, system_default,-->
+<!--                                 enabled, tenant_code, create_by, create_time, update_by, update_time, del_flag)-->
+<!--        value (-->
+<!--            #{params.id}, #{params.parentId}, #{params.parentIds}, #{params.deptName}, #{params.deptCode},-->
+<!--            #{params.deptType},#{params.bizType},#{params.sortNo},#{params.description},#{params.systemDefault},-->
+<!--            #{params.enabled},#{params.tenantCode},-1,now(),-1,now(),0-->
+<!--        )-->
+<!--    </insert>-->
+</mapper>

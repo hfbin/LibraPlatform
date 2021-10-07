@@ -1,0 +1,38 @@
+import request from '@/utils/request'
+
+export function pageList(data) {
+  return request({
+    url: '/${moduleName}/${pathName}/page',
+    method: 'get',
+    params: data
+  })
+}
+export function get(id) {
+  return request({
+    url: '/${moduleName}/${pathName}/' + id,
+    method: 'get'
+  })
+}
+
+export function del(id) {
+  return request({
+    url: '/${moduleName}/${pathName}/delete/' + id,
+    method: 'delete'
+  })
+}
+
+export function add(data) {
+  return request({
+    url: '/${moduleName}/${pathName}/save',
+    method: 'post',
+    data
+  })
+}
+
+export function update(data) {
+  return request({
+    url: '/${moduleName}/${pathName}/update',
+    method: 'put',
+    data
+  })
+}

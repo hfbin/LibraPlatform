@@ -1,0 +1,89 @@
+/*
+ *    Copyright [2021] [LibraPlatform of copyright huangfubin]
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
+package cn.hfbin.ucpm.api;
+
+
+import cn.hfbin.ucpm.entity.Position;
+import cn.hfbin.ucpm.params.PositionParams;
+import cn.hfbin.ucpm.vo.PositionVo;
+import cn.hfbin.common.core.api.ResponseData;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+
+/**
+ * @Author: huangfubin
+ * @Description: 岗位表 服务调用接口
+ * @Date: 2021-06-16
+ */
+public interface PositionApiService {
+
+    /**
+     * 分页查询
+     * @param pageNo 页码
+     * @param pageSize 页数
+     * @param position 岗位表
+     * @return ResponseData
+     */
+    @GetMapping("/page")
+    ResponseData<Page<Position>> page(@RequestParam(name = "pageNo",defaultValue = "1") Integer pageNo,
+                                      @RequestParam(name = "pageSize",defaultValue = "10") Integer pageSize,
+                                      Position position);
+
+    /**
+     * 查询岗位列表（不分页）
+     * @param positionParams
+     * @return
+     */
+    @GetMapping("/list")
+    ResponseData<List<PositionVo>> list(PositionParams positionParams);
+
+    /**
+     * 通过id查询岗位表
+     * @param id id
+     * @return ResponseData
+     */
+    @GetMapping("/{id}")
+    ResponseData<PositionVo> getById(@PathVariable("id" ) Long id);
+
+    /**
+     * 新增岗位表
+     * @param basePosition 岗位表
+     * @return ResponseData
+     */
+    @PostMapping("/save")
+     ResponseData<Integer> save(@RequestBody PositionParams basePosition);
+
+    /**
+     * 修改岗位表
+     * @param basePosition 岗位表
+     * @return ResponseData
+     */
+    @PutMapping("/edit")
+    ResponseData<Integer> updateById(@RequestBody PositionParams basePosition);
+
+    /**
+     * 通过id删除岗位表
+     * @param id id
+     * @return ResponseData
+     */
+    @DeleteMapping("delete/{id}")
+    ResponseData<Integer> removeById(@PathVariable("id") Long id);
+
+}

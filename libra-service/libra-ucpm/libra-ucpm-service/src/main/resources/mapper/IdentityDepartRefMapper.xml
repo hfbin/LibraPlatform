@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.hfbin.ucpm.mapper.IdentityDepartRefMapper">
+
+  <resultMap id="baseIdentityDepartRefMap" type="cn.hfbin.ucpm.entity.IdentityDepartRef">
+          <id property="id" column="id"/>
+              <result property="identityId" column="identity_id"/>
+              <result property="deptId" column="dept_id"/>
+              <result property="tenantCode" column="tenant_code"/>
+              <result property="createBy" column="create_by"/>
+              <result property="createTime" column="create_time"/>
+              <result property="updateBy" column="update_by"/>
+              <result property="updateTime" column="update_time"/>
+              <result property="delFlag" column="del_flag"/>
+        </resultMap>
+    <select id="selectListByEmpId" resultType="cn.hfbin.ucpm.entity.Depart">
+        select bd.id, bd.dept_name, bd.dept_code from ucpm_identity_depart_ref bidr
+        LEFT JOIN ucpm_depart bd on bd.id = bidr.dept_id and bd.del_flag = 0
+        where bidr.del_flag = 0
+        <if test="flag">
+            and bidr.dept_type = 1
+        </if>
+        <if test="id != null">
+            and bidr.identity_id= #{id}
+        </if>
+
+    </select>
+</mapper>

@@ -1,0 +1,94 @@
+package ${package}.${moduleName}.service.impl;
+/**
+*    Copyright [2021] [LibraPlatform of copyright huangfubin]
+*
+*    Licensed under the Apache License, Version 2.0 (the "License");
+*    you may not use this file except in compliance with the License.
+*    You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+*    Unless required by applicable law or agreed to in writing, software
+*    distributed under the License is distributed on an "AS IS" BASIS,
+*    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*    See the License for the specific language governing permissions and
+*    limitations under the License.
+*/
+import ${package}.${moduleName}.entity.${className};
+import ${package}.${moduleName}.mapper.${className}Mapper;
+import ${package}.${moduleName}.service.${className}Service;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
+
+/**
+ * @Author: ${author}
+ * @Description: ${comments}
+ * @Date: ${datetime}
+ */
+@Service
+public class ${className}ServiceImpl extends ServiceImpl<${className}Mapper, ${className}> implements ${className}Service {
+
+    /**
+     * 分页查询
+     * @param pageNo
+     * @param pageSize
+     * @param ${classname}
+     * @return
+     */
+    @Override
+    public Page<${className}> page(Integer pageNo, Integer pageSize, ${className} ${classname}) {
+        Page<${className}> page = new Page(pageNo, pageSize);
+        return baseMapper.selectPage(page, Wrappers.lambdaQuery(${classname}));
+    }
+    /**
+     * 根据id查询
+     * @param id
+     * @return
+     */
+    @Override
+    public ${className} getById(${pk.attrType} id) {
+        return baseMapper.selectById(id);
+    }
+
+    /**
+     * 删除数据
+     * @param id
+     * @return
+     */
+    @Override
+    public int deleteById(${pk.attrType} id) {
+        return baseMapper.deleteById(id);
+    }
+
+    /**
+     * 新增数据
+     * @param ${classname}
+     * @return
+     */
+    @Override
+    public int insert(${className} ${classname}) {
+        return baseMapper.insert(${classname});
+    }
+
+    /**
+     * 更新数据(为null的字段不会更新)
+     * @param ${classname}
+     * @return
+     */
+    @Override
+    public int update(${className} ${classname}) {
+        return baseMapper.updateById(${classname});
+    }
+
+    /**
+     * 更新数据(为null的字段会更新)
+     * @param ${classname}
+     * @return
+     */
+    @Override
+    public int updateSomeColumnById(${className} ${classname}) {
+        return baseMapper.alwaysUpdateSomeColumnById(${classname});
+    }
+}

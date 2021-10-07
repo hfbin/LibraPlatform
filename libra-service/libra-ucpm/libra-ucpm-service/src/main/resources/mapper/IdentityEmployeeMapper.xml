@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.hfbin.ucpm.mapper.IdentityEmployeeMapper">
+
+    <resultMap id="baseIdentityEmployeeMap" type="cn.hfbin.ucpm.entity.IdentityEmployee">
+        <id property="id" column="id"/>
+        <result property="accountId" column="account_id"/>
+        <result property="name" column="name"/>
+        <result property="mobile" column="mobile"/>
+        <result property="avatar" column="avatar"/>
+        <result property="birthday" column="birthday"/>
+        <result property="sex" column="sex"/>
+        <result property="email" column="email"/>
+        <result property="workNo" column="work_no"/>
+        <result property="cardNo" column="card_no"/>
+        <result property="entryDate" column="entry_date"/>
+        <result property="positionStatus" column="position_status"/>
+        <result property="sourceType" column="source_type"/>
+        <result property="status" column="status"/>
+        <result property="systemDefault" column="system_default"/>
+        <result property="tenantCode" column="tenant_code"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="delFlag" column="del_flag"/>
+    </resultMap>
+    <sql id="selectPageFiled">
+        ba.username, bie.id, bie.account_id, bie.name, bie.entry_date, bie.card_no, bie.avatar, bie.sex, bie.card_type,
+        bie.we_chat_no, bie.mobile, bie.birthday, bie.email, bie.system_default,
+        bie.work_no, bie.position_status, bie.source_type, bie.status, bie.create_time, bidr.update_time,
+        bidr.dept_id,bidr.dept_type, brr.role_id,  bipr.position_id
+    </sql>
+    <select id="selectPageList" parameterType="cn.hfbin.ucpm.params.EmployeeQueryParams"
+            resultType="cn.hfbin.ucpm.vo.IdentityInfoVo">
+        select
+        <include refid="selectPageFiled"/>
+        ,GROUP_CONCAT(brr.role_id separator ',')as role_ids
+        from ucpm_identity_employee bie
+        left join ucpm_identity_depart_ref bidr on bidr.identity_id = bie.id and bidr.del_flag = 0
+        left join ucpm_relation_role brr on brr.relation_id = bie.id and brr.del_flag = 0
+        left join ucpm_identity_position_ref bipr on bipr.identity_id = bie.id and bipr.del_flag = 0
+        left join ucpm_account ba on ba.id = bie.account_id and ba.del_flag = 0
+        <where>
+            bie.del_flag = 0
+            <if test="params.deptIds != null and params.deptIds.size() > 0">
+                and bidr.dept_id in
+                <foreach collection="params.deptIds" item="item" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="params.roleListIds != null and params.roleListIds.size() > 0">
+                and brr.role_id in
+                <foreach collection="params.roleListIds" item="item" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="params.positionId != null and params.positionId != ''">
+                and bipr.position_id = #{params.positionId}
+            </if>
+        </where>
+        GROUP BY bie.id
+        order by bie.create_time desc
+    </select>
+</mapper>

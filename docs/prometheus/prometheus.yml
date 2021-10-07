@@ -1,0 +1,48 @@
+# my global config
+global:
+  scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          # - alertmanager:9093
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+# - "first_rules.yml"
+# - "second_rules.yml"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  - job_name: "node"
+    static_configs:
+      - targets: [ "node1:9100","node2:9100","node3:9100" ]
+  - job_name: "nacos"
+    metrics_path: '/nacos/actuator/prometheus'
+    static_configs:
+      - targets: ["node1:8848"]
+  - job_name: "libra-base"
+    metrics_path: '/base/actuator/prometheus'
+    static_configs:
+      - targets: ["node2:8810"]
+  - job_name: "libra-tenant"
+    metrics_path: '/tr/actuator/prometheus'
+    static_configs:
+      - targets: ["node2:8812"]
+  - job_name: "libra-ucpm"
+    metrics_path: '/ucpm/actuator/prometheus'
+    static_configs:
+      - targets: ["node2:8811"]
+  - job_name: "libra-gateway"
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ["node2:9999"]
+  - job_name: "libra-auth"
+    metrics_path: '/auth/actuator/prometheus'
+    static_configs:
+      - targets: ["node2:8813"]

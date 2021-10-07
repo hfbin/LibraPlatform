@@ -1,0 +1,33 @@
+server:
+  port: 7824
+  servlet:
+    context-path: /tr
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: libra-tenant
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      # nacos 地址
+      server-addr: http://127.0.0.1:8848
+      config:
+        namespace: ${spring.profiles.active}
+        file-extension: yml
+        shared-configs:
+          - dataId: common.yml
+            group: COMMON
+          - dataId: sentinel.yml
+            group: COMMON
+          - dataId: prometheus.yml
+            group: COMMON
+          - dataId: redis.yml
+            group: COMMON
+      discovery:
+        namespace: ${spring.profiles.active}
+        metadata:
+          version: 1.0
+

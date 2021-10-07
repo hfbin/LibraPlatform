@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    cn.hfbin.common.database.MybatisPlusConfig,cn.hfbin.common.database.MybatisInterceptor

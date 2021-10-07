@@ -1,0 +1,37 @@
+-- 启动该脚本时注意菜单所在的parent_id，当前默认为根路径下
+-- 菜单SQL
+INSERT INTO `base_menu`(`parent_id`, `client_code`, `name`, `path`, `component`, `menu_type`, `biz_type`, `perms`, `sort_no`, `icon`, `is_leaf`, `keep_alive`, `hidden`, `is_out_url`, `module`, `enabled`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`)
+VALUES (0, '${clientCode}', '${comments}', '${pathName}', '${moduleName}/${pathName}/index', 1, 1, NULL, 10, '', 1, 1, 0, 0, NULL, 1, -1, now(), -1, now(), 0);
+
+-- 父菜单ID
+set @nemuParentId = last_insert_id();
+
+-- 菜单对应按钮
+INSERT INTO `base_menu`( `parent_id`, `client_code`, `name`,`menu_type`, `biz_type`, `perms`, `sort_no`, `icon`, `is_leaf`, `keep_alive`, `hidden`, `is_out_url`, `module`, `enabled`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`)
+VALUES (@nemuParentId, '列表', '${clientCode}', 2, 1, '${pathName}:list', 1, '', 1, 1, 0, 0, NULL, 1,  -1, now(), -1, now(), 0);
+INSERT INTO `base_menu`( `parent_id`, `client_code`, `name`,`menu_type`, `biz_type`, `perms`, `sort_no`, `icon`, `is_leaf`, `keep_alive`, `hidden`, `is_out_url`, `module`, `enabled`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`)
+VALUES (@nemuParentId, '详情', '${clientCode}', 2, 1, '${pathName}:info', 1, '', 1, 1, 0, 0, NULL, 1,  -1, now(), -1, now(), 0);
+INSERT INTO `base_menu`( `parent_id`, `client_code`, `name`,`menu_type`, `biz_type`, `perms`, `sort_no`, `icon`, `is_leaf`, `keep_alive`, `hidden`, `is_out_url`, `module`, `enabled`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`)
+VALUES (@nemuParentId, '新增', '${clientCode}', 2, 1, '${pathName}:save', 1, '', 1, 1, 0, 0, NULL, 1,  -1, now(), -1, now(), 0);
+INSERT INTO `base_menu`( `parent_id`, `client_code`, `name`,`menu_type`, `biz_type`, `perms`, `sort_no`, `icon`, `is_leaf`, `keep_alive`, `hidden`, `is_out_url`, `module`, `enabled`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`)
+VALUES (@nemuParentId, '修改', '${clientCode}', 2, 1, '${pathName}:update', 1, '', 1, 1, 0, 0, NULL, 1,  -1, now(), -1, now(), 0);
+INSERT INTO `base_menu`( `parent_id`, `client_code`, `name`,`menu_type`, `biz_type`, `perms`, `sort_no`, `icon`, `is_leaf`, `keep_alive`, `hidden`, `is_out_url`, `module`, `enabled`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`)
+VALUES (@nemuParentId, '删除', '${clientCode}', 2, 1, '${pathName}:delete', 1, '', 1, 1, 0, 0, NULL, 1,  -1, now(), -1, now(), 0);
+
+
+-- 权限SQL
+INSERT INTO `base_interface`(`parent_id`, `client_code`, `client_code`, `code`, `name`, `interface_path`, `method`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`)
+VALUES (0, '${clientCode}', '${pathName}', '${comments}', NULL, 0,  -1, now(), -1, now(), 0);
+
+set @parentId = last_insert_id();
+
+INSERT INTO `base_interface`(`parent_id`, `client_code`, `code`, `name`, `interface_path`, `method`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`)
+VALUES (@parentId, '${clientCode}', '${pathName}:page', '分页接口', '/${pathName}/page', 0, -1, now(), -1, now(), 0);
+INSERT INTO `base_interface`(`parent_id`, `client_code`, `code`, `name`, `interface_path`, `method`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`)
+VALUES (@parentId, '${clientCode}', '${pathName}:info', '详情', '/${pathName}/{id}', 0, -1, now(), -1, now(), 0);
+INSERT INTO `base_interface`(`parent_id`, `client_code`, `code`, `name`, `interface_path`, `method`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`)
+VALUES (@parentId, '${clientCode}', '${pathName}:save', '新增', '/${pathName}/save', 1, -1, now(), -1, now(), 0);
+INSERT INTO `base_interface`(`parent_id`, `client_code`, `code`, `name`, `interface_path`, `method`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`)
+VALUES (@parentId, '${clientCode}', '${pathName}:update', '修改', '/${pathName}/update', 2, -1, now(), -1, now(), 0);
+INSERT INTO `base_interface`(`parent_id`, `client_code`, `code`, `name`, `interface_path`, `method`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`)
+VALUES (@parentId, '${clientCode}', '${pathName}:delete', '删除', '/${pathName}/delete/{id}', 3, -1, now(), -1, now(), 0);

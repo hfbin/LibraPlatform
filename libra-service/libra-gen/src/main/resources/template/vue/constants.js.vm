@@ -1,0 +1,21 @@
+// 公共参数定义
+// 主表columns
+export const columns = [
+#foreach ($column in $columns)
+  #if($column.lowerAttrName != 'id' && $column.lowerAttrName != 'delFlag' && $column.lowerAttrName != 'createBy' && $column.lowerAttrName != 'createTime' && $column.lowerAttrName != 'updateBy' && $column.lowerAttrName != 'updateTime')
+  {
+    label: '$column.comments',
+    field: '$column.lowerAttrName'
+  },
+  #end
+#end
+  {
+    label: '操作',
+    columnType: 'slot',
+    slotName: 'operation',
+    width: 260,
+    fixed: 'right',
+    align: 'center',
+    headAlign: 'center'
+  }
+]

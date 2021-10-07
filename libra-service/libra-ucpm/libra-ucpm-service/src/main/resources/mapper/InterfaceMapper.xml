@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.hfbin.ucpm.mapper.InterfaceMapper">
+
+  <resultMap id="baseInterfaceMap" type="cn.hfbin.ucpm.entity.Interface">
+          <id property="id" column="id"/>
+              <result property="parentId" column="parent_id"/>
+              <result property="clientCode" column="client_code"/>
+              <result property="code" column="code"/>
+              <result property="name" column="name"/>
+              <result property="interfacePath" column="interface_path"/>
+              <result property="method" column="method"/>
+              <result property="createBy" column="create_by"/>
+              <result property="createTime" column="create_time"/>
+              <result property="updateBy" column="update_by"/>
+              <result property="updateTime" column="update_time"/>
+              <result property="delFlag" column="del_flag"/>
+        </resultMap>
+    <select id="selectInterfaceCode" resultType="java.lang.String">
+        select bi.code
+        from ucpm_interface bi
+        left join ucpm_menu_interface_ref bmir on bi.id = bmir.interface_id
+        <where>
+            and bmir.del_flag = 0
+            and bi.code is not null
+            <if test="menuIds != null and menuIds.size() > 0">
+                and bmir.menu_id in
+                <foreach collection="menuIds" item="item" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+        group by bi.code
+    </select>
+</mapper>
