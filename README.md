@@ -1,5 +1,19 @@
 # Libra-Platform 微服务平台
-目前Libra-Platform微服务平台还处于开发阶段，源码已开源，后续将会不断完善强大功能。基于SpringCloud(2020.0.x) + SpringCloudAlibaba(2021.x) + SpringBoot(2.4.x) + Vue3开发，基于多租户SaaS模式的设计，拥有强大的用户中心，权限基于RBAC设计，支持租户灰度发布等功能。Libra-Platform平台架构清晰、代码简介、注解齐全，很适合作为基础框架使用。相关功能如下：
+目前Libra-Platform微服务平台还处于开发阶段，源码已开源，后续将会不断完善强大功能。基于SpringCloud(2020.0.x) + SpringCloudAlibaba(2021.x) + SpringBoot(2.4.x) + Vue3开发，基于多租户SaaS模式的设计，拥有强大的用户中心，权限基于RBAC设计，支持租户灰度发布等功能。Libra-Platform平台架构清晰、代码简介、注解齐全，很适合作为基础框架使用。
+
+## 仓库地址
+
+【github】
+
+后端：https://github.com/hfbin/LibraPlatform
+
+前端：https://github.com/hfbin/LibraPlatformUi
+
+【gitee】
+
+后端：https://gitee.com/huangfubin/LibraPlatform
+
+前端：https://gitee.com/huangfubin/LibraPlatformUi
 
 ## 相关功能
 ![相关功能](./docs/img/Libra-Platform平台规划.png)
