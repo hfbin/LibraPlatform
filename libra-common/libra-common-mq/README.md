@@ -1,1 +1,1 @@
-# libra-common-log 接入说明
+# libra-common-mq 接入说明

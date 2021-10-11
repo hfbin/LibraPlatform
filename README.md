@@ -46,6 +46,7 @@ libra-platform -- 父项目
 │  │  ├─libra-tenant -- 租户服务
 
 ```
+相关组件和服务都有使用说明，在对应组件或者服务下的文件，文件名为README.md
 
 ## 运行
 
