@@ -1,0 +1,41 @@
+{
+  "strategy":{
+    "routeKey":"route-1"
+  },
+  "strategyRelease":{
+    "blueGreen":{
+      "condition":[
+        {
+          "expression":"tenantCode=1",
+          "routeKey":"route-1"
+        },
+        {
+          "expression":"tenantCode=1",
+          "routeKey":"route-1"
+        }
+      ],
+      "basicCondition":{
+        "routeKey":"route-1"
+      }
+    },
+    "gray":{
+      "condition":[
+        {
+          "expression":"tenantCode=1",
+          "routeKey":"route-1=50;route-2=50"
+        },
+        {
+          "expression":"tenantCode=1",
+          "routeKey":"route-1=50;route-2=50"
+        }
+      ],
+      "basicCondition":{
+        "route":"route-1=100;route-2=0"
+      }
+    },
+    "routes":{
+      "route-1":"{\"service-a\":\"1.0\", \"service-b\":\"1.0\", \"service-c\":\"3.0\"}",
+      "route-2":"{\"service-a\":\"1.0\", \"service-b\":\"2.0\", \"service-c\":\"2.0\"}"
+    }
+  }
+}
