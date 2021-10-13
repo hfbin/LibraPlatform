@@ -17,19 +17,18 @@
 package cn.hfbin.gateway.gary;
 
 import cn.hfbin.gateway.weight.MapWeightRandom;
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.loadbalancer.DefaultResponse;
-import org.springframework.cloud.client.loadbalancer.EmptyResponse;
-import org.springframework.cloud.client.loadbalancer.Request;
-import org.springframework.cloud.client.loadbalancer.Response;
+import org.springframework.cloud.client.loadbalancer.*;
 import org.springframework.cloud.loadbalancer.core.NoopServiceInstanceListSupplier;
 import org.springframework.cloud.loadbalancer.core.ReactorServiceInstanceLoadBalancer;
 import org.springframework.cloud.loadbalancer.core.ServiceInstanceListSupplier;
 import org.springframework.http.HttpHeaders;
+import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.*;
@@ -42,12 +41,9 @@ import java.util.*;
 public class GrayLoadBalancer implements ReactorServiceInstanceLoadBalancer {
 
     //服务列表
-    private ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSupplierProvider;
-    //服务ID号
-    private String serviceId;
+    private final ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSupplierProvider;
 
     public GrayLoadBalancer(ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSupplierProvider, String serviceId) {
-        this.serviceId = serviceId;
         this.serviceInstanceListSupplierProvider = serviceInstanceListSupplierProvider;
     }
 
@@ -60,12 +56,13 @@ public class GrayLoadBalancer implements ReactorServiceInstanceLoadBalancer {
     @Override
     public Mono<Response<ServiceInstance>> choose(Request request) {
         //获取所有请求头
-        HttpHeaders headers = (HttpHeaders) request.getContext();
-
+        DefaultRequestContext requestContext = (DefaultRequestContext) request.getContext();
+        RequestData clientRequest = (RequestData) requestContext.getClientRequest();
+        HttpHeaders headers = clientRequest.getHeaders();
         //服务列表不为空
-        if (Objects.nonNull(this.serviceInstanceListSupplierProvider)) {
+        if (Objects.nonNull(serviceInstanceListSupplierProvider)) {
             //获取有效的实例对象
-            ServiceInstanceListSupplier supplier = this.serviceInstanceListSupplierProvider.getIfAvailable(NoopServiceInstanceListSupplier::new);
+            ServiceInstanceListSupplier supplier = serviceInstanceListSupplierProvider.getIfAvailable(NoopServiceInstanceListSupplier::new);
             //按照指定路由规则查找符合的实例对象
             return supplier.get().next().map(list -> getInstanceResponse(list, headers));
         }
@@ -84,7 +81,8 @@ public class GrayLoadBalancer implements ReactorServiceInstanceLoadBalancer {
             return new EmptyResponse();
         } else {
             //获取版本号
-            String versionNo = headers.getFirst("version");
+            String versionNo = headers.getFirst("bgg-version");
+            headers.add("bgg-type", "gateway");
             //权重路由、  根据版本号+权重路由
             return StrUtil.isEmpty(versionNo) ? getServiceInstanceResponseWithWeight(instances) :
                     getServiceInstanceResponseByMtName(instances, versionNo, "version");
@@ -114,6 +112,10 @@ public class GrayLoadBalancer implements ReactorServiceInstanceLoadBalancer {
             if (metadata.entrySet().containsAll(attributes)) {
                 serviceInstances.add(instance);
             }
+        }
+        // 如果没用当前版本服务则返回此所有服务
+        if(CollectionUtil.isEmpty(serviceInstances)){
+            serviceInstances.addAll(instances);
         }
         //权重分发
         return getServiceInstanceResponseWithWeight(serviceInstances);

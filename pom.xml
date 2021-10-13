@@ -14,6 +14,8 @@
         <module>libra-gateway</module>
         <module>libra-service</module>
         <module>libra-auth</module>
+        <module>libra-bgg</module>
+        <module>libra-bgg</module>
     </modules>
 
     <properties>
@@ -51,6 +53,7 @@
         <spring.version>5.3.3</spring.version>
         <redis.version>2.4.2</redis.version>
         <prometheus.version>1.6.0</prometheus.version>
+        <commons.collections4.version>4.4</commons.collections4.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     </properties>
@@ -275,6 +278,11 @@
                 <groupId>com.zaxxer</groupId>
                 <artifactId>HikariCP</artifactId>
                 <version>${hikaricp.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons.collections4.version}</version>
             </dependency>
 
             <!--libra platform 相关包-->

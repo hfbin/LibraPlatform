@@ -138,7 +138,7 @@ public class JsonExceptionHandler implements ErrorWebExceptionHandler {
         // 重新返回自定义的数据
         result.put(BODY, JSONObject.toJSON(error));
         ServerHttpRequest request = exchange.getRequest();
-        log.error("网关拦截异常:{},记录异常信息:{}", request.getPath(), error);
+        log.error("网关拦截异常:{},记录异常信息:{},异常堆栈：{}", request.getPath(), error, ex);
         //参考AbstractErrorWebExceptionHandler
         if (exchange.getResponse().isCommitted()) {
             return Mono.error(ex);
