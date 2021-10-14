@@ -9,9 +9,16 @@ public interface BggConstant {
 
     // 配置入口类型
     String BGG_TYPE = "Bgg-Type";
-
     // 需要走的全链路规则
     String BGG_ROUTE = "Bgg-Route";
 
     String NACOS_WEIGHT = "nacos.weight";
+
+    String VERSION = "version";
+
+    String RULE = "rule";
+
+    String CONFIG_PATH = "classpath:rule.json";
+
+
 }

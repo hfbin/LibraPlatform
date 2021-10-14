@@ -16,6 +16,8 @@
         <module>libra-auth</module>
         <module>libra-bgg</module>
         <module>libra-bgg</module>
+        <module>libra-bgg/libra-bgg-gateway</module>
+        <module>libra-bgg/libra-bgg-service</module>
     </modules>
 
     <properties>
@@ -53,6 +55,7 @@
         <spring.version>5.3.3</spring.version>
         <redis.version>2.4.2</redis.version>
         <prometheus.version>1.6.0</prometheus.version>
+        <caffeine.version>2.9.2</caffeine.version>
         <commons.collections4.version>4.4</commons.collections4.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
@@ -77,6 +80,11 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
                 <version>${springboot.version}</version>
             </dependency>
             <dependency>
@@ -283,6 +291,11 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-collections4</artifactId>
                 <version>${commons.collections4.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.ben-manes.caffeine</groupId>
+                <artifactId>caffeine</artifactId>
+                <version>${caffeine.version}</version>
             </dependency>
 
             <!--libra platform 相关包-->

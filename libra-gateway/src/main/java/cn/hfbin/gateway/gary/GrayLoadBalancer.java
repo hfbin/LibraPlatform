@@ -82,7 +82,6 @@ public class GrayLoadBalancer implements ReactorServiceInstanceLoadBalancer {
         } else {
             //获取版本号
             String versionNo = headers.getFirst("bgg-version");
-            headers.add("bgg-type", "gateway");
             //权重路由、  根据版本号+权重路由
             return StrUtil.isEmpty(versionNo) ? getServiceInstanceResponseWithWeight(instances) :
                     getServiceInstanceResponseByMtName(instances, versionNo, "version");

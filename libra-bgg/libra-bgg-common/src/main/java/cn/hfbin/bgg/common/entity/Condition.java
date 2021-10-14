@@ -17,6 +17,8 @@ public class Condition implements Serializable {
         this.expression = expression;
         this.routeKey = routeKey;
     }
+    public Condition() {}
+
 
     public String getExpression() {
         return expression;
