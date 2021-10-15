@@ -15,8 +15,8 @@
  */
 
 package cn.hfbin.bgg.common.weight;
-import javafx.util.Pair;
 import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 import java.util.SortedMap;
@@ -31,7 +31,7 @@ public class MapWeightRandom<K, V extends Number>{
 
     private final TreeMap<Double, K> weightMap = new TreeMap<>();
 
-    public MapWeightRandom(List<javafx.util.Pair<K, V>> pairList) {
+    public MapWeightRandom(List<Pair<K, V>> pairList) {
         for (Pair<K, V> pair : pairList) {
             double value = pair.getValue().doubleValue();
             if (value <= 0) {

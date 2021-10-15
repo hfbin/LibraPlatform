@@ -3,6 +3,7 @@ package cn.hfbin.bgg.common.service;
 import cn.hfbin.bgg.common.adapter.PluginAdapter;
 import cn.hfbin.bgg.common.context.StrategyContextHolder;
 import cn.hfbin.bgg.common.entity.*;
+import com.sun.xml.internal.bind.v2.TODO;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class StrategyContextService {
 
     /**
      * 执行优先级为: 蓝绿路由配置 -> 灰度路由配置 -> 全局兜底路由配置
-     * @return
+     * @return 链路
      */
     public String getRouteVersion() {
         String routeVersion = getConditionBlueGreenRouteVersion();
@@ -40,7 +41,7 @@ public class StrategyContextService {
 
     /**
      * 兜底规则匹配
-     * @return
+     * @return 链路
      */
     private String getGlobalRouteVersion() {
         Rule localRule = pluginAdapter.getLocalRule();
@@ -58,7 +59,7 @@ public class StrategyContextService {
 
     /**
      * 灰度规则匹配
-     * @return
+     * @return 链路
      */
     private String getConditionGrayRouteVersion() {
         String routeKey = null;
@@ -88,12 +89,13 @@ public class StrategyContextService {
     }
 
     private Condition matchingExpressionStrategyConditionGray(List<Condition> conditionList) {
+        // TODO: 2021/10/15  匹配规则未开发
         return null;
     }
 
     /**
      * 蓝绿规则匹配
-     * @return
+     * @return 链路
      */
     private String getConditionBlueGreenRouteVersion() {
         String routeKey = null;
@@ -122,9 +124,12 @@ public class StrategyContextService {
     }
 
     private Condition matchingExpressionStrategyConditionBlueGreen(List<Condition> conditionList) {
-        conditionList.forEach(data -> {
-            String expression = data.getExpression();
-        });
-        return new Condition();
+        for (Condition condition : conditionList) {
+            // TODO: 2021/10/15  匹配规则未开发
+            if(condition.getExpression().equals("tenantCode=1")){
+                return condition;
+            }
+        }
+        return null;
     }
 }

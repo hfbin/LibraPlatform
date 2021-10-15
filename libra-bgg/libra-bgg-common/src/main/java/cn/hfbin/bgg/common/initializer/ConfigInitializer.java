@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
+import java.util.Objects;
 
 /**
  * @Author: huangfubin
@@ -28,6 +29,8 @@ public class ConfigInitializer {
             e.printStackTrace();
         }
         Rule rule = JSONObject.parseObject(config, Rule.class);
-        pluginAdapter.setLocalRule(rule);
+        if(Objects.nonNull(rule)){
+            pluginAdapter.setLocalRule(rule);
+        }
     }
 }

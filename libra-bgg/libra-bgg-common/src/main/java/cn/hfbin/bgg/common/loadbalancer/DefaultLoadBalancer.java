@@ -14,21 +14,24 @@
  *    limitations under the License.
  */
 
-package cn.hfbin.gateway.gary;
+package cn.hfbin.bgg.common.loadbalancer;
 
-import cn.hfbin.gateway.weight.MapWeightRandom;
-import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.core.util.StrUtil;
+import cn.hfbin.bgg.common.adapter.PluginAdapter;
+import cn.hfbin.bgg.common.constant.BggConstant;
+import cn.hfbin.bgg.common.weight.MapWeightRandom;
+import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.*;
 import org.springframework.cloud.loadbalancer.core.NoopServiceInstanceListSupplier;
 import org.springframework.cloud.loadbalancer.core.ReactorServiceInstanceLoadBalancer;
 import org.springframework.cloud.loadbalancer.core.ServiceInstanceListSupplier;
 import org.springframework.http.HttpHeaders;
-import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.*;
@@ -38,20 +41,27 @@ import java.util.*;
  * @Description: GrayLoadBalancer 类
  * @Date: 2021/9/16
  */
-public class GrayLoadBalancer implements ReactorServiceInstanceLoadBalancer {
+public class DefaultLoadBalancer implements ReactorServiceInstanceLoadBalancer {
 
     //服务列表
     private final ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSupplierProvider;
 
-    public GrayLoadBalancer(ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSupplierProvider, String serviceId) {
+    private final String serviceId;
+
+    @Autowired
+    PluginAdapter pluginAdapter;
+
+    public DefaultLoadBalancer(ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSupplierProvider, String serviceId) {
         this.serviceInstanceListSupplierProvider = serviceInstanceListSupplierProvider;
+        this.serviceId = serviceId;
+
     }
 
     /**
      * 根据不同策略选择指定服务实例
      *
      * @param request：用户请求信息封装对象
-     * @return
+     * @return ServiceInstance
      */
     @Override
     public Mono<Response<ServiceInstance>> choose(Request request) {
@@ -72,33 +82,35 @@ public class GrayLoadBalancer implements ReactorServiceInstanceLoadBalancer {
 
     /**
      * 获取实例
-     * @param instances
-     * @return
+     * @param instances ServiceInstance
+     * @return ServiceInstance
      */
     private Response<ServiceInstance> getInstanceResponse(List<ServiceInstance> instances, HttpHeaders headers) {
         //找不到实例
         if (instances.isEmpty()) {
             return new EmptyResponse();
         } else {
-            //获取版本号
-            String versionNo = headers.getFirst("bgg-version");
-            //权重路由、  根据版本号+权重路由
-            return StrUtil.isEmpty(versionNo) ? getServiceInstanceResponseWithWeight(instances) :
-                    getServiceInstanceResponseByMtName(instances, versionNo, "version");
+            String route = headers.getFirst(BggConstant.BGG_ROUTE);
+            String serviceVersion = null;
+            // 获取蓝绿、灰度链路规则serviceVersion
+            if(StringUtils.isNotBlank(route)){
+                serviceVersion = (String)JSONObject.parseObject(route).get(serviceId);
+            }
+            //权重路由（根据版本号+权重路由）
+            return StringUtils.isEmpty(serviceVersion) ? getServiceInstanceResponseWithWeight(instances) :
+                    getServiceInstanceResponseByMetadataName(instances, serviceVersion);
         }
     }
 
     /**
-     * 指定属性切流（根据版本进行分发|IP切流）
-     *
-     * @param instances
-     * @param versionNo
-     * @return
+     * 指定属性切流（根据版本进行切流）
+     * @param instances 实例列表
+     * @param versionNo 版本
+     * @return ServiceInstance
      */
-    private Response<ServiceInstance> getServiceInstanceResponseByMtName(List<ServiceInstance> instances, String versionNo, String mtname) {
+    private Response<ServiceInstance> getServiceInstanceResponseByMetadataName(List<ServiceInstance> instances, String versionNo) {
         Map<String, String> versionMap = new HashMap<>();
-        //versionMap.put("version",versionNo);
-        versionMap.put(mtname, versionNo);
+        versionMap.put(BggConstant.VERSION, versionNo);
         //去除重复
         final Set<Map.Entry<String, String>> attributes = Collections.unmodifiableSet(versionMap.entrySet());
 
@@ -106,14 +118,14 @@ public class GrayLoadBalancer implements ReactorServiceInstanceLoadBalancer {
         List<ServiceInstance> serviceInstances = new ArrayList<>();
         for (ServiceInstance instance : instances) {
             //当前实例的元数据信息
-            Map<String, String> metadata = instance.getMetadata();
+            Map<String, String> metadata = pluginAdapter.getServerMetadata(instance);
             //元数据信息中是否包含当前版本号信息
             if (metadata.entrySet().containsAll(attributes)) {
                 serviceInstances.add(instance);
             }
         }
-        // 如果没用当前版本服务则返回此所有服务
-        if(CollectionUtil.isEmpty(serviceInstances)){
+        // 如果没用当前版本服务则返回此所有服务（避免所以规则不符合情况下，导致返回空实例）
+        if(CollectionUtils.isEmpty(serviceInstances)){
             serviceInstances.addAll(instances);
         }
         //权重分发
@@ -123,28 +135,26 @@ public class GrayLoadBalancer implements ReactorServiceInstanceLoadBalancer {
     /**
      * 根据在nacos中配置的权重值，进行分发
      *
-     * @param instances
-     * @return
+     * @param instances ServiceInstance
+     * @return ServiceInstance
      */
     private Response<ServiceInstance> getServiceInstanceResponseWithWeight(List<ServiceInstance> instances) {
         //循环所有实例
         List<Pair<ServiceInstance, Integer>> weightList = new ArrayList<>();
         for (ServiceInstance instance : instances) {
             //获取当前实例元信息
-            Map<String, String> metadata = instance.getMetadata();
+            Map<String, String> metadata = pluginAdapter.getServerMetadata(instance);
             //如果当前元信息包含权重key
-            if (metadata.containsKey("nacos.weight")) {
-                weightList.add(new ImmutablePair<>(instance, Double.valueOf(metadata.get("nacos.weight")).intValue()));
-
+            if (metadata.containsKey(BggConstant.NACOS_WEIGHT)) {
+                weightList.add(new ImmutablePair<>(instance, Double.valueOf(metadata.get(BggConstant.NACOS_WEIGHT)).intValue()));
             }
         }
+        // 根据nacos的nacos.weight配置权重进行匹配获取具体实例
         MapWeightRandom<ServiceInstance, Integer> weightRandom = new MapWeightRandom<>(weightList);
         ServiceInstance serviceInstance = weightRandom.random();
-
         if (Objects.nonNull(serviceInstance)){
             return new DefaultResponse(serviceInstance);
         }
-
         //返回空实例
         return new EmptyResponse();
     }

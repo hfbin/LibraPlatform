@@ -52,7 +52,7 @@
         <javax.validation.version>2.0.1.Final</javax.validation.version>
         <jjwt.version>0.9.1</jjwt.version>
         <jackson.version>2.10.4</jackson.version>
-        <spring.version>5.3.3</spring.version>
+        <spring.version>5.3.7</spring.version>
         <redis.version>2.4.2</redis.version>
         <prometheus.version>1.6.0</prometheus.version>
         <caffeine.version>2.9.2</caffeine.version>
@@ -135,6 +135,21 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
                 <version>${spring.version}</version>
             </dependency>
             <dependency>

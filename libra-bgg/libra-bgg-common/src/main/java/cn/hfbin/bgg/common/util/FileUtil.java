@@ -19,15 +19,16 @@ public class FileUtil {
 
     public static InputStream getInputStream(ApplicationContext applicationContext, String path) {
         if (StringUtils.isEmpty(path)) {
-            throw new IllegalArgumentException("File path doesn't set");
+            System.out.println("load file failed, path entity : " + path);
+            return null;
         }
         try {
             String filePath = applicationContext.getEnvironment().resolvePlaceholders(path);
             InputStream inputStream = applicationContext.getResource(filePath).getInputStream();
-            System.out.println("File : " +  path);
+            System.out.println("load file success : " +  path);
             return inputStream;
         } catch (Exception e) {
-            System.out.println("File load error : " + path);
+            System.out.println("load file failed : " + path);
         }
         return null;
     }
@@ -40,7 +41,7 @@ public class FileUtil {
                 try {
                     return IOUtils.toString(inputStream, StandardCharsets.UTF_8);
                 } catch (IOException e) {
-                    System.out.println("InputStream to String failed, ignore to load...");
+                    System.out.println("load file failed : " + path);
                 }
             }
         } finally {

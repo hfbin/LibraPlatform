@@ -3,12 +3,10 @@ package cn.hfbin.bgg.common.configuration;
 import cn.hfbin.bgg.common.adapter.Adapter;
 import cn.hfbin.bgg.common.adapter.PluginAdapter;
 import cn.hfbin.bgg.common.cache.RuleCache;
-import cn.hfbin.bgg.common.context.PluginContextAware;
-import cn.hfbin.bgg.common.context.StrategyContextHolder;
+import cn.hfbin.bgg.common.constant.BggConstant;
 import cn.hfbin.bgg.common.initializer.ConfigInitializer;
 import cn.hfbin.bgg.common.loader.LocalConfigLoader;
 import cn.hfbin.bgg.common.service.StrategyContextService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,13 +18,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ConfigAutoConfiguration {
 
-    @Autowired
-    private PluginContextAware pluginContextAware;
-
-    @Bean
-    public PluginContextAware pluginContextAware() {
-        return new PluginContextAware();
-    }
     @Bean
     public RuleCache ruleCache() {
         return new RuleCache();
@@ -42,7 +33,7 @@ public class ConfigAutoConfiguration {
         return new LocalConfigLoader() {
             @Override
             protected String getPath() {
-                return pluginContextAware.getConfigPath();
+                return BggConstant.CONFIG_PATH;
             }
         };
     }

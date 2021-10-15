@@ -30,7 +30,6 @@ public class ServiceStrategyContextHolder extends AbstractStrategyContextHolder 
         }
         return attributes.getRequest();
     }
-
     @Override
     public String getHeader(String name) {
         String header = null;
@@ -39,7 +38,6 @@ public class ServiceStrategyContextHolder extends AbstractStrategyContextHolder 
             header = request.getHeader(name);
         }
         return header;
-
     }
 
 }

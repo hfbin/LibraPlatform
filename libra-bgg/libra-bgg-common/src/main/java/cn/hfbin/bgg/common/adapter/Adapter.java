@@ -1,6 +1,8 @@
 package cn.hfbin.bgg.common.adapter;
 
-import cn.hfbin.bgg.common.entity.Rule;
+import org.springframework.cloud.client.ServiceInstance;
+
+import java.util.Map;
 
 /**
  * @Author: huangfubin
@@ -9,4 +11,13 @@ import cn.hfbin.bgg.common.entity.Rule;
  */
 public class Adapter extends AbstractPluginAdapter{
 
+    @Override
+    public Map<String, String> getServerMetadata(ServiceInstance server) {
+        return server.getMetadata();
+    }
+
+    @Override
+    public String getServerServiceId(ServiceInstance server) {
+        return server.getServiceId();
+    }
 }

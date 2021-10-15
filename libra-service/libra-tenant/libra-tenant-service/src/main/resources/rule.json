@@ -31,7 +31,7 @@
     }
   },
   "routes":{
-    "route-1":"{\"libra-tenant\":\"2.0\", \"libra-ucpm\":\"2.0\", \"libra-base\":\"1.0\", \"libra-auth\":\"2.0\"}",
+    "route-1":"{\"libra-tenant\":\"2.0\", \"libra-ucpm\":\"1.0\", \"libra-base\":\"1.0\"}",
     "route-2":"{\"libra-tenant\":\"1.0\", \"libra-ucpm\":\"1.0\", \"libra-base\":\"1.0\"}"
   }
 }

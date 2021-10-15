@@ -1,6 +1,9 @@
 package cn.hfbin.bgg.common.adapter;
 
 import cn.hfbin.bgg.common.entity.Rule;
+import org.springframework.cloud.client.ServiceInstance;
+
+import java.util.Map;
 
 /**
  * @Author: huangfubin
@@ -13,5 +16,9 @@ public interface PluginAdapter {
     void setLocalRule(Rule rule);
 
     Rule getLocalRule();
+
+    Map<String, String> getServerMetadata(ServiceInstance server);
+
+    String getServerServiceId(ServiceInstance server);
 
 }
