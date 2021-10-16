@@ -50,11 +50,11 @@ public class ClientIp {
                 "  \"strategyRelease\":{\n" +
                 "    \"blueGreen\":{\n" +
                 "      \"condition-1\":{\n" +
-                "        \"expression\":\"tenantCode=1\",\n" +
+                "        \"expression\":\"#H['tenantCode'] == 'HDDC'\",\n" +
                 "        \"routeKey\":\"route-1\"\n" +
                 "      },\n" +
                 "      \"condition-2\":{\n" +
-                "        \"expression\":\"tenantCode=1\",\n" +
+                "        \"expression\":\"#H['tenantCode'] == 'HDDC'\",\n" +
                 "        \"routeKey\":\"route-1\"\n" +
                 "      },\n" +
                 "      \"basicCondition\":{\n" +

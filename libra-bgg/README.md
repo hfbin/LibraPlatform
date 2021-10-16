@@ -10,11 +10,11 @@
     "blueGreen":{ // 蓝绿发布
       "conditionList":[ // 蓝绿策列
         {
-          "expression":"tenantCode=1", // expression匹配值是在请求头中获取，可根据请求的属性进行匹对
+          "expression":"#H['tenantCode'] == 'HDDC'", // expression匹配值是在请求头中获取，可根据请求头的属性进行匹对(使用spring spel)
           "routeKey":"route-1"
         },
         {
-          "expression":"tenantCode=1",
+          "expression":"#H['tenantCode'] == 'HDDC'",
           "routeKey":"route-1"
         }
       ],
@@ -23,11 +23,11 @@
     "gray":{ // 灰度发布
       "conditionList":[ // 灰度策列
         {
-          "expression":"tenantCode=1",
+          "expression":"#H['tenantCode'] == 'HDDC'",
           "routeKey":"route-1=40;route-2=60" // 【route-1=50;route-2=50】含义说明：route-1对应策列，40流量权重；route-1对应策列，60流量权重 （权重加起来100）
         },
         {
-          "expression":"tenantCode=1",
+          "expression":"#H['tenantCode'] == 'HDDC'",
           "routeKey":"route-1=50;route-2=50"
         }
       ],

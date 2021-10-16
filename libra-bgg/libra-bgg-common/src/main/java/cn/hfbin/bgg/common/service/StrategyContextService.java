@@ -1,15 +1,37 @@
+/*
+ *    Copyright [2021] [LibraPlatform of copyright huangfubin]
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package cn.hfbin.bgg.common.service;
 
 import cn.hfbin.bgg.common.adapter.PluginAdapter;
+import cn.hfbin.bgg.common.constant.BggConstant;
 import cn.hfbin.bgg.common.context.StrategyContextHolder;
 import cn.hfbin.bgg.common.entity.*;
-import com.sun.xml.internal.bind.v2.TODO;
+import cn.hfbin.bgg.common.weight.MapWeightRandom;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @Author: huangfubin
@@ -23,6 +45,8 @@ public class StrategyContextService {
 
     @Autowired
     StrategyContextHolder strategyContextHolder;
+
+    private final Pattern pattern = Pattern.compile(BggConstant.EXPRESSION_REGEX);
 
     /**
      * 执行优先级为: 蓝绿路由配置 -> 灰度路由配置 -> 全局兜底路由配置
@@ -71,12 +95,11 @@ public class StrategyContextService {
                 if(Objects.nonNull(gray)){
                     List<Condition> conditionList = gray.getConditionList();
                     if(CollectionUtils.isNotEmpty(conditionList)){
-                        Condition condition = this.matchingExpressionStrategyConditionGray(conditionList);
+                        Condition condition = this.matchingExpressionStrategyCondition(conditionList);
                         if(Objects.nonNull(condition)){
                             routeKey = condition.getRouteKey();
                         }else {
                             routeKey = gray.getBasicCondition();
-
                         }
                     }
                 }
@@ -87,12 +110,6 @@ public class StrategyContextService {
         }
         return null;
     }
-
-    private Condition matchingExpressionStrategyConditionGray(List<Condition> conditionList) {
-        // TODO: 2021/10/15  匹配规则未开发
-        return null;
-    }
-
     /**
      * 蓝绿规则匹配
      * @return 链路
@@ -107,7 +124,7 @@ public class StrategyContextService {
                 if(Objects.nonNull(blueGreen)){
                     List<Condition> conditionList = blueGreen.getConditionList();
                     if(CollectionUtils.isNotEmpty(conditionList)){
-                        Condition condition = this.matchingExpressionStrategyConditionBlueGreen(conditionList);
+                        Condition condition = this.matchingExpressionStrategyCondition(conditionList);
                         if(Objects.nonNull(condition)){
                             routeKey = condition.getRouteKey();
                         }else {
@@ -118,18 +135,72 @@ public class StrategyContextService {
             }
         }
         if(StringUtils.isNotBlank(routeKey)){
-            return localRule.getRoutes().get(routeKey);
+            return localRule.getRoutes().get(getRouteByWeightRandom(routeKey));
         }
         return null;
     }
 
-    private Condition matchingExpressionStrategyConditionBlueGreen(List<Condition> conditionList) {
+    /**
+     *
+     * @description  根据权重配比获取具体链路
+     * @param routeKey routeKey
+     * @author huangfubin
+     * @date 2021/10/16
+     * @return java.lang.String
+     */
+
+    private String getRouteByWeightRandom(String routeKey) {
+        String[] routeKeys = routeKey.split(BggConstant.SPLIT_FH);
+        List<Pair<String, Integer>> weightList = new ArrayList<>();
+        for (String key : routeKeys) {
+            String[] route = key.split(BggConstant.SPLIT_DY);
+            weightList.add(new ImmutablePair<>(route[0], Integer.valueOf(route[1])));
+        }
+        return new MapWeightRandom<>(weightList).random();
+    }
+
+    /**
+     *
+     * @description 使用 spring sepl 获取匹配条件的Condition
+     * @param conditionList
+     * @author huangfubin
+     * @date 2021/10/16
+     * @return cn.hfbin.bgg.common.entity.Condition
+     */
+    private Condition matchingExpressionStrategyCondition(List<Condition> conditionList) {
         for (Condition condition : conditionList) {
-            // TODO: 2021/10/15  匹配规则未开发
-            if(condition.getExpression().equals("tenantCode=1")){
+            String expression = condition.getExpression();
+            Map<String, String> map = this.getHeaderToMap(expression);
+            StandardEvaluationContext standardEvaluationContext = new StandardEvaluationContext();
+            standardEvaluationContext.setVariable(BggConstant.EXPRESSION_PREFIX, map);
+            SpelExpressionParser spelExpressionParser = new SpelExpressionParser();
+            Boolean bool = spelExpressionParser.parseExpression(expression).getValue(standardEvaluationContext, Boolean.class);
+            if(null != bool && bool){
                 return condition;
             }
         }
         return null;
+    }
+
+    /**
+     *
+     * @description 根据expression条件，获取条件在请求头对应的值
+     * @param expression expression
+     * @author huangfubin
+     * @date 2021/10/16
+     * @return java.util.Map<java.lang.String,java.lang.String>
+     */
+    private Map<String, String> getHeaderToMap(String expression) {
+        Map<String, String> map = new HashMap<>();
+        Matcher matcher = pattern.matcher(expression);
+        while (matcher.find()) {
+            String group = matcher.group();
+            String name = StringUtils.substringBetween(group, BggConstant.EXPRESSION_SUB_PREFIX, BggConstant.EXPRESSION_SUB_SUFFIX);
+            String value = strategyContextHolder.getHeader(name);
+            if (StringUtils.isBlank(value)) {
+                map.put(name, value);
+            }
+        }
+        return map;
     }
 }

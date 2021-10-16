@@ -6,11 +6,11 @@
     "blueGreen":{
       "conditionList":[
         {
-          "expression":"tenantCode=1",
+          "expression":"#H['tenantCode'] == 'HDDC'",
           "routeKey":"route-1"
         },
         {
-          "expression":"tenantCode=1",
+          "expression":"#H['tenantCode'] == 'HDDC'",
           "routeKey":"route-1"
         }
       ],
@@ -19,11 +19,11 @@
     "gray":{
       "conditionList":[
         {
-          "expression":"tenantCode=1",
+          "expression":"#H['tenantCode'] == 'HDDC'",
           "routeKey":"route-1=50;route-2=50"
         },
         {
-          "expression":"tenantCode=1",
+          "expression":"#H['tenantCode'] == 'HDDC'",
           "routeKey":"route-1=50;route-2=50"
         }
       ],
