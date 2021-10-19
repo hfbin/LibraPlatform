@@ -1,0 +1,37 @@
+{
+  "strategy":{
+    "routeKey":"route-1"
+  },
+  "strategyRelease":{
+    "blueGreen":{
+      "conditionList":[
+        {
+          "expression":"#H['Tenant-Code'] == 'HDDC'",
+          "routeKey":"route-1"
+        },
+        {
+          "expression":"#H['Tenant-Code'] == 'AOLIN'",
+          "routeKey":"route-2"
+        }
+      ],
+      "basicCondition": "route-1"
+    },
+    "gray":{
+      "conditionList":[
+        {
+          "expression":"#H['Tenant-Code'] == 'HDDC'",
+          "routeKey":"route-1=100;route-2=0"
+        },
+        {
+          "expression":"#H['Tenant-Code'] == 'AOLIN'",
+          "routeKey":"route-1=50;route-2=50"
+        }
+      ],
+      "basicCondition": "route-1=100;route-2=0"
+    }
+  },
+  "routes":{
+    "route-1":"{\"libra-tenant\":\"2.0\", \"libra-ucpm\":\"2.0\", \"libra-base\":\"1.0\", \"libra-auth\":\"2.0\"}",
+    "route-2":"{\"libra-tenant\":\"1.0\", \"libra-ucpm\":\"1.0\", \"libra-base\":\"1.0\"}"
+  }
+}

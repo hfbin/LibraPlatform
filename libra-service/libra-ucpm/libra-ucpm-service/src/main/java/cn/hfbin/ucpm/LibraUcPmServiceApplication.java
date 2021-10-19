@@ -20,6 +20,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 public class LibraUcPmServiceApplication {
 
 	public static void main(String[] args) {
+		System.setProperty("server.port", "7827");
+		System.setProperty("spring.cloud.nacos.discovery.metadata.version", "1.0");
 		SpringApplication.run(LibraUcPmServiceApplication.class, args);
 	}
 

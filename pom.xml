@@ -14,6 +14,7 @@
         <module>libra-gateway</module>
         <module>libra-service</module>
         <module>libra-auth</module>
+        <module>libra-bgg</module>
     </modules>
 
     <properties>
@@ -48,9 +49,11 @@
         <javax.validation.version>2.0.1.Final</javax.validation.version>
         <jjwt.version>0.9.1</jjwt.version>
         <jackson.version>2.10.4</jackson.version>
-        <spring.version>5.3.3</spring.version>
+        <spring.version>5.3.7</spring.version>
         <redis.version>2.4.2</redis.version>
         <prometheus.version>1.6.0</prometheus.version>
+        <caffeine.version>2.9.2</caffeine.version>
+        <commons.collections4.version>4.4</commons.collections4.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     </properties>
@@ -74,6 +77,11 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
                 <version>${springboot.version}</version>
             </dependency>
             <dependency>
@@ -124,6 +132,21 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
                 <version>${spring.version}</version>
             </dependency>
             <dependency>
@@ -275,6 +298,16 @@
                 <groupId>com.zaxxer</groupId>
                 <artifactId>HikariCP</artifactId>
                 <version>${hikaricp.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons.collections4.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.ben-manes.caffeine</groupId>
+                <artifactId>caffeine</artifactId>
+                <version>${caffeine.version}</version>
             </dependency>
 
             <!--libra platform 相关包-->

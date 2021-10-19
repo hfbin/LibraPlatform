@@ -19,7 +19,6 @@ package cn.hfbin.common.springcloud;
 import cn.hfbin.common.core.api.ResponseData;
 import cn.hfbin.common.core.api.ServiceCode;
 import cn.hfbin.common.core.exception.CommonExceptionCode;
-import cn.hutool.json.JSONUtil;
 import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.BlockExceptionHandler;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.csp.sentinel.slots.block.authority.AuthorityException;
@@ -27,6 +26,7 @@ import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowException;
 import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowException;
 import com.alibaba.csp.sentinel.slots.system.SystemBlockException;
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 
@@ -75,6 +75,6 @@ public class SentinelUrlBlockHandler implements BlockExceptionHandler {
         response.setCharacterEncoding("utf-8");
         response.setHeader("Content-Type", "application/json;charset=utf-8");
         response.setContentType("application/json;charset=utf-8");
-        response.getWriter().write(JSONUtil.toJsonStr(ResponseData.error(serviceCode)));
+        response.getWriter().write(JSONObject.toJSONString(ResponseData.error(serviceCode)));
     }
 }
