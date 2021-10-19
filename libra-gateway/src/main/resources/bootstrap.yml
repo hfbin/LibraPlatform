@@ -23,3 +23,6 @@ spring:
         namespace: ${spring.profiles.active}
         metadata:
           version: 1.0
+libra:
+  bgg:
+    enabled: false

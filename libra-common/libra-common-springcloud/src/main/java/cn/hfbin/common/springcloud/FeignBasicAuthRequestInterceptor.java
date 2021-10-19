@@ -18,7 +18,6 @@ package cn.hfbin.common.springcloud;
 
 import cn.hfbin.common.core.constant.SpecialCharacterPool;
 import cn.hfbin.common.core.context.HeaderCode;
-import cn.hfbin.common.core.context.SpringContextUtils;
 import cn.hutool.core.util.StrUtil;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;

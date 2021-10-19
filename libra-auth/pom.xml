@@ -53,6 +53,11 @@
 			<groupId>cn.hfbin</groupId>
 			<artifactId>libra-common-springcloud</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>cn.hfbin</groupId>
+			<artifactId>libra-bgg-service</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
