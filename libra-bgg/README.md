@@ -37,11 +37,11 @@ libra-platform -- 父项目
     "blueGreen":{ // 蓝绿发布
       "conditionList":[ // 蓝绿策列
         {
-          "expression":"#H['tenantCode'] == 'HDDC'", // expression匹配值是在请求头中获取，可根据请求头的属性进行匹对(使用spring spel)
+          "expression":"#H['Tenant-Code'] == 'HDDC'", // expression匹配值是在请求头中获取，可根据请求头的属性进行匹对(使用spring spel)
           "routeKey":"route-1"
         },
         {
-          "expression":"#H['tenantCode'] == 'AOLIN'",
+          "expression":"#H['Tenant-Code'] == 'AOLIN'",
           "routeKey":"route-2"
         }
       ],
@@ -50,11 +50,11 @@ libra-platform -- 父项目
     "gray":{ // 灰度发布
       "conditionList":[ // 灰度策列
         {
-          "expression":"#H['tenantCode'] == 'HDDC'",
+          "expression":"#H['Tenant-Code'] == 'HDDC'",
           "routeKey":"route-1=40;route-2=60" // 【route-1=50;route-2=50】含义说明：route-1对应策列，40流量权重；route-1对应策列，60流量权重 （权重加起来100）
         },
         {
-          "expression":"#H['tenantCode'] == 'AOLIN'",
+          "expression":"#H['Tenant-Code'] == 'AOLIN'",
           "routeKey":"route-1=50;route-2=50"
         }
       ],
@@ -76,11 +76,11 @@ libra-platform -- 父项目
     "blueGreen":{ // 蓝绿发布
       "conditionList":[ // 蓝绿策列
         {
-          "expression":"#H['tenantCode'] == 'HDDC'", // expression匹配值是在请求头中获取，可根据请求头的属性进行匹对(使用spring spel)
+          "expression":"#H['Tenant-Code'] == 'HDDC'", // expression匹配值是在请求头中获取，可根据请求头的属性进行匹对(使用spring spel)
           "routeKey":"route-1"
         },
         {
-          "expression":"#H['tenantCode'] == 'AOLIN'",
+          "expression":"#H['Tenant-Code'] == 'AOLIN'",
           "routeKey":"route-2"
         }
       ],
@@ -100,11 +100,11 @@ libra-platform -- 父项目
     "gray":{ // 灰度发布
       "conditionList":[ // 灰度策列
         {
-          "expression":"#H['tenantCode'] == 'HDDC'",
+          "expression":"#H['Tenant-Code'] == 'HDDC'",
           "routeKey":"route-1=40;route-2=60" // 【route-1=50;route-2=50】含义说明：route-1对应策列，40流量权重；route-1对应策列，60流量权重 （权重加起来100）
         },
         {
-          "expression":"#H['tenantCode'] == 'AOLIN'",
+          "expression":"#H['Tenant-Code'] == 'AOLIN'",
           "routeKey":"route-1=50;route-2=50"
         }
       ],
@@ -130,6 +130,24 @@ libra-platform -- 父项目
 ```
 2、在`resources`下添加蓝绿、灰度发布规则rule.json
 
+3、在`bootstrap.yml`添加如下配置，开启蓝绿灰度发布，默认是关闭的，如果在配置策略中包含的相关服务，必须在所包含的服务都设置为true，如果中间断层往后调用的服务链路将不起作用。
+```yml
+libra:
+  bgg:
+    enabled: true
+```
+4、添加服务版本(必填)
+```yml
+spring:
+  cloud:
+    nacos:
+      discovery:
+        metadata:
+          version: 1.0
+```
+
+说明：如果不需要蓝绿灰度发布引入了包务必将libra.bgg.enabled配置为false，蓝绿灰度发布是通过请求头进行传递相关策略信息，有一定耗时（具体损耗的时间待测试给出数据）。
+
 ## 非网关接入蓝绿灰度发布
 
 1、添加依赖
@@ -141,3 +159,20 @@ libra-platform -- 父项目
 </dependency>
 ```
 2、在`resources`下添加蓝绿、灰度发布规则rule.json
+
+3、在`bootstrap.yml`添加如下配置，开启蓝绿灰度发布，默认是关闭的，如果在配置策略中包含的相关服务，必须在所包含的服务都设置为true，如果中间断层往后调用的服务链路将不起作用。
+```yml
+libra:
+  bgg:
+    enabled: true
+```
+4、添加服务版本(必填)
+```yml
+spring:
+  cloud:
+    nacos:
+      discovery:
+        metadata:
+          version: 1.0
+```
+说明：如果不需要蓝绿灰度发布引入了包务必将libra.bgg.enabled配置为false，蓝绿灰度发布是通过请求头进行传递相关策略信息，有一定耗时（具体损耗的时间待测试给出数据）。

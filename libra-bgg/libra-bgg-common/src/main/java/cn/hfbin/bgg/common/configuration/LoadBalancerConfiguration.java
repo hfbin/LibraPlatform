@@ -15,7 +15,9 @@
  */
 package cn.hfbin.bgg.common.configuration;
 
+import cn.hfbin.bgg.common.constant.BggConstant;
 import cn.hfbin.bgg.common.loadbalancer.DefaultLoadBalancer;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClients;
 import org.springframework.cloud.loadbalancer.core.ReactorLoadBalancer;
@@ -31,6 +33,7 @@ import org.springframework.core.env.Environment;
  * @Date: 2021/10/15
  */
 @Configuration
+@ConditionalOnProperty(value = BggConstant.LIBRA_BGG_ENABLED, matchIfMissing = true)
 @LoadBalancerClients(defaultConfiguration = {LoadBalancerConfiguration.class})
 public class LoadBalancerConfiguration {
 

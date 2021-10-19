@@ -23,6 +23,7 @@ import cn.hfbin.bgg.common.constant.BggConstant;
 import cn.hfbin.bgg.common.initializer.ConfigInitializer;
 import cn.hfbin.bgg.common.loader.LocalConfigLoader;
 import cn.hfbin.bgg.common.service.StrategyContextService;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -32,6 +33,7 @@ import org.springframework.context.annotation.Configuration;
  * @Date: 2021/10/14
  */
 @Configuration
+@ConditionalOnProperty(value = BggConstant.LIBRA_BGG_ENABLED, matchIfMissing = true)
 public class ConfigAutoConfiguration {
 
     @Bean

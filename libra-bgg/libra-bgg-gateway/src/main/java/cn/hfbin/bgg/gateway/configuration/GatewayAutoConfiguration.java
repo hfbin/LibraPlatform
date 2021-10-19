@@ -16,10 +16,15 @@
 
 package cn.hfbin.bgg.gateway.configuration;
 
+import cn.hfbin.bgg.common.configuration.ConfigAutoConfiguration;
+import cn.hfbin.bgg.common.configuration.LoadBalancerConfiguration;
+import cn.hfbin.bgg.common.constant.BggConstant;
 import cn.hfbin.bgg.gateway.context.GatewayStrategyContextHolder;
 import cn.hfbin.bgg.gateway.filter.AbstractGatewayStrategyRouteFilter;
 import cn.hfbin.bgg.gateway.filter.DefaultGatewayStrategyRouteFilter;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -29,6 +34,8 @@ import org.springframework.context.annotation.Configuration;
  * @Date: 2021/10/14
  */
 @Configuration
+@ConditionalOnProperty(value = BggConstant.LIBRA_BGG_ENABLED, matchIfMissing = true)
+@AutoConfigureBefore({LoadBalancerConfiguration.class, ConfigAutoConfiguration.class})
 public class GatewayAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean

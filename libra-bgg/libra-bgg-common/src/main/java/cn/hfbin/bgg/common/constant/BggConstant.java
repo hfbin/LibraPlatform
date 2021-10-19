@@ -36,6 +36,8 @@ public interface BggConstant {
 
     String CONFIG_PATH = "classpath:rule.json";
 
+    String LIBRA_BGG_ENABLED = "libra.bgg.enabled";
+
     String EXPRESSION_PREFIX = "H";
     String EXPRESSION_REGEX = "\\#" + EXPRESSION_PREFIX + "\\['\\S+'\\]";
     String EXPRESSION_SUB_PREFIX = "#" + EXPRESSION_PREFIX + "['";

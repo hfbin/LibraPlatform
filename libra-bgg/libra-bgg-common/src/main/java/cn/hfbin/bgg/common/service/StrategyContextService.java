@@ -106,7 +106,7 @@ public class StrategyContextService {
             }
         }
         if(StringUtils.isNotBlank(routeKey)){
-            return localRule.getRoutes().get(routeKey);
+            return localRule.getRoutes().get(getRouteByWeightRandom(routeKey));
         }
         return null;
     }
@@ -135,7 +135,7 @@ public class StrategyContextService {
             }
         }
         if(StringUtils.isNotBlank(routeKey)){
-            return localRule.getRoutes().get(getRouteByWeightRandom(routeKey));
+            return localRule.getRoutes().get(routeKey);
         }
         return null;
     }
@@ -197,7 +197,7 @@ public class StrategyContextService {
             String group = matcher.group();
             String name = StringUtils.substringBetween(group, BggConstant.EXPRESSION_SUB_PREFIX, BggConstant.EXPRESSION_SUB_SUFFIX);
             String value = strategyContextHolder.getHeader(name);
-            if (StringUtils.isBlank(value)) {
+            if (StringUtils.isNotBlank(value)) {
                 map.put(name, value);
             }
         }

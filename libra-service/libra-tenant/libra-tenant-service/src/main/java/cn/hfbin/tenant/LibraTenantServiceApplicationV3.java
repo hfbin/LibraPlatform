@@ -29,13 +29,13 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableFeignClients({UcPmConstant.LIBRA_UCPM_PACKAGE})
 @SpringBootApplication
 @ComponentScan({LibraConstant.LIBRA_COMMON_PACKAGE, TenantConstant.LIBRA_TENANT_PACKAGE, UcPmConstant.LIBRA_UCPM_PACKAGE})
-public class LibraTenantServiceApplicationC {
+public class LibraTenantServiceApplicationV3 {
 
 	public static void main(String[] args) {
 		System.setProperty("server.port", "7830");
 		System.setProperty("spring.cloud.nacos.discovery.metadata.version", "2.0");
 
-		SpringApplication.run(LibraTenantServiceApplicationC.class, args);
+		SpringApplication.run(LibraTenantServiceApplicationV3.class, args);
 	}
 
 }

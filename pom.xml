@@ -15,9 +15,6 @@
         <module>libra-service</module>
         <module>libra-auth</module>
         <module>libra-bgg</module>
-        <module>libra-bgg</module>
-        <module>libra-bgg/libra-bgg-gateway</module>
-        <module>libra-bgg/libra-bgg-service</module>
     </modules>
 
     <properties>
