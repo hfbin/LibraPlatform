@@ -13,7 +13,7 @@ spring:
   cloud:
     nacos:
       # nacos 地址
-      server-addr: http://127.0.0.1:8848
+      server-addr: http://localhost:8848
       config:
         namespace: ${spring.profiles.active}
       discovery:
@@ -21,9 +21,9 @@ spring:
 
 
   datasource:
-    url: jdbc:mysql://localhost:3306/libra?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://node1:3306/libra-gen?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
     username: root
-    password: 1010
+    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
 
