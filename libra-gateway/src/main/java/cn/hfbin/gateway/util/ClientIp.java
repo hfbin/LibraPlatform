@@ -41,46 +41,4 @@ public class ClientIp {
         }
         return ip;
     }
-
-    public static void main(String[] args) {
-        String json = "{\n" +
-                "  \"strategy\":{\n" +
-                "    \"routeKey\":\"route-1\"\n" +
-                "  },\n" +
-                "  \"strategyRelease\":{\n" +
-                "    \"blueGreen\":{\n" +
-                "      \"condition-1\":{\n" +
-                "        \"expression\":\"#H['tenantCode'] == 'HDDC'\",\n" +
-                "        \"routeKey\":\"route-1\"\n" +
-                "      },\n" +
-                "      \"condition-2\":{\n" +
-                "        \"expression\":\"#H['tenantCode'] == 'HDDC'\",\n" +
-                "        \"routeKey\":\"route-1\"\n" +
-                "      },\n" +
-                "      \"basicCondition\":{\n" +
-                "        \"routeKey\":\"route-1\"\n" +
-                "      }\n" +
-                "    },\n" +
-                "    \"gray\":{\n" +
-                "      \"condition-1\":{\n" +
-                "        \"route\":\"route-1=50;route-2=50\"\n" +
-                "      },\n" +
-                "      \"condition-2\":{\n" +
-                "        \"route\":\"route-1=50;route-2=50\"\n" +
-                "      },\n" +
-                "      \"basicCondition\":{\n" +
-                "        \"route\":\"route-1=100;route-2=0\"\n" +
-                "      }\n" +
-                "    },\n" +
-                "    \"routes\":{\n" +
-                "      \"route-1\":\"{\\\"service-a\\\":\\\"1.0\\\", \\\"service-b\\\":\\\"1.0\\\", \\\"service-c\\\":\\\"3.0\\\"}\",\n" +
-                "      \"route-2\":\"{\\\"service-a\\\":\\\"1.0\\\", \\\"service-b\\\":\\\"2.0\\\", \\\"service-c\\\":\\\"2.0\\\"}\"\n" +
-                "    }\n" +
-                "  }\n" +
-                "}";
-
-        JSONObject toJSON = JSONObject.parseObject(json);
-        System.out.println(toJSON.get("strategy"));
-        System.out.println(toJSON.get("strategyRelease"));
-    }
 }

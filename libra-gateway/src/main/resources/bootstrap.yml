@@ -23,6 +23,17 @@ spring:
         namespace: ${spring.profiles.active}
         metadata:
           version: 1.0
+
 libra:
+  # 如果nacos config配置没有配置文件则自动创建文件 默认开启
+  nacos-config-init: true
   bgg:
-    enabled: false
+    # 全蓝绿蓝绿灰度发布开启 默认开启
+    enabled: true
+    # 是否开启nacos config动态更新配置 默认开启
+    remote-config:
+        enabled: true
+  gateway:
+    # 网关动态路由开启 默认开启(开启后通过spring.cloud.gateway.routes配置的将会失效，建议所有的转发路由都使用动态路由配置文件进行配置)
+    dynamic-route:
+        enabled: false

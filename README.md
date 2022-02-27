@@ -1,5 +1,5 @@
 # Libra-Platform 微服务平台
-目前Libra-Platform微服务平台还处于开发阶段，源码已开源，后续将会不断完善强大功能。基于SpringCloud(2020.0.x) + SpringCloudAlibaba(2021.x) + SpringBoot(2.4.x) + Vue3开发，基于多租户SaaS模式的设计，拥有强大的用户中心，权限基于RBAC设计，支持蓝绿灰度发布等功能。Libra-Platform平台架构清晰、代码简介、注解齐全，很适合作为基础框架使用。
+目前Libra-Platform微服务平台还处于开发阶段，源码已开源，后续将会不断完善强大功能。基于SpringCloud(2020.0.x) + SpringCloudAlibaba(2021.x) + SpringBoot(2.4.x) + Vue3开发，基于多租户SaaS模式的设计，拥有强大的用户中心，权限基于RBAC设计，支持蓝绿灰度发布、网关动态路由等功能。Libra-Platform平台架构清晰、代码简介、注解齐全，很适合作为基础框架使用。
 
 ## 仓库地址
 
@@ -28,10 +28,10 @@ http://www.librayun.net:8888
 ## 模块说明
 ```lua
 libra-platform -- 父项目
-│  │─libra-bgg -- 蓝绿灰度父级
-│  │  ├─libra-bgg-common -- 蓝绿灰度公共封装
-│  │  ├─libra-bgg-gateway -- 蓝绿灰度网关组件
-│  │  ├─libra-bgg-service -- 蓝绿灰度非网关组件
+│  │─libra-plugin -- 蓝绿灰度父级
+│  │  ├─libra-plugin-common -- 蓝绿灰度公共封装
+│  │  ├─libra-plugin-gateway -- 蓝绿灰度网关组件
+│  │  ├─libra-plugin-service -- 蓝绿灰度非网关组件
 │  ├─libra-auth -- 认证授权服务
 │  │─libra-common -- 公共工具父级
 │  │  ├─libra-common-log -- 封装Log相关
@@ -60,10 +60,9 @@ git clone https://gitee.com/huangfubin/LibraPlatform.git
 
 # 前端工程
 git clone https://gitee.com/huangfubin/LibraPlatformUi.git
-npm install -g cnpm --registry=https://registry.npm.taobao.org
-cnpm i
+npm install
+npm install --registry=https://registry.npm.taobao.org
 npm run dev
-
 ```
 ## 相关工具截图
 

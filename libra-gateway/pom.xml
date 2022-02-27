@@ -134,7 +134,7 @@
         </dependency>
         <dependency>
             <groupId>cn.hfbin</groupId>
-            <artifactId>libra-bgg-gateway</artifactId>
+            <artifactId>libra-plugin-gateway</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>

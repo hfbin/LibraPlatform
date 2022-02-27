@@ -50,7 +50,7 @@
 		</dependency>
 		<dependency>
 			<groupId>cn.hfbin</groupId>
-			<artifactId>libra-bgg-service</artifactId>
+			<artifactId>libra-plugin-service</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 	</dependencies>

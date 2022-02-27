@@ -14,7 +14,7 @@
         <module>libra-gateway</module>
         <module>libra-service</module>
         <module>libra-auth</module>
-        <module>libra-bgg</module>
+        <module>libra-plugin</module>
     </modules>
 
     <properties>
@@ -53,6 +53,8 @@
         <redis.version>2.4.2</redis.version>
         <prometheus.version>1.6.0</prometheus.version>
         <caffeine.version>2.9.2</caffeine.version>
+        <log4j.version>2.17.0</log4j.version>
+        <nacos.client.version>1.4.1</nacos.client.version>
         <commons.collections4.version>4.4</commons.collections4.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
@@ -101,6 +103,11 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-aop</artifactId>
                 <version>${springboot.version}</version>
             </dependency>
@@ -108,6 +115,11 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-redis</artifactId>
                 <version>${redis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>${nacos.client.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.micrometer</groupId>
@@ -308,6 +320,16 @@
                 <groupId>com.github.ben-manes.caffeine</groupId>
                 <artifactId>caffeine</artifactId>
                 <version>${caffeine.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-to-slf4j</artifactId>
+                <version>${log4j.version}</version>
             </dependency>
 
             <!--libra platform 相关包-->

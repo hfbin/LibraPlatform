@@ -30,3 +30,12 @@ spring:
         namespace: ${spring.profiles.active}
         metadata:
           version: 1.0
+libra:
+  # 如果nacos config配置没有配置文件则自动创建文件 默认开启
+  nacos-config-init: true
+  bgg:
+    # 全蓝绿蓝绿灰度发布开启 默认开启
+    enabled: true
+    # 是否开启nacos config动态更新配置 默认开启
+    remote-config:
+      enabled: true
