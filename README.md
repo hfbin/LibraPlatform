@@ -25,6 +25,9 @@
 
 http://www.librayun.net:8888
 
+欢迎关注我的公众号：java技术会所。  技术干货源源不断。
+![img.png](./docs/img/wx_code.jpg)
+
 ## 模块说明
 ```lua
 libra-platform -- 父项目
