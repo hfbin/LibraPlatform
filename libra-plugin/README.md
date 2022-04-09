@@ -4,10 +4,10 @@
 蓝绿灰度发布工程说明
 ```lua
 libra-platform -- 父项目
-│  │─libra-plugin -- 蓝绿灰度父级
-│  │  ├─libra-plugin-common -- 蓝绿灰度公共封装
-│  │  ├─libra-plugin-gateway -- 蓝绿灰度网关组件
-│  │  ├─libra-plugin-service -- 蓝绿灰度非网关组件
+│  │─libra-plugin -- 扩展服务治理功能组件
+│  │  ├─libra-plugin-common -- 公共
+│  │  ├─libra-plugin-gateway -- 网关组件
+│  │  ├─libra-plugin-service -- 非网关组件
 ```
 
 **支持全链路混合实施蓝绿灰度发布**
