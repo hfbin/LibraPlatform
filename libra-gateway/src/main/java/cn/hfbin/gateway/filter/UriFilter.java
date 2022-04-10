@@ -43,10 +43,9 @@ public class UriFilter extends BaseFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String path = String.valueOf(exchange.getRequest().getPath());
         // 演示环境部分接口不允许操作
         if(env.equals("prod")){
-            if(super.checkPath(path, gatewayProperties.getNoOptPath())){
+            if(super.checkPath(super.getPath(exchange), gatewayProperties.getNoOptPath())){
                 throw new LibraException(CommonExceptionCode.OPT_ERROR);
             }
         }
