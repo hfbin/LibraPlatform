@@ -1,6 +1,7 @@
 package cn.hfbin.gateway.filter;
 
 import cn.hfbin.common.core.context.HeaderCode;
+import cn.hfbin.gateway.constant.OrderConstant;
 import cn.hutool.core.util.IdUtil;
 import org.slf4j.MDC;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -17,7 +18,7 @@ import reactor.core.publisher.Mono;
  * @description:
  */
 @Component
-public class TraceFilter implements GlobalFilter, Ordered {
+public class TraceFilter extends BaseFilter{
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -29,6 +30,6 @@ public class TraceFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return -999;
+        return OrderConstant.TRACE_ORDER;
     }
 }

@@ -32,8 +32,35 @@ libra:
     enabled: true
     # 是否开启nacos config动态更新配置 默认开启
     remote-config:
-        enabled: true
+      enabled: true
   gateway:
     # 网关动态路由开启 默认开启(开启后通过spring.cloud.gateway.routes配置的将会失效，建议所有的转发路由都使用动态路由配置文件进行配置)
     dynamic-route:
-        enabled: false
+      enabled: false
+    no-identity-path:
+      - /api/auth/token
+    no-opt-path:
+      - api/ucpm/depart/delete
+      - api/ucpm/role/delete
+      - api/ucpm/role/group/delete
+      - api/ucpm/position/delete
+      - api/ucpm/role/saveRoleMenu
+      - api/tr/menu/template/delete
+      - api/tr/menu/template/edit
+      - api/tr/menu/template/save
+      - api/tr/menu/template/syncTenantMenuPermission
+      - api/tr/tenant/delete
+      - api/ucpm/client/delete
+      - api/ucpm/client/update
+      - api/ucpm/interface/edit
+      - api/ucpm/interface/delete
+      - api/ucpm/interface/save
+      - api/ucpm/menu/interfaceRef/save
+      - api/ucpm/menu/edit
+      - api/ucpm/menu/save
+      - api/ucpm/menu/delete
+      - api/ucpm/version/delete
+      - api/ucpm/version/save
+      - api/ucpm/version/edit
+      - api/ucpm/ds/edit
+      - api/ucpm/version/edit
