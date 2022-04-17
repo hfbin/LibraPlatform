@@ -26,6 +26,10 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.hfbin</groupId>
+            <artifactId>libra-plugin-bgg</artifactId>
+        </dependency>
     </dependencies>
 
 

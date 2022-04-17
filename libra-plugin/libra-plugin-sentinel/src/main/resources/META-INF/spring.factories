@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.hfbin.plugin.gateway.configuration.GatewayAutoConfiguration
+cn.hfbin.plugin.sentinel.configuration.SentinelAutoConfiguration

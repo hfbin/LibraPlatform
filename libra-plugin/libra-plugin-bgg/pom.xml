@@ -6,11 +6,15 @@
         <artifactId>libra-plugin</artifactId>
         <groupId>cn.hfbin</groupId>
         <version>1.0.0</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>libra-plugin-gateway</artifactId>
-    <packaging>jar</packaging>
+
+    <artifactId>libra-plugin-bgg</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -19,17 +23,16 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.hfbin</groupId>
-            <artifactId>libra-plugin-bgg</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.hfbin</groupId>
-            <artifactId>libra-plugin-bgg</artifactId>
+            <artifactId>libra-plugin-nacos</artifactId>
         </dependency>
     </dependencies>
-
 
 </project>

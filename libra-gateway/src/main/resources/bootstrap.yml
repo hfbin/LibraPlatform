@@ -36,7 +36,7 @@ libra:
   gateway:
     # 网关动态路由开启 默认开启(开启后通过spring.cloud.gateway.routes配置的将会失效，建议所有的转发路由都使用动态路由配置文件进行配置)
     dynamic-route:
-      enabled: false
+      enabled: true
     no-identity-path:
       - /api/auth/token
     no-opt-path:

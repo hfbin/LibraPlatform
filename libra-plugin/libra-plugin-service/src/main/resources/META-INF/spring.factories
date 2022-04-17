@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.hfbin.bgg.service.configuration.ServiceAutoConfiguration
+cn.hfbin.plugin.service.configuration.ServiceAutoConfiguration

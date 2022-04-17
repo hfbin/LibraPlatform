@@ -1,4 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.hfbin.bgg.common.configuration.ConfigAutoConfiguration,\
-cn.hfbin.bgg.common.configuration.LoadBalancerConfiguration,\
-cn.hfbin.bgg.common.configuration.NacosAutoConfiguration

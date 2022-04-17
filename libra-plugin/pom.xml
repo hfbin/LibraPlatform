@@ -16,7 +16,35 @@
         <module>libra-plugin-common</module>
         <module>libra-plugin-gateway</module>
         <module>libra-plugin-service</module>
+        <module>libra-plugin-nacos</module>
+        <module>libra-plugin-sentinel</module>
+        <module>libra-plugin-bgg</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-plugin-common</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-plugin-nacos</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-plugin-sentinel</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-plugin-bgg</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 
 </project>
