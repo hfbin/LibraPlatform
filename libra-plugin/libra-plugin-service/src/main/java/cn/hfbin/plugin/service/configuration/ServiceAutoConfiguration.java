@@ -19,7 +19,6 @@ package cn.hfbin.plugin.service.configuration;
 import cn.hfbin.plugin.common.constant.CommonConstant;
 import cn.hfbin.plugin.service.context.ServiceStrategyContextHolder;
 import cn.hfbin.plugin.service.interceptor.FeignStrategyInterceptor;
-import feign.RequestInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -42,7 +41,7 @@ public class ServiceAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnProperty(value = CommonConstant.LIBRA_BGG_ENABLED, matchIfMissing = true)
-    public RequestInterceptor feignStrategyInterceptor(){
+    public FeignStrategyInterceptor bggFeignStrategyInterceptor(){
         return new FeignStrategyInterceptor();
     }
 }

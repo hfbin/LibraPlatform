@@ -135,7 +135,6 @@
         <dependency>
             <groupId>cn.hfbin</groupId>
             <artifactId>libra-plugin-gateway</artifactId>
-            <version>1.0.0</version>
         </dependency>
     </dependencies>
 

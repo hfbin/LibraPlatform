@@ -378,6 +378,16 @@
                 <artifactId>libra-tenant-api</artifactId>
                 <version>1.0.0</version>
             </dependency>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-plugin-service</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-plugin-gateway</artifactId>
+                <version>1.0.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
