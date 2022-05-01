@@ -6,8 +6,12 @@
 libra-platform -- 父项目
 │  │─libra-plugin -- 扩展服务治理功能组件
 │  │  ├─libra-plugin-common -- 公共
+│  │  ├─libra-plugin-bgg -- 蓝绿灰度发布组件
+│  │  ├─libra-plugin-nacos -- nacos二次封装组件
+│  │  ├─libra-plugin-bgg -- sentinel二次封装组件
 │  │  ├─libra-plugin-gateway -- 网关组件
 │  │  ├─libra-plugin-service -- 非网关组件
+│  │  ├─libra-plugin-admin-service -- 暴露动态更新配置服务
 ```
 
 **支持全链路混合实施蓝绿灰度发布**
