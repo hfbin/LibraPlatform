@@ -23,5 +23,10 @@ package cn.hfbin.plugin.nacos.operation;
  * @Date: 2022/01/26
  */
 public interface NacosSubscribeCallback {
+    /**
+     *   nacos subscribe callback
+     * @param config nacos config
+     * @return void
+     */
     void callback(String config);
 }
