@@ -19,6 +19,7 @@
         <module>libra-plugin-nacos</module>
         <module>libra-plugin-sentinel</module>
         <module>libra-plugin-bgg</module>
+        <module>libra-plugin-admin-service</module>
     </modules>
 
     <dependencyManagement>
@@ -41,6 +42,26 @@
             <dependency>
                 <groupId>cn.hfbin</groupId>
                 <artifactId>libra-plugin-bgg</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-core</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-common-swagger</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-common-log</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-common-springcloud</artifactId>
                 <version>1.0.0</version>
             </dependency>
         </dependencies>
