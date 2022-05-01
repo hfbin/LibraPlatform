@@ -80,7 +80,7 @@ public class DepartController implements DepartApiService {
     @Override
     @PreAuthorize("dept:tree")
     @ApiOperation(value = "部门列表（树结构）", notes = "部门列表")
-    @Log(desc = "部门管理-部门列表（树结构", logType = LogTypeEnum.OPT_LOG, optBehavior = OptBehaviorEnum.SELECT)
+    @Log(desc = "部门管理-部门列表（树结构）", logType = LogTypeEnum.OPT_LOG, optBehavior = OptBehaviorEnum.SELECT)
     public ResponseData<List<DepartTreeVo>> list(DepartParams departParams) {
         return ResponseData.ok(departService.treeList(departParams));
     }
