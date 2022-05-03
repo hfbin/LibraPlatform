@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package cn.hfbin.plugin.bgg.entity;
+package cn.hfbin.plugin.common.entity;
 
 import java.io.Serializable;
 
@@ -23,15 +23,25 @@ import java.io.Serializable;
  * @Description: Rule 类
  * @Date: 2021/10/13
  */
-public class Strategy implements Serializable{
-    private static final long serialVersionUID = -5474569908596820334L;
-    private String routeKey;
+public class StrategyRelease implements Serializable {
+    private static final long serialVersionUID = 3698676565717246478L;
+    private BlueGreen blueGreen;
 
-    public String getRouteKey() {
-        return routeKey;
+    private Gray gray;
+
+    public BlueGreen getBlueGreen() {
+        return blueGreen;
     }
 
-    public void setRouteKey(String routeKey) {
-        this.routeKey = routeKey;
+    public void setBlueGreen(BlueGreen blueGreen) {
+        this.blueGreen = blueGreen;
+    }
+
+    public Gray getGray() {
+        return gray;
+    }
+
+    public void setGray(Gray gray) {
+        this.gray = gray;
     }
 }

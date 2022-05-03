@@ -18,7 +18,7 @@ package cn.hfbin.plugin.gateway.route;
 
 import cn.hfbin.plugin.common.future.FutureResolver;
 import cn.hfbin.plugin.common.thread.ThreadPoolFactory;
-import cn.hfbin.plugin.gateway.entity.GatewayRouteEntity;
+import cn.hfbin.plugin.common.entity.GatewayRoute;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import org.apache.commons.collections4.CollectionUtils;
@@ -52,7 +52,7 @@ import java.util.stream.Collectors;
  * @date 2022/2/02 11:34 下午
  * @description: GatewayRouteImpl
  */
-public class GatewayRouteImpl implements GatewayRoute, ApplicationEventPublisherAware {
+public class GatewayRouteImpl implements cn.hfbin.plugin.gateway.route.GatewayRoute, ApplicationEventPublisherAware {
     private static final Logger log = LoggerFactory.getLogger(GatewayRouteImpl.class);
     private final ExecutorService executorService = ThreadPoolFactory.getExecutorService("gateway-route-operation");
     private ApplicationEventPublisher applicationEventPublisher;
@@ -70,7 +70,7 @@ public class GatewayRouteImpl implements GatewayRoute, ApplicationEventPublisher
     }
 
     @Override
-    public void add(GatewayRouteEntity gatewayRouteEntity) {
+    public void add(GatewayRoute gatewayRouteEntity) {
         if (Objects.isNull(gatewayRouteEntity)) {
             log.error("route entity is null");
             return;
@@ -88,7 +88,7 @@ public class GatewayRouteImpl implements GatewayRoute, ApplicationEventPublisher
     }
 
     @Override
-    public void update(GatewayRouteEntity gatewayRouteEntity) {
+    public void update(GatewayRoute gatewayRouteEntity) {
         if (Objects.isNull(gatewayRouteEntity)) {
             log.error("route entity is null");
             return;
@@ -129,18 +129,18 @@ public class GatewayRouteImpl implements GatewayRoute, ApplicationEventPublisher
             log.error("gatewayRouteEntity is null");
             return;
         }
-        List<GatewayRouteEntity> gatewayRouteEntityList = JSONArray.parseArray(config, GatewayRouteEntity.class);
+        List<GatewayRoute> gatewayRouteEntityList = JSONArray.parseArray(config, GatewayRoute.class);
         if (CollectionUtils.isEmpty(gatewayRouteEntityList)) {
             log.error("gatewayRouteEntity is null");
             return;
         }
-        Map<Object, Long> listMap = gatewayRouteEntityList.stream().collect(Collectors.groupingBy(GatewayRouteEntity::getId, Collectors.counting()));
+        Map<Object, Long> listMap = gatewayRouteEntityList.stream().collect(Collectors.groupingBy(GatewayRoute::getId, Collectors.counting()));
         long repeatCount = listMap.entrySet().stream().filter(entry -> entry.getValue() > 1).map(Map.Entry::getKey).count();
         if (repeatCount > 0) {
             log.error("gateway routeId is repeat");
             return;
         }
-        Map<String, RouteDefinition> dynamicRouteDefinitionMap = gatewayRouteEntityList.stream().collect(Collectors.toMap(GatewayRouteEntity::getId, this::convertRoute));
+        Map<String, RouteDefinition> dynamicRouteDefinitionMap = gatewayRouteEntityList.stream().collect(Collectors.toMap(GatewayRoute::getId, this::convertRoute));
         Map<String, RouteDefinition> currentRouteDefinitionMap = currentGatewayRoutes();
         List<RouteDefinition> addRouteDefinitionList = new ArrayList<>(dynamicRouteDefinitionMap.size());
         List<RouteDefinition> updateRouteDefinitionList = new ArrayList<>(dynamicRouteDefinitionMap.size());
@@ -190,7 +190,7 @@ public class GatewayRouteImpl implements GatewayRoute, ApplicationEventPublisher
     }
 
     @Override
-    public List<GatewayRouteEntity> allList() {
+    public List<GatewayRoute> allList() {
         return null;
     }
 
@@ -246,7 +246,7 @@ public class GatewayRouteImpl implements GatewayRoute, ApplicationEventPublisher
     }
 
 
-    public RouteDefinition convertRoute(GatewayRouteEntity gatewayRouteEntity) {
+    public RouteDefinition convertRoute(GatewayRoute gatewayRouteEntity) {
         RouteDefinition routeDefinition = new RouteDefinition();
         routeDefinition.setId(gatewayRouteEntity.getId());
         routeDefinition.setUri(convertURI(gatewayRouteEntity.getUri()));

@@ -16,7 +16,6 @@
 
 
 package cn.hfbin.plugin.gateway.route;
-import cn.hfbin.plugin.gateway.entity.GatewayRouteEntity;
 
 import java.util.List;
 
@@ -27,13 +26,13 @@ import java.util.List;
  * @description: gateway route operation
  */
 public interface GatewayRoute {
-    void add(GatewayRouteEntity gatewayStrategyRouteEntity);
+    void add(cn.hfbin.plugin.common.entity.GatewayRoute gatewayStrategyRouteEntity);
 
-    void update(GatewayRouteEntity gatewayStrategyRouteEntity);
+    void update(cn.hfbin.plugin.common.entity.GatewayRoute gatewayStrategyRouteEntity);
 
     void delete(String routeId);
 
     void updateAll(String gatewayStrategyRouteConfig);
 
-    List<GatewayRouteEntity> allList();
+    List<cn.hfbin.plugin.common.entity.GatewayRoute> allList();
 }

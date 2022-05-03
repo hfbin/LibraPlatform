@@ -17,7 +17,7 @@
 package cn.hfbin.plugin.bgg.initializer;
 
 import cn.hfbin.plugin.bgg.adapter.BggPluginAdapter;
-import cn.hfbin.plugin.bgg.entity.Rule;
+import cn.hfbin.plugin.common.entity.Rule;
 import cn.hfbin.plugin.bgg.loader.LocalConfigLoader;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;

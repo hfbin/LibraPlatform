@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package cn.hfbin.plugin.bgg.entity;
+package cn.hfbin.plugin.common.entity;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;

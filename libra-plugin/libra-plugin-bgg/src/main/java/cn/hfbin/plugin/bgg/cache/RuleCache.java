@@ -16,7 +16,7 @@
 
 package cn.hfbin.plugin.bgg.cache;
 
-import cn.hfbin.plugin.bgg.entity.Rule;
+import cn.hfbin.plugin.common.entity.Rule;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
 

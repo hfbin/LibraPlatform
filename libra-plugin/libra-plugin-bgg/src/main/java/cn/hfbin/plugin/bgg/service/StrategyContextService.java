@@ -18,9 +18,9 @@ package cn.hfbin.plugin.bgg.service;
 
 import cn.hfbin.plugin.bgg.adapter.BggPluginAdapter;
 import cn.hfbin.plugin.bgg.context.StrategyContextHolder;
-import cn.hfbin.plugin.bgg.entity.*;
 import cn.hfbin.plugin.common.constant.CommonConstant;
 import cn.hfbin.plugin.bgg.weight.MapWeightRandom;
+import cn.hfbin.plugin.common.entity.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;

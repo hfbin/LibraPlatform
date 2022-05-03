@@ -14,40 +14,40 @@
  *    limitations under the License.
  */
 
-package cn.hfbin.plugin.bgg.entity;
+package cn.hfbin.plugin.common.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Author: huangfubin
  * @Description: Rule 类
  * @Date: 2021/10/13
  */
-public class Condition implements Serializable {
-    private static final long serialVersionUID = -4958997347620640664L;
-    private String expression;
-    private String routeKey;
+public class Gray implements Serializable {
+    private static final long serialVersionUID = 1978209038478744466L;
+    private List<Condition> conditionList;
 
-    public Condition(String expression, String routeKey) {
-        this.expression = expression;
-        this.routeKey = routeKey;
-    }
-    public Condition() {}
+    private String basicCondition;
 
-
-    public String getExpression() {
-        return expression;
+    public Gray(List<Condition> conditionList, String basicCondition) {
+        this.conditionList = conditionList;
+        this.basicCondition = basicCondition;
     }
 
-    public void setExpression(String expression) {
-        this.expression = expression;
+    public List<Condition> getConditionList() {
+        return conditionList;
     }
 
-    public String getRouteKey() {
-        return routeKey;
+    public void setConditionList(List<Condition> conditionList) {
+        this.conditionList = conditionList;
     }
 
-    public void setRouteKey(String routeKey) {
-        this.routeKey = routeKey;
+    public String getBasicCondition() {
+        return basicCondition;
+    }
+
+    public void setBasicCondition(String basicCondition) {
+        this.basicCondition = basicCondition;
     }
 }

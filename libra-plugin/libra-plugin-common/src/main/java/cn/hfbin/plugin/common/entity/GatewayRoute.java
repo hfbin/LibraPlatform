@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package cn.hfbin.plugin.gateway.entity;
+package cn.hfbin.plugin.common.entity;
 
 import java.io.Serializable;
 import java.util.*;
@@ -25,7 +25,7 @@ import java.util.*;
  * @date 2022/2/01 11:11 下午
  * @description: 路由实体
  */
-public class GatewayRouteEntity implements Serializable {
+public class GatewayRoute implements Serializable {
     private static final long serialVersionUID = 8753685181409614365L;
 
     private String id;

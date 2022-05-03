@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package cn.hfbin.plugin.bgg.entity;
+package cn.hfbin.plugin.common.entity;
 
 import java.io.Serializable;
 import java.util.List;
@@ -24,13 +24,13 @@ import java.util.List;
  * @Description: Rule 类
  * @Date: 2021/10/13
  */
-public class Gray implements Serializable {
-    private static final long serialVersionUID = 1978209038478744466L;
+public class BlueGreen implements Serializable {
+    private static final long serialVersionUID = 8132971609944999016L;
     private List<Condition> conditionList;
 
     private String basicCondition;
 
-    public Gray(List<Condition> conditionList, String basicCondition) {
+    public BlueGreen(List<Condition> conditionList, String basicCondition) {
         this.conditionList = conditionList;
         this.basicCondition = basicCondition;
     }

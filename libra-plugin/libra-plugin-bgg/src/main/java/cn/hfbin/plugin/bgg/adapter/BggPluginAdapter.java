@@ -16,7 +16,7 @@
 
 package cn.hfbin.plugin.bgg.adapter;
 
-import cn.hfbin.plugin.bgg.entity.Rule;
+import cn.hfbin.plugin.common.entity.Rule;
 import cn.hfbin.plugin.common.adapter.PluginAdapter;
 
 /**

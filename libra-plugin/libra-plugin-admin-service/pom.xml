@@ -18,6 +18,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
             <groupId>cn.hfbin</groupId>
             <artifactId>libra-core</artifactId>
         </dependency>
@@ -32,6 +36,10 @@
         <dependency>
             <groupId>cn.hfbin</groupId>
             <artifactId>libra-common-springcloud</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hfbin</groupId>
+            <artifactId>libra-plugin-common</artifactId>
         </dependency>
     </dependencies>
 

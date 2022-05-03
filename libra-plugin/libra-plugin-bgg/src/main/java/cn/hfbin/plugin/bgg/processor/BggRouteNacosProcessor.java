@@ -17,7 +17,7 @@
 package cn.hfbin.plugin.bgg.processor;
 
 import cn.hfbin.plugin.bgg.adapter.BggPluginAdapter;
-import cn.hfbin.plugin.bgg.entity.Rule;
+import cn.hfbin.plugin.common.entity.Rule;
 import cn.hfbin.plugin.common.constant.CommonConstant;
 import cn.hfbin.plugin.nacos.processor.NacosListenerProcessor;
 import com.alibaba.fastjson.JSONObject;

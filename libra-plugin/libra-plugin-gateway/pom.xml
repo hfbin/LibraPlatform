@@ -25,10 +25,6 @@
             <groupId>cn.hfbin</groupId>
             <artifactId>libra-plugin-bgg</artifactId>
         </dependency>
-        <dependency>
-            <groupId>cn.hfbin</groupId>
-            <artifactId>libra-plugin-bgg</artifactId>
-        </dependency>
     </dependencies>
 
 
