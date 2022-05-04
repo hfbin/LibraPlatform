@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  * @date 2022/5/1 4:13 下午
  * @description: 网关动态路由
  */
-@Api("网关动态路由")
+@Api(tags = "网关动态路由")
 @RestController
 @RequestMapping("/route")
 public class GatewayRouteController {

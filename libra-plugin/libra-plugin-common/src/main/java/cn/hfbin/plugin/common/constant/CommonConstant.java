@@ -30,6 +30,7 @@ public interface CommonConstant {
     String LOCAL_RULE = "local-rule";
     String REMOTE_RULE = "remote-rule";
     String CONFIG_PATH = "classpath:rule.json";
+    String SPRING_APPLICATION_TYPE = "service-type";
 
 
     String LIBRA_BGG_ENABLED = "libra.bgg.enabled";
