@@ -20,11 +20,11 @@ public class BlueGreenGrayDto {
     @ApiModelProperty("主键id")
     private Long id;
 
-    @ApiModelProperty("入口类型：1、网关 2、非网关")
-    private Integer portalType;
+    @ApiModelProperty("服务类型：1、网关 2、非网关")
+    private Integer serviceType;
 
-    @ApiModelProperty("入口名称")
-    private String portalName;
+    @ApiModelProperty("服务名称")
+    private String serviceName;
 
     @ApiModelProperty("描述信息")
     private String description;
@@ -42,7 +42,7 @@ public class BlueGreenGrayDto {
         private String condition;
 
         @ApiModelProperty("路由Id")
-        private Long blueGreenId;
+        private Long blueGreenRouteId;
 
         @ApiModelProperty("路由Id, 流量比例（加起来100）")
         private Map<Long, Integer> grayMap;
