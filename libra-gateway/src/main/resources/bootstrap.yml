@@ -23,6 +23,7 @@ spring:
         namespace: ${spring.profiles.active}
         metadata:
           version: 1.0
+          service-type: gateway
 
 libra:
   # 如果nacos config配置没有配置文件则自动创建文件 默认开启
