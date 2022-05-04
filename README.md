@@ -25,7 +25,7 @@ Libra-Platform微服务平台基于SpringCloud(2020.0.x) + SpringCloudAlibaba(20
 
 http://www.librayun.net:8888
 
-**商业合作、技术问题可加微信：Jack-hfbin**
+**商业合作、技术问题可加微信：Jack-hfbin (添加时请备注好意图)**
 
 欢迎关注我的公众号：java技术会所。  技术干货源源不断。
 ![img.png](./docs/img/wx_code.jpg)
