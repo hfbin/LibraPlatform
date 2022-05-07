@@ -19,7 +19,7 @@ package cn.hfbin.gateway.filter;
 import cn.hfbin.common.core.constant.ConfigValueConstant;
 import cn.hfbin.common.core.exception.CommonExceptionCode;
 import cn.hfbin.common.core.exception.LibraException;
-import cn.hutool.core.collection.CollectionUtil;
+import cn.hfbin.gateway.constant.OrderConstant;
 import cn.hutool.core.collection.ListUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,7 +31,6 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 /**
@@ -41,46 +40,17 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Component
-public class UriFilter implements GlobalFilter, Ordered {
-
-    private final static List<String> uriList = ListUtil.toList(
-          "/api/ucpm/depart/delete",
-            "/api/ucpm/role/delete",
-            "/api/ucpm/role/group/delete",
-            "/api/ucpm/position/delete",
-            "/api/ucpm/role/saveRoleMenu",
-            "/api/tr/menu/template/delete",
-            "/api/tr/menu/template/edit",
-            "/api/tr/menu/template/save",
-            "/api/tr/menu/template/syncTenantMenuPermission",
-            "/api/tr/tenant/delete",
-            "/api/tr/tenant/edit",
-            "/api/ucpm/client/delete",
-            "/api/ucpm/client/update",
-            "/api/ucpm/interface/edit",
-            "/api/ucpm/interface/delete",
-            "/api/ucpm/interface/save",
-            "/api/ucpm/menu/interfaceRef/save",
-            "/api/ucpm/menu/edit",
-            "/api/ucpm/menu/save",
-            "/api/ucpm/menu/delete",
-            "/api/ucpm/version/delete",
-            "/api/ucpm/version/save",
-            "/api/ucpm/version/edit",
-            "/api/ucpm/ds/edit",
-            "/api/ucpm/version/edit"
-    );
+public class UriFilter extends BaseFilter {
 
     @Value("${" + ConfigValueConstant.SPRING_PROFILES_ACTIVE + "}")
     private String env;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String path = String.valueOf(exchange.getRequest().getPath());
         // 演示环境部分接口不允许操作
         if(env.equals("prod")){
-            uriList.forEach(data -> {
-                if(path.contains(data)){
+            gatewayProperties.getNoOptPath().forEach(data -> {
+                if(super.getPath(exchange).contains(data)){
                     throw new LibraException(CommonExceptionCode.OPT_ERROR);
                 }
             });
@@ -90,6 +60,6 @@ public class UriFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return -100;
+        return OrderConstant.URI_ORDER;
     }
 }

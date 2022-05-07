@@ -18,6 +18,8 @@ package cn.hfbin.common.core.config;
 
 import cn.hfbin.common.core.context.HeaderCode;
 import cn.hfbin.common.core.context.SpringContextUtils;
+import cn.hutool.core.util.StrUtil;
+import org.slf4j.MDC;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -70,6 +72,9 @@ public class GlobalMvcConfigurer implements WebMvcConfigurer {
             headers.put(HeaderCode.IDENTITY_ID, request.getHeader(HeaderCode.IDENTITY_ID));
             headers.put(HeaderCode.IDENTITY_TYPE, request.getHeader(HeaderCode.IDENTITY_TYPE));
 
+            MDC.put(HeaderCode.TENANT_CODE, request.getHeader(HeaderCode.TENANT_CODE));
+            MDC.put(HeaderCode.IDENTITY_ID, request.getHeader(HeaderCode.IDENTITY_ID));
+            MDC.put(HeaderCode.TRACE_ID, request.getHeader(HeaderCode.TRACE_ID));
             // 放到TransmittableThreadLocal中，避免异步线程丢失
             SpringContextUtils.setLocalMap(headers);
             return true;

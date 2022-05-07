@@ -26,6 +26,8 @@ import cn.hfbin.common.core.api.ServiceCode;
 public enum GatewayExceptionCode implements ServiceCode {
 
     TOKEN_INVALID(5020,"token失效"),
+    TOKEN_EMPTY(5021,"token不能为空"),
+
 
     ;
     private int code;

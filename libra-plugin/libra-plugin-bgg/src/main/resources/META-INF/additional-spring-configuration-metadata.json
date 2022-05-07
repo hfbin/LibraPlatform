@@ -1,0 +1,16 @@
+{
+	"properties": [
+		{
+			"name": "libra.bgg.enabled",
+			"type": "java.lang.Boolean",
+			"defaultValue": true,
+			"description": "灰度发布配置，默认开启"
+		},
+		{
+			"name": "libra.bgg.remote-config.enabled",
+			"type": "java.lang.Boolean",
+			"defaultValue": true,
+			"description": "灰度发布配置，是否开启远端动态更新，默认开启"
+		}
+	]
+}

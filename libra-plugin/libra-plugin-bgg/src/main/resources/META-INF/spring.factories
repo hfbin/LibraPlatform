@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+cn.hfbin.plugin.bgg.configuration.BggAutoConfiguration,\
+cn.hfbin.plugin.bgg.configuration.LoadBalancerConfiguration

@@ -16,14 +16,16 @@
 
 package cn.hfbin.common.core.context;
 
-import sun.management.resources.agent;
-
 /**
  * @Description 请求头code常量
  * @anthor hfbin
  * @date 2019/9/22
  */
 public interface HeaderCode {
+    /**
+     * 链路id
+     */
+    String TRACE_ID = "Trace-Id";
     /**
      * token
      */

@@ -31,9 +31,9 @@
 
     <!-- 彩色日志格式 -->
     <springProperty scope="context" name="common-pattern-color" source="logging.common-pattern-color"
-                    defaultValue="[${spring.application.name}:${server.port}:%X{tenantCode}租户:%X{userid}用户id] %clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint}:%clr([%5p]){blue} %clr([${PID}]){magenta} %clr([%X{trace}链路id]){yellow} %clr([%t:%r]){orange} %clr([%logger{50}.%M:%L]){cyan} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+                    defaultValue="[${spring.application.name}:${server.port}:%X{Tenant-Code}:%X{Identity-Id}] %clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint}:%clr([%5p]){blue} %clr([${PID}]){magenta} %clr([%X{Trace-Id}]){yellow} %clr([%t:%r]){orange} %clr([%logger{50}.%M:%L]){cyan} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
     <springProperty scope="context" name="common-pattern" source="logging.common-pattern"
-                    defaultValue="[${spring.application.name}:${server.port}:%X{tenantCode}租户:%X{userid}用户id] %d{yyyy-MM-dd HH:mm:ss.SSS}[%5p] ${PID} [%X{trace}链路id] [%t:%r] [%logger{50}.%M:%L] %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+                    defaultValue="[${spring.application.name}:${server.port}:%X{Tenant-Code}:%X{Identity-Id}] %d{yyyy-MM-dd HH:mm:ss.SSS}[%5p] ${PID} [%X{Trace-Id}] [%t:%r] [%logger{50}.%M:%L] %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
 
     <property name="FILE" value="${log.path}/${spring.application.name}"/>
 

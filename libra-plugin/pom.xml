@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>libra-platform</artifactId>
+        <groupId>cn.hfbin</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>libra-plugin</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>libra-plugin-common</module>
+        <module>libra-plugin-gateway</module>
+        <module>libra-plugin-service</module>
+        <module>libra-plugin-nacos</module>
+        <module>libra-plugin-sentinel</module>
+        <module>libra-plugin-bgg</module>
+        <module>libra-plugin-admin-service</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-plugin-common</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-plugin-nacos</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-plugin-sentinel</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-plugin-bgg</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-core</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-common-swagger</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-common-log</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-common-springcloud</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+</project>

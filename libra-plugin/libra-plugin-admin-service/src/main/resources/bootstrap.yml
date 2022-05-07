@@ -1,0 +1,22 @@
+server:
+  port: 7888
+  servlet:
+    context-path: /plugin
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: libra-plugin
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      # nacos 地址
+      server-addr: http://localhost:8848
+      discovery:
+        namespace: ${spring.profiles.active}
+        metadata:
+          version: 1.0
+          service-type: service
+
