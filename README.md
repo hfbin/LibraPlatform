@@ -1,6 +1,11 @@
 # Libra-Platform 微服务平台
 Libra-Platform微服务平台基于SpringCloud(2020.0.x) + SpringCloudAlibaba(2021.x) + SpringBoot(2.4.x) + Vue3开发，基于多租户SaaS模式的设计，拥有强大的用户中心，权限基于RBAC设计，支持蓝绿灰度发布、网关动态路由等功能。Libra-Platform平台架构清晰、代码简介、注解齐全，很适合作为基础框架使用。
 
+
+    最新代码分支：1.2.x
+    稳定分支：master 
+    SC&SAC最新版本分支：1.3.0
+
 ## 仓库地址
 
 【github】
@@ -68,7 +73,7 @@ libra-platform -- 父项目
 ```
 # 后端工程
 git clone https://gitee.com/huangfubin/LibraPlatform.git
-说明：启动项目需要依赖nacos、mysql（5.7+）、redis，启动前请先安装好
+说明：启动项目需要依赖nacos（2+）、mysql（5.7+）、redis，启动前请先安装好
 
 安装好之后nacos（可以参考官网如何安装）、mysql、redis
 第一步：创建好数据库libra-base、libra-gen、libra-tr、libra-ucpm、nacos。sql文件目录下create-database.sql是创建数据脚本，可以直接执行，执行完之后执行如下脚本（sql文件下）：
@@ -82,8 +87,8 @@ git clone https://gitee.com/huangfubin/LibraPlatform.git
 
 # 前端工程
 git clone https://gitee.com/huangfubin/LibraPlatformUi.git
-npm install
 npm install --registry=https://registry.npm.taobao.org
+npm install
 npm run dev
 
 访问地址：http://localhost:9527
