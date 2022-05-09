@@ -8,7 +8,7 @@ libra-platform -- 父项目
 │  │  ├─libra-plugin-common -- 公共
 │  │  ├─libra-plugin-bgg -- 蓝绿灰度发布组件
 │  │  ├─libra-plugin-nacos -- nacos二次封装组件
-│  │  ├─libra-plugin-bgg -- sentinel二次封装组件
+│  │  ├─libra-plugin-sentinel -- sentinel二次封装组件
 │  │  ├─libra-plugin-gateway -- 网关组件
 │  │  ├─libra-plugin-service -- 非网关组件
 │  │  ├─libra-plugin-admin-service -- 暴露动态更新配置服务
@@ -153,7 +153,8 @@ spring:
     nacos:
       discovery:
         metadata:
-          version: 1.0
+          version: 1.0 # 版本
+          service-type: gateway # 服务类型
 ```
 
 说明：如果不需要蓝绿灰度发布引入了包务必将libra.bgg.enabled配置为false，蓝绿灰度发布是通过请求头进行传递相关策略信息，有一定耗时（具体损耗的时间待测试给出数据）。
@@ -189,6 +190,7 @@ spring:
     nacos:
       discovery:
         metadata:
-          version: 1.0
+          version: 1.0 # 版本
+          service-type: service # 服务类型
 ```
 说明：如果不需要蓝绿灰度发布引入了包务必将libra.bgg.enabled配置为false，蓝绿灰度发布是通过请求头进行传递相关策略信息，有一定耗时（具体损耗的时间待测试给出数据）。
