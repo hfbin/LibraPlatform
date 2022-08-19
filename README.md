@@ -73,16 +73,15 @@ libra-platform -- 父项目
 ```
 # 后端工程
 git clone https://gitee.com/huangfubin/LibraPlatform.git
-说明：启动项目需要依赖nacos（2+）、mysql（5.7+）、redis，启动前请先安装好
+说明：启动项目需要依赖nacos（2.1）、mysql（5.7+）、redis，启动前请先安装好
 
 安装好之后nacos（可以参考官网如何安装）、mysql、redis
-第一步：创建好数据库libra-base、libra-gen、libra-tr、libra-ucpm、nacos。sql文件目录下create-database.sql是创建数据脚本，可以直接执行，执行完之后执行如下脚本（sql文件下）：
+第一步：创建好数据库libra-base、libra-gen、libra-tr、libra-ucpm文件目录下create-database.sql是创建数据脚本，可以直接执行，执行完之后执行如下脚本（sql文件下）：
     libra-base.sql
     libra-gen.sql
     libra-tr.sql
     libra-ucpm.sql
-    nacos.sql（nacos配置中心文件）
-第二步：重启搭建好nacos服务，进入nocos控制台修改对应服务配置，比如数据库密码等配置
+第二步：访问搭建好nacos服务，将libra服务相关nacos配置文件导入配置中心，在nacos目录下nacos_config.zip（直接导入zip即可）
 第三步：启动服务libra-base-service、libra-tenant-service、libra-ucpm-service、libra-auth-service、libra-gateway
 
 # 前端工程
