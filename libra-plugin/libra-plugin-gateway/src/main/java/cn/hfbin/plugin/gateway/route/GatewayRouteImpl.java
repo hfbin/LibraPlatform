@@ -126,18 +126,18 @@ public class GatewayRouteImpl implements cn.hfbin.plugin.gateway.route.GatewayRo
     @Override
     public void updateAll(String config) {
         if (StringUtils.isBlank(config)) {
-            log.error("gatewayRouteEntity is null");
+            log.warn("gatewayRouteEntity is null");
             return;
         }
         List<GatewayRoute> gatewayRouteEntityList = JSONArray.parseArray(config, GatewayRoute.class);
         if (CollectionUtils.isEmpty(gatewayRouteEntityList)) {
-            log.error("gatewayRouteEntity is null");
+            log.warn("gatewayRouteEntity is null");
             return;
         }
         Map<Object, Long> listMap = gatewayRouteEntityList.stream().collect(Collectors.groupingBy(GatewayRoute::getId, Collectors.counting()));
         long repeatCount = listMap.entrySet().stream().filter(entry -> entry.getValue() > 1).map(Map.Entry::getKey).count();
         if (repeatCount > 0) {
-            log.error("gateway routeId is repeat");
+            log.warn("gateway routeId is repeat");
             return;
         }
         Map<String, RouteDefinition> dynamicRouteDefinitionMap = gatewayRouteEntityList.stream().collect(Collectors.toMap(GatewayRoute::getId, this::convertRoute));

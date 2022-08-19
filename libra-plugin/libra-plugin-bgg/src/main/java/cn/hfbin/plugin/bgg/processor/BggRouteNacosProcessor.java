@@ -52,16 +52,21 @@ public class BggRouteNacosProcessor extends NacosListenerProcessor {
     }
 
     @Override
+    public String getDefaultConfig() {
+        return CommonConstant.DEFAULT_JSON_1;
+    }
+
+    @Override
     public void callbackConfig(String config) {
         log.info("nacos listener dataId [bgg-route] -> {}", getDataId());
         log.info("config info [bgg-route]  -> {}", config);
-        if(StringUtils.isBlank(config) || (StringUtils.isNotBlank(config) && config.equals(CommonConstant.DEFAULT_JSON))){
-            log.error("config is null");
+        if(StringUtils.isBlank(config) || (StringUtils.isNotBlank(config) && config.equals(CommonConstant.DEFAULT_JSON_1))){
+            log.warn("config is null");
             return;
         }
         Rule rule = JSONObject.parseObject(config, Rule.class);
         if(Objects.isNull(rule)){
-            log.error("rule is null");
+            log.warn("rule is null");
             return;
         }
         log.info("update bgg rule success");

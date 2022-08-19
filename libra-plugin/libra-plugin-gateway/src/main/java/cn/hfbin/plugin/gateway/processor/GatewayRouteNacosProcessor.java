@@ -49,6 +49,11 @@ public class GatewayRouteNacosProcessor extends NacosListenerProcessor {
     }
 
     @Override
+    public String getDefaultConfig() {
+        return CommonConstant.DEFAULT_JSON_2;
+    }
+
+    @Override
     public void callbackConfig(String config) {
         log.info("nacos listener dataId [gateway-route] -> {}", getDataId());
         log.info("nacos config info [gateway-route] -> {}", config);

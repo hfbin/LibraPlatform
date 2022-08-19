@@ -63,10 +63,10 @@ public abstract class NacosListenerProcessor extends AbstractConfigProcessor {
             if (config != null) {
                 callbackConfig(config);
             } else {
-                log.error("get nacos config is null");
+                log.warn("get nacos config is null");
                 boolean initConfig = Boolean.parseBoolean(environment.getProperty(CommonConstant.LIBRA_NACOS_CONFIG_INIT));
                 if(initConfig){
-                    nacosOperation.publishConfig(group, dataId, CommonConstant.DEFAULT_JSON, NacosFormatType.JSON_FORMAT);
+                    nacosOperation.publishConfig(group, dataId, getDefaultConfig(), NacosFormatType.JSON_FORMAT);
                     log.info("create nacos config success");
                 }
             }

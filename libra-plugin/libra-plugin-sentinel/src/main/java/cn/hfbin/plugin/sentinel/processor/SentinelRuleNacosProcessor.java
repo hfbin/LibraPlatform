@@ -20,6 +20,11 @@ public class SentinelRuleNacosProcessor extends NacosListenerProcessor{
     }
 
     @Override
+    public String getDefaultConfig() {
+        return null;
+    }
+
+    @Override
     public void callbackConfig(String config) {
 
     }
