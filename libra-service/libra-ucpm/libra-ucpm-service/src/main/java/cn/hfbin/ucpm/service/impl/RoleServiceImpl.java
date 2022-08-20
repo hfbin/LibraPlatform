@@ -141,6 +141,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             roleGroupVo.setId(data.getId());
             roleGroupVo.setName(data.getName());
             roleGroupVo.setRoleGroup(true);
+            roleGroupVo.setRemark(data.getDescription());
             if(CollectionUtil.isNotEmpty(finalRoleList)) {
                 List<Role> collect = finalRoleList.parallelStream().filter(o -> o.getGroupId().equals(data.getId())).collect(Collectors.toList());
                 List<RoleGroupVo> roleVoList = new ArrayList<>();
@@ -150,6 +151,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
                         roleVo.setId(roleData.getId());
                         roleVo.setName(roleData.getRoleName());
                         roleVo.setRoleGroup(false);
+                        roleVo.setRemark(roleData.getDescription());
                         roleVoList.add(roleVo);
                     });
                 }

@@ -21,13 +21,16 @@ public class RoleGroupVo implements Serializable {
      */
     @ApiModelProperty(value = "主键id")
     private Long id;
-
     /**
      * 角色名称
      */
     @ApiModelProperty(value = "角色组名称")
     private String name;
-
+    /**
+     * 角色描述
+     */
+    @ApiModelProperty(value = "角色描述")
+    private String remark;
     /**
      * 角色名称
      */
