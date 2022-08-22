@@ -22,6 +22,8 @@ import cn.hfbin.plugin.gateway.context.GatewayStrategyContext;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.core.Ordered;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
@@ -30,7 +32,7 @@ import reactor.core.publisher.Mono;
  * @Description: AbstractGatewayStrategyRouteFilter 类
  * @Date: 2021/10/14
  */
-public abstract class AbstractGatewayStrategyRouteFilter implements GatewayStrategyFilter {
+public class GatewayRouteFilter implements GlobalFilter, Ordered {
     @Autowired
     private StrategyContextHolder strategyContextHolder;
 
