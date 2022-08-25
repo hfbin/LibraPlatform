@@ -27,8 +27,6 @@ import java.util.Map;
  */
 public class Rule implements Serializable {
     private static final long serialVersionUID = -6294291383078484829L;
-    private Strategy strategy;
-
     private StrategyRelease strategyRelease;
 
     private Map<String, String> routes = new LinkedHashMap<>();
@@ -39,14 +37,6 @@ public class Rule implements Serializable {
 
     public void setRoutes(Map<String, String> routes) {
         this.routes = routes;
-    }
-
-    public Strategy getStrategy() {
-        return strategy;
-    }
-
-    public void setStrategy(Strategy strategy) {
-        this.strategy = strategy;
     }
 
     public StrategyRelease getStrategyRelease() {

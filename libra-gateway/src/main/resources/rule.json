@@ -1,7 +1,4 @@
 {
-  "strategy":{
-    "routeKey":"route-1"
-  },
   "strategyRelease":{
     "blueGreen":{
       "conditionList":[

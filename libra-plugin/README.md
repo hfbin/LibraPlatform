@@ -34,9 +34,6 @@ libra-platform -- 父项目
 1、完整的混合蓝绿灰度发布配置
 ```json
 {
-  "strategy":{ // 兜底策列
-    "routeKey":"route-1"
-  },
   "strategyRelease":{
     "blueGreen":{ // 蓝绿发布
       "conditionList":[ // 蓝绿策列

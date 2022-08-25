@@ -24,13 +24,13 @@ import java.util.List;
  * @Description: Rule 类
  * @Date: 2021/10/13
  */
-public class BlueGreen implements Serializable {
+public class BlueGreenGray implements Serializable {
     private static final long serialVersionUID = 8132971609944999016L;
     private List<Condition> conditionList;
 
     private String basicCondition;
 
-    public BlueGreen(List<Condition> conditionList, String basicCondition) {
+    public BlueGreenGray(List<Condition> conditionList, String basicCondition) {
         this.conditionList = conditionList;
         this.basicCondition = basicCondition;
     }
