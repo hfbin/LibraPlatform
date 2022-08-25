@@ -4,7 +4,6 @@ Libra-Platform微服务平台基于SpringCloud(2020.0.x) + SpringCloudAlibaba(20
 
     最新代码分支：1.2.x
     稳定分支：master 
-    SC&SAC最新版本分支：1.3.0
 
 ## 仓库地址
 
@@ -28,7 +27,7 @@ Libra-Platform微服务平台基于SpringCloud(2020.0.x) + SpringCloudAlibaba(20
 
 ## 在线体验
 
-http://www.librayun.net:8888
+http://www.librayun.net:8888 (服务器到期，暂时无法提供在线体验)
 
 **商业合作、技术问题可加微信：Jack-hfbin (添加时请备注好意图)**
 
