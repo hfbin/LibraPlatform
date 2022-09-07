@@ -2,7 +2,7 @@
 Libra-Platform微服务平台基于SpringCloud(2020.0.x) + SpringCloudAlibaba(2021.x) + SpringBoot(2.4.x) + Vue3开发，基于多租户SaaS模式的设计，拥有强大的用户中心，权限基于RBAC设计，支持蓝绿灰度发布、网关动态路由等功能。Libra-Platform平台架构清晰、代码简介、注解齐全，很适合作为基础框架使用。
 
 
-    最新代码分支：1.2.x
+    最新代码分支：2.0.x
     稳定分支：master 
 
 ## 仓库地址
