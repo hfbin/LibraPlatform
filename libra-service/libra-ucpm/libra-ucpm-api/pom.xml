@@ -13,12 +13,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.hfbin</groupId>
-            <artifactId>libra-common-springcloud</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -27,12 +23,10 @@
         <dependency>
             <groupId>cn.hfbin</groupId>
             <artifactId>libra-core</artifactId>
-            <version>1.0.0</version>
         </dependency>
         <dependency>
-            <groupId>cn.hfbin</groupId>
-            <artifactId>libra-common-swagger</artifactId>
-            <version>1.0.0</version>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
         </dependency>
     </dependencies>
 </project>

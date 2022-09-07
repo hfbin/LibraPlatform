@@ -2,7 +2,7 @@ package cn.hfbin.gateway.filter;
 
 import cn.hfbin.common.core.context.HeaderCode;
 import cn.hfbin.common.core.exception.LibraException;
-import cn.hfbin.common.core.jwt.model.JwtUserInfo;
+import cn.hfbin.common.token.model.JwtUserInfo;
 import cn.hfbin.gateway.constant.OrderConstant;
 import cn.hfbin.gateway.enums.GatewayExceptionCode;
 import cn.hfbin.gateway.util.ClientIp;

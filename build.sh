@@ -7,7 +7,7 @@ sk="-javaagent:/data/agent/skywalking-agent.jar -Dskywalking.collector.backend_s
 
 echo '=============重启gateway服务================'
 gatewayServiceName="libra-gateway"
-gatewayJar="$gatewayServiceName-1.0.0-SNAPSHOT.jar"
+gatewayJar="$gatewayServiceName-1.0.0.jar"
 mkdir /data/jar/libra-gateway
 mv /data/jar/libra-gateway/target/$gatewayJar /data/jar/libra-gateway/$gatewayJar
 cd /data/jar/libra-gateway

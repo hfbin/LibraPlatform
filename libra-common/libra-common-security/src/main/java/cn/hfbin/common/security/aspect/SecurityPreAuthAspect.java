@@ -34,7 +34,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Objects;
@@ -46,7 +45,6 @@ import java.util.Objects;
  */
 @Slf4j
 @Aspect
-@Component
 public class SecurityPreAuthAspect {
 
     @Value("${" + ConfigValueConstant.SECURITY_ENABLED +":true}")

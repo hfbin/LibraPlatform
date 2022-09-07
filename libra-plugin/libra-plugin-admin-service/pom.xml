@@ -19,24 +19,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
             <groupId>cn.hfbin</groupId>
-            <artifactId>libra-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.hfbin</groupId>
-            <artifactId>libra-common-swagger</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.hfbin</groupId>
-            <artifactId>libra-common-log</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.hfbin</groupId>
-            <artifactId>libra-common-springcloud</artifactId>
+            <artifactId>libra-webmvc-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.hfbin</groupId>

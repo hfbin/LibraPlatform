@@ -3,6 +3,7 @@ package cn.hfbin.gen.config;
 import cn.hfbin.gen.support.DataSourceConstants;
 import com.baomidou.dynamic.datasource.provider.AbstractJdbcDataSourceProvider;
 import com.baomidou.dynamic.datasource.spring.boot.autoconfigure.DataSourceProperty;
+import lombok.extern.slf4j.Slf4j;
 import org.jasypt.encryption.StringEncryptor;
 
 import java.sql.ResultSet;
@@ -14,6 +15,7 @@ import java.util.Map;
 /**
  * 从数据源中获取 配置信息
  */
+@Slf4j
 public class JdbcDynamicDataSourceProvider extends AbstractJdbcDataSourceProvider {
 
 	private final DataSourceProperties properties;
@@ -47,9 +49,13 @@ public class JdbcDynamicDataSourceProvider extends AbstractJdbcDataSourceProvide
 			property.setDriverClassName(DataSourceConstants.DS_DRIVER);
 			property.setUsername(username);
 			property.setLazy(true);
-			property.setPassword(stringEncryptor.decrypt(password));
 			property.setUrl(url);
-			map.put(name, property);
+			try {
+				property.setPassword(stringEncryptor.decrypt(password));
+				map.put(name, property);
+			}catch (Exception e){
+				log.error("password error !!!, url:{} username:{} password:{}", url, username, password);
+			}
 		}
 
 		// 默认主数据源添加

@@ -1,7 +1,7 @@
 package cn.hfbin.auth.provider.token;
 
-import cn.hfbin.common.core.constant.GrantTypeConstant;
-import cn.hfbin.common.core.jwt.model.AuthUserInfo;
+import cn.hfbin.auth.constant.GrantTypeConstant;
+import cn.hfbin.common.token.model.AuthUserInfo;
 import cn.hfbin.ucpm.params.LoginParams;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

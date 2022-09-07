@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.hfbin.webmvc.configuration.GlobalMvcAutoConfiguration,\
+  cn.hfbin.webmvc.configuration.BasicAutoConfiguration

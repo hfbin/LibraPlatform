@@ -16,6 +16,7 @@
 
 package cn.hfbin.common.redis.config;
 
+import cn.hfbin.common.redis.util.RedisUtil;
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
 import org.springframework.context.annotation.Bean;
@@ -74,5 +75,10 @@ public class RedisConfig {
         redisTemplate.setHashValueSerializer(redisValueSerializer);
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
+    }
+
+    @Bean
+    public RedisUtil redisUtil(){
+        return new RedisUtil();
     }
 }

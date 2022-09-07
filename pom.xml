@@ -24,16 +24,16 @@
         <spring.cloud.version>2020.0.3</spring.cloud.version>
         <alibaba.version>2021.1</alibaba.version>
         <lombok.version>1.18.20</lombok.version>
-        <fastjson.version>1.2.57</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <druid.version>1.2.6</druid.version>
         <mybatisplus.version>3.4.3</mybatisplus.version>
-        <mybatisplus.dynamic.datasource.version>3.4.1</mybatisplus.dynamic.datasource.version>
+        <mybatisplus.dynamic.datasource.version>3.5.1</mybatisplus.dynamic.datasource.version>
         <bitwalker.version>1.21</bitwalker.version>
         <knife4j.version>3.0.2</knife4j.version>
         <swagger2.serion>3.0.0</swagger2.serion>
         <swagger.ui.version>1.9.6</swagger.ui.version>
         <hutool.version>5.6.7</hutool.version>
-        <jasypt.version>2.1.0</jasypt.version>
+        <jasypt.version>3.0.4</jasypt.version>
         <httpclient.version>4.5.13</httpclient.version>
         <hikaricp.version>3.4.5</hikaricp.version>
         <ip2region.version>1.7.2</ip2region.version>
@@ -48,13 +48,15 @@
         <velocity.version>1.7</velocity.version>
         <javax.validation.version>2.0.1.Final</javax.validation.version>
         <jjwt.version>0.9.1</jjwt.version>
-        <jackson.version>2.10.4</jackson.version>
+        <jackson.version>2.12.6</jackson.version>
         <spring.version>5.3.7</spring.version>
         <redis.version>2.4.2</redis.version>
         <prometheus.version>1.6.0</prometheus.version>
         <caffeine.version>2.9.2</caffeine.version>
         <log4j.version>2.17.0</log4j.version>
+        <slf4j.version>1.7.30</slf4j.version>
         <nacos.client.version>2.1.0</nacos.client.version>
+        <snakeyaml.version>1.27</snakeyaml.version>
         <commons.collections4.version>4.4</commons.collections4.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
@@ -149,6 +151,11 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
                 <version>${spring.version}</version>
             </dependency>
             <dependency>
@@ -269,6 +276,11 @@
                 <artifactId>jackson-databind</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
             <!-- swagger2 knife4j -->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
@@ -331,62 +343,92 @@
                 <artifactId>log4j-to-slf4j</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>${snakeyaml.version}</version>
+            </dependency>
 
             <!--libra platform 相关包-->
             <dependency>
                 <groupId>cn.hfbin</groupId>
+                <artifactId>libra-webmvc-starter</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-core</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-common-token</artifactId>
+                <version>${project.parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
                 <artifactId>libra-common-log</artifactId>
-                <version>1.0.0</version>
+                <version>${project.parent.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.hfbin</groupId>
                 <artifactId>libra-common-mq</artifactId>
-                <version>1.0.0</version>
+                <version>${project.parent.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.hfbin</groupId>
                 <artifactId>libra-common-mybatis</artifactId>
-                <version>1.0.0</version>
+                <version>${project.parent.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.hfbin</groupId>
                 <artifactId>libra-common-cache</artifactId>
-                <version>1.0.0</version>
+                <version>${project.parent.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.hfbin</groupId>
                 <artifactId>libra-common-security</artifactId>
-                <version>1.0.0</version>
+                <version>${project.parent.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.hfbin</groupId>
                 <artifactId>libra-common-springcloud</artifactId>
-                <version>1.0.0</version>
+                <version>${project.parent.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.hfbin</groupId>
                 <artifactId>libra-common-swagger</artifactId>
-                <version>1.0.0</version>
+                <version>${project.parent.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.hfbin</groupId>
                 <artifactId>libra-base-api</artifactId>
-                <version>1.0.0</version>
+                <version>${project.parent.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.hfbin</groupId>
                 <artifactId>libra-tenant-api</artifactId>
-                <version>1.0.0</version>
+                <version>${project.parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hfbin</groupId>
+                <artifactId>libra-ucpm-api</artifactId>
+                <version>${project.parent.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.hfbin</groupId>
                 <artifactId>libra-plugin-service</artifactId>
-                <version>1.0.0</version>
+                <version>${project.parent.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.hfbin</groupId>
                 <artifactId>libra-plugin-gateway</artifactId>
-                <version>1.0.0</version>
+                <version>${project.parent.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

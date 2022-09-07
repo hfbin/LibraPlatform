@@ -21,6 +21,8 @@
         <module>libra-common-springcloud</module>
         <module>libra-common-mybatis</module>
         <module>libra-common-security</module>
+        <module>libra-common-token</module>
+        <module>libra-webmvc-starter</module>
     </modules>
 
 </project>

@@ -26,7 +26,6 @@
         <relativePath>../</relativePath>
     </parent>
     <artifactId>libra-common-mq</artifactId>
-    <version>1.0.0</version>
     <packaging>jar</packaging>
 
 </project>

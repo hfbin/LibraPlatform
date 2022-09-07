@@ -5,7 +5,7 @@ import cn.hfbin.common.core.api.ResponseData;
 import cn.hfbin.common.core.constant.AuthRedisKeyConstant;
 import cn.hfbin.common.core.constant.SpecialCharacterPool;
 import cn.hfbin.common.core.context.SpringContextUtils;
-import cn.hfbin.common.core.jwt.model.AuthUserInfo;
+import cn.hfbin.common.token.model.AuthUserInfo;
 import cn.hfbin.common.log.annotation.Log;
 import cn.hfbin.common.log.enums.LogTypeEnum;
 import cn.hfbin.common.log.enums.OptBehaviorEnum;

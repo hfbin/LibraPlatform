@@ -1,6 +1,6 @@
 package cn.hfbin.auth.provider;
 
-import cn.hfbin.common.core.jwt.model.AuthUserInfo;
+import cn.hfbin.common.token.model.AuthUserInfo;
 import cn.hfbin.ucpm.params.LoginParams;
 
 /**

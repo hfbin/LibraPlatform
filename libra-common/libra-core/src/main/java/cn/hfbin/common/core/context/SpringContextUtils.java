@@ -19,13 +19,10 @@ package cn.hfbin.common.core.context;
 import cn.hfbin.common.core.constant.SpecialCharacterPool;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.map.MapUtil;
-import cn.hutool.core.text.StrPool;
 import com.alibaba.ttl.TransmittableThreadLocal;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -40,7 +37,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date 2020-03-30
  * @description: 请求上下文数据
  */
-@Component
 public class SpringContextUtils implements ApplicationContextAware {
 
     /**

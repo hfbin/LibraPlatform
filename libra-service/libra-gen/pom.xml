@@ -8,19 +8,20 @@
 		<version>1.0.0</version>
 	</parent>
 	<artifactId>libra-gen</artifactId>
-	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<dependencies>
 		<dependency>
-			<groupId>com.alibaba.cloud</groupId>
-			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.yaml</groupId>
-					<artifactId>snakeyaml</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>cn.hfbin</groupId>
+			<artifactId>libra-webmvc-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.hfbin</groupId>
+			<artifactId>libra-common-mybatis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.hfbin</groupId>
+			<artifactId>libra-common-springcloud</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -32,10 +33,6 @@
 			<artifactId>velocity</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>cn.hfbin</groupId>
-			<artifactId>libra-common-mybatis</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>dynamic-datasource-spring-boot-starter</artifactId>
 		</dependency>
@@ -45,21 +42,16 @@
 			<artifactId>jasypt-spring-boot-starter</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>cn.hfbin</groupId>
-			<artifactId>libra-common-swagger</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>cn.hfbin</groupId>
-			<artifactId>libra-core</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
 		</dependency>
 	</dependencies>
 
