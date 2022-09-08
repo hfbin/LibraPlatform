@@ -20,7 +20,6 @@ import cn.hfbin.ucpm.entity.RelationRole;
 import cn.hfbin.ucpm.entity.Role;
 import cn.hfbin.ucpm.entity.RoleGroup;
 import cn.hfbin.ucpm.entity.RoleMenuRef;
-import cn.hfbin.ucpm.enums.RelationTypeEnum;
 import cn.hfbin.ucpm.enums.UcPmExceptionCode;
 import cn.hfbin.ucpm.mapper.RoleGroupMapper;
 import cn.hfbin.ucpm.mapper.RoleMapper;
@@ -29,7 +28,6 @@ import cn.hfbin.ucpm.params.RoleMenuParams;
 import cn.hfbin.ucpm.params.RoleParams;
 import cn.hfbin.ucpm.service.RelationRoleService;
 import cn.hfbin.ucpm.service.RoleService;
-import cn.hfbin.ucpm.vo.RelationRoleVo;
 import cn.hfbin.ucpm.vo.RoleGroupVo;
 import cn.hfbin.ucpm.vo.RoleMenuVo;
 import cn.hfbin.ucpm.vo.RoleVo;
@@ -141,6 +139,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             roleGroupVo.setId(data.getId());
             roleGroupVo.setName(data.getName());
             roleGroupVo.setRoleGroup(true);
+            roleGroupVo.setRemark(data.getDescription());
             if(CollectionUtil.isNotEmpty(finalRoleList)) {
                 List<Role> collect = finalRoleList.parallelStream().filter(o -> o.getGroupId().equals(data.getId())).collect(Collectors.toList());
                 List<RoleGroupVo> roleVoList = new ArrayList<>();
@@ -150,6 +149,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
                         roleVo.setId(roleData.getId());
                         roleVo.setName(roleData.getRoleName());
                         roleVo.setRoleGroup(false);
+                        roleVo.setRemark(roleData.getDescription());
                         roleVoList.add(roleVo);
                     });
                 }

@@ -17,7 +17,7 @@
 package cn.hfbin.gateway.filter;
 
 
-import cn.hfbin.common.core.jwt.AuthUtil;
+import cn.hfbin.common.token.AuthUtil;
 import cn.hfbin.gateway.properties.LibraGatewayProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;

@@ -45,7 +45,7 @@ public class FileUtil {
             log.info("load file success : {}", path);
             return inputStream;
         } catch (Exception e) {
-            log.error("load file failed : {}", path);
+            log.warn("load file failed : {}", path);
         }
         return null;
     }
@@ -58,7 +58,7 @@ public class FileUtil {
                 try {
                     return IOUtils.toString(inputStream, StandardCharsets.UTF_8);
                 } catch (IOException e) {
-                    log.error("load file failed : {}", path);
+                    log.warn("load file failed : {}", path);
                 }
             }
         } finally {

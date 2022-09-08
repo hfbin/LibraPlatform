@@ -17,10 +17,9 @@
 package cn.hfbin.plugin.gateway.configuration;
 
 import cn.hfbin.plugin.common.constant.CommonConstant;
+import cn.hfbin.plugin.gateway.filter.GatewayRouteFilter;
 import cn.hfbin.plugin.nacos.processor.NacosListenerProcessor;
 import cn.hfbin.plugin.gateway.context.GatewayStrategyContextHolder;
-import cn.hfbin.plugin.gateway.filter.AbstractGatewayStrategyRouteFilter;
-import cn.hfbin.plugin.gateway.filter.DefaultGatewayStrategyRouteFilter;
 import cn.hfbin.plugin.gateway.processor.GatewayRouteNacosProcessor;
 import cn.hfbin.plugin.gateway.route.GatewayRoute;
 import cn.hfbin.plugin.gateway.route.GatewayRouteImpl;
@@ -40,8 +39,8 @@ public class GatewayAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnProperty(value = CommonConstant.LIBRA_BGG_ENABLED, matchIfMissing = true)
-    public AbstractGatewayStrategyRouteFilter gatewayStrategyRouteFilter() {
-        return new DefaultGatewayStrategyRouteFilter();
+    public GatewayRouteFilter gatewayStrategyRouteFilter() {
+        return new GatewayRouteFilter();
     }
 
     @Bean

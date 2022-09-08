@@ -56,29 +56,8 @@ public class StrategyContextService {
         String routeVersion = getConditionBlueGreenRouteVersion();
         if (StringUtils.isEmpty(routeVersion)) {
             routeVersion = getConditionGrayRouteVersion();
-            if (StringUtils.isEmpty(routeVersion)) {
-                routeVersion = getGlobalRouteVersion();
-            }
         }
         return routeVersion;
-    }
-
-    /**
-     * 兜底规则匹配
-     * @return 链路
-     */
-    private String getGlobalRouteVersion() {
-        Rule localRule = pluginAdapter.getRule();
-        if (Objects.nonNull(localRule)) {
-            Strategy strategy = localRule.getStrategy();
-            if (Objects.nonNull(strategy)) {
-                String routeKey = strategy.getRouteKey();
-                if (StringUtils.isNotBlank(routeKey)) {
-                    return localRule.getRoutes().get(routeKey);
-                }
-            }
-        }
-        return null;
     }
 
     /**
@@ -91,18 +70,8 @@ public class StrategyContextService {
         if(Objects.nonNull(localRule)){
             StrategyRelease strategyRelease = localRule.getStrategyRelease();
             if(Objects.nonNull(strategyRelease)){
-                Gray gray = strategyRelease.getGray();
-                if(Objects.nonNull(gray)){
-                    List<Condition> conditionList = gray.getConditionList();
-                    if(CollectionUtils.isNotEmpty(conditionList)){
-                        Condition condition = this.matchingExpressionStrategyCondition(conditionList);
-                        if(Objects.nonNull(condition)){
-                            routeKey = condition.getRouteKey();
-                        }else {
-                            routeKey = gray.getBasicCondition();
-                        }
-                    }
-                }
+                BlueGreenGray gray = strategyRelease.getGray();
+                routeKey = getRouteKey(gray);
             }
         }
         if(StringUtils.isNotBlank(routeKey)){
@@ -120,24 +89,30 @@ public class StrategyContextService {
         if(Objects.nonNull(localRule)){
             StrategyRelease strategyRelease = localRule.getStrategyRelease();
             if(Objects.nonNull(strategyRelease)){
-                BlueGreen blueGreen = strategyRelease.getBlueGreen();
-                if(Objects.nonNull(blueGreen)){
-                    List<Condition> conditionList = blueGreen.getConditionList();
-                    if(CollectionUtils.isNotEmpty(conditionList)){
-                        Condition condition = this.matchingExpressionStrategyCondition(conditionList);
-                        if(Objects.nonNull(condition)){
-                            routeKey = condition.getRouteKey();
-                        }else {
-                            routeKey = blueGreen.getBasicCondition();
-                        }
-                    }
-                }
+                BlueGreenGray blueGreen = strategyRelease.getBlueGreen();
+                routeKey = getRouteKey(blueGreen);
             }
         }
         if(StringUtils.isNotBlank(routeKey)){
             return localRule.getRoutes().get(routeKey);
         }
         return null;
+    }
+
+    private String getRouteKey(BlueGreenGray gray) {
+        String routeKey = null;
+        if(Objects.nonNull(gray)){
+            List<Condition> conditionList = gray.getConditionList();
+            if(CollectionUtils.isNotEmpty(conditionList)){
+                Condition condition = this.matchingExpressionStrategyCondition(conditionList);
+                if(Objects.nonNull(condition)){
+                    routeKey = condition.getRouteKey();
+                }else {
+                    routeKey = gray.getBasicCondition();
+                }
+            }
+        }
+        return routeKey;
     }
 
     /**

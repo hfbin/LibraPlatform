@@ -1,11 +1,10 @@
 package cn.hfbin.auth.provider.token;
 
 import cn.hfbin.auth.enums.AuthExceptionCode;
-import cn.hfbin.common.core.api.ResponseData;
-import cn.hfbin.common.core.constant.GrantTypeConstant;
+import cn.hfbin.auth.constant.GrantTypeConstant;
 import cn.hfbin.common.core.exception.LibraException;
-import cn.hfbin.common.core.jwt.model.AuthUserInfo;
 import cn.hfbin.common.core.utils.FeignResponseUtil;
+import cn.hfbin.common.token.model.AuthUserInfo;
 import cn.hfbin.ucpm.enums.AccountStatusEnum;
 import cn.hfbin.ucpm.params.LoginParams;
 import cn.hfbin.ucpm.vo.AccountVo;

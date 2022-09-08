@@ -21,7 +21,6 @@ import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ScanOptions;
-import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -32,7 +31,6 @@ import java.util.concurrent.TimeUnit;
  * @date 2021/8/5
  * @description: V1 redis 操作工具，后续需优化V2：1、加锁解决缓存击穿，2、缓存空值解决缓存穿透
  */
-@Component
 public class RedisUtil {
 
     @Autowired

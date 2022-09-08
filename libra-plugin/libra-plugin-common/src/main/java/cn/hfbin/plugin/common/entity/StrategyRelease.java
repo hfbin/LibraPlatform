@@ -25,23 +25,23 @@ import java.io.Serializable;
  */
 public class StrategyRelease implements Serializable {
     private static final long serialVersionUID = 3698676565717246478L;
-    private BlueGreen blueGreen;
+    private BlueGreenGray blueGreen;
 
-    private Gray gray;
+    private BlueGreenGray gray;
 
-    public BlueGreen getBlueGreen() {
+    public BlueGreenGray getBlueGreen() {
         return blueGreen;
     }
 
-    public void setBlueGreen(BlueGreen blueGreen) {
+    public void setBlueGreen(BlueGreenGray blueGreen) {
         this.blueGreen = blueGreen;
     }
 
-    public Gray getGray() {
+    public BlueGreenGray getGray() {
         return gray;
     }
 
-    public void setGray(Gray gray) {
+    public void setGray(BlueGreenGray gray) {
         this.gray = gray;
     }
 }

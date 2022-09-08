@@ -27,7 +27,6 @@ import cn.hfbin.ucpm.params.AccountParams;
 import cn.hfbin.ucpm.params.AccountIdentityQueryParams;
 import cn.hfbin.ucpm.params.RelationRoleParams;
 import cn.hfbin.ucpm.service.AccountService;
-import cn.hfbin.common.core.constant.GrantTypeConstant;
 import cn.hfbin.common.core.exception.LibraException;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;

@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.hfbin.common.core.configuration.SpringAsyncThreadConfig,\
+  cn.hfbin.common.core.configuration.BasicAutoConfiguration

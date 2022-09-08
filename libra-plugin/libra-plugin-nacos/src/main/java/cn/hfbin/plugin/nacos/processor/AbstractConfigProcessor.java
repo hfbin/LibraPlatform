@@ -30,5 +30,7 @@ public abstract class AbstractConfigProcessor implements DisposableBean {
 
     public abstract String getDataId();
 
+    public abstract String getDefaultConfig();
+
     public abstract void callbackConfig(String config);
 }

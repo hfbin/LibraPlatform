@@ -16,7 +16,6 @@
 
 package cn.hfbin.common.core.utils;
 
-import cn.hfbin.common.core.enums.IdentityEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.EnumUtils;
 
@@ -38,6 +37,7 @@ public class EnumUtil {
      * @param code code
      * @return 存在返回true，否则返回false
      */
+    @SuppressWarnings("all")
     public static boolean isInclude(Class enumClass, int code){
         List enumList = EnumUtils.getEnumList(enumClass);
         for (int i = 0;i<enumList.size(); i++){

@@ -8,7 +8,6 @@
 		<version>1.0.0</version>
 	</parent>
 	<artifactId>libra-tenant-service</artifactId>
-	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<dependencies>
@@ -19,21 +18,7 @@
 		</dependency>
 		<dependency>
 			<groupId>cn.hfbin</groupId>
-			<artifactId>libra-tenant-api</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>cn.hfbin</groupId>
-			<artifactId>libra-common-mybatis</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>cn.hfbin</groupId>
-			<artifactId>libra-ucpm-api</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>cn.hfbin</groupId>
-			<artifactId>libra-common-security</artifactId>
+			<artifactId>libra-webmvc-starter</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>cn.hfbin</groupId>
@@ -41,11 +26,19 @@
 		</dependency>
 		<dependency>
 			<groupId>cn.hfbin</groupId>
-			<artifactId>libra-common-log</artifactId>
+			<artifactId>libra-common-mybatis</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>cn.hfbin</groupId>
-			<artifactId>libra-common-swagger</artifactId>
+			<artifactId>libra-tenant-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.hfbin</groupId>
+			<artifactId>libra-ucpm-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.hfbin</groupId>
+			<artifactId>libra-common-security</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>cn.hfbin</groupId>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~    Copyright [2021] [LibraPlatform of copyright huangfubin]
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
+<configuration scan="true">
+    <springProperty scope="context" name="log.path" source="logging.file.path" defaultValue="./logs"/>
+    <springProperty scope="context" name="spring.application.name" source="spring.application.name"/>
+    <springProperty scope="context" name="spring.profiles.active" source="spring.profiles.active"/>
+    <springProperty scope="context" name="log.level.console" source="logging.level.console" defaultValue="INFO"/>
+    <springProperty scope="context" name="server.port" source="server.port" defaultValue="0000"/>
+    <!-- 彩色日志 彩色日志依赖的渲染类-->
+    <conversionRule conversionWord="clr"
+                    converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+    <conversionRule conversionWord="wex"
+                    converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+    <conversionRule conversionWord="wEx"
+                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+
+    <!-- 彩色日志格式 -->
+    <springProperty scope="context" name="common-pattern-color" source="logging.common-pattern-color"
+                    defaultValue="[${spring.application.name}:${server.port}:%X{Tenant-Code}:%X{Identity-Id}] %clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint}:%clr([%5p]){blue} %clr([${PID}]){magenta} %clr([%X{Trace-Id}]){yellow} %clr([%t:%r]){orange} %clr([%logger{50}.%M:%L]){cyan} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+    <springProperty scope="context" name="common-pattern" source="logging.common-pattern"
+                    defaultValue="[${spring.application.name}:${server.port}:%X{Tenant-Code}:%X{Identity-Id}] %d{yyyy-MM-dd HH:mm:ss.SSS}[%5p] ${PID} [%X{Trace-Id}] [%t:%r] [%logger{50}.%M:%L] %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+    <property name="FILE" value="${log.path}/${spring.application.name}"/>
+
+    <contextName>${spring.application.name}-logback</contextName>
+
+    <!-- 控制台实时输出，采用高亮语法，用于开发环境 -->
+    <appender name="CONSOLE_APPENDER" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!--            <level>${log.level.console}</level>-->
+        </filter>
+        <encoder>
+            <pattern>${common-pattern-color}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 整个项目的所有日志 -->
+    <appender name="ROOT_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${FILE}/root.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- 每天一归档 -->
+            <fileNamePattern>${log.path}/${spring.application.name}/%d{yyyy-MM}/root-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <!-- 单个日志文件最多 100MB, 60天的日志周期，最大不能超过20GB -->
+            <maxFileSize>128MB</maxFileSize>
+            <maxHistory>60</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${common-pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 埋点包的日志 -->
+    <appender name="POINT_LOG_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${FILE}/point.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/${spring.application.name}/%d{yyyy-MM}/point-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <maxFileSize>128MB</maxFileSize>
+            <maxHistory>60</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${common-pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 共用异常包的日志 -->
+    <appender name="ERROR_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${FILE}/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/${spring.application.name}/%d{yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <maxFileSize>128MB</maxFileSize>
+            <maxHistory>60</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${common-pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!-- 此日志文档只记录ERROR级别的 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- uat,prod -->
+    <springProfile name="=fat,uat,prod">
+        <root level="${log.level.console}">
+            <appender-ref ref="ROOT_APPENDER"/>
+            <appender-ref ref="ERROR_APPENDER"/>
+        </root>
+        <logger name="cn.hfbin.common.log" level="INFO" addtivity="false">
+            <appender-ref ref="POINT_LOG_APPENDER"/>
+        </logger>
+    </springProfile>
+
+    <!-- dev,fat -->
+    <springProfile name="dev">
+        <root level="${log.level.console}">
+            <appender-ref ref="CONSOLE_APPENDER"/>
+            <appender-ref ref="ROOT_APPENDER"/>
+            <appender-ref ref="ERROR_APPENDER"/>
+        </root>
+        <logger name="cn.hfbin.common.log" level="INFO" addtivity="false">
+            <appender-ref ref="POINT_LOG_APPENDER"/>
+        </logger>
+    </springProfile>
+
+</configuration>

@@ -46,7 +46,8 @@ public interface CommonConstant {
     String EXPRESSION_SUB_SUFFIX = "']";
     String SPLIT_FH = ";";
     String SPLIT_DY = "=";
-    String DEFAULT_JSON = "{}";
+    String DEFAULT_JSON_1 = "{}";
+    String DEFAULT_JSON_2 = "[]";
 
 
     String DYNAMIC_ROUTE_KEY = "dynamic-route";

@@ -8,23 +8,16 @@
 		<version>1.0.0</version>
 	</parent>
 	<artifactId>libra-base-service</artifactId>
-	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<groupId>cn.hfbin</groupId>
+			<artifactId>libra-webmvc-starter</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>cn.hfbin</groupId>
 			<artifactId>libra-common-mybatis</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>cn.hfbin</groupId>
-			<artifactId>libra-base-api</artifactId>
-			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>cn.hfbin</groupId>
@@ -36,11 +29,16 @@
 		</dependency>
 		<dependency>
 			<groupId>cn.hfbin</groupId>
-			<artifactId>libra-common-log</artifactId>
+			<artifactId>libra-base-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>cn.hfbin</groupId>
 			<artifactId>libra-plugin-service</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

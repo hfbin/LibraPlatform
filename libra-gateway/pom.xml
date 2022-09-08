@@ -23,11 +23,9 @@
         <artifactId>libra-platform</artifactId>
         <version>1.0.0</version>
     </parent>
-    <groupId>cn.hfbin</groupId>
     <artifactId>libra-gateway</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
     <name>libra-gateway</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Libra Gateway</description>
 
     <dependencies>
         <dependency>
@@ -35,32 +33,17 @@
             <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-client</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-            <!--与springboot版本snakeyaml冲突导致到找不到，需要排除-->
-            <exclusions>
-                <exclusion>
-                    <groupId>org.yaml</groupId>
-                    <artifactId>snakeyaml</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-        <dependency>
-            <groupId>cn.hfbin</groupId>
-            <artifactId>libra-core</artifactId>
-            <version>1.0.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-web</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- 网关路由转发服务会出现503，2020版本需要重新依赖openfeign、loadbalancer，-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -82,52 +65,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
         </dependency>
-        <!-- sentinel的nacos持久化 -->
-        <dependency>
-            <groupId>com.alibaba.csp</groupId>
-            <artifactId>sentinel-datasource-nacos</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-            <!--sentinel 依赖netty版本与gateway版本冲突需排除-->
-            <exclusions>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty-codec-http</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty-transport</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty-handler</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty-common</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.hfbin</groupId>
-            <artifactId>libra-common-log</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>cn.hfbin</groupId>
-                    <artifactId>libra-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>cn.hfbin</groupId>
-                    <artifactId>libra-base-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
@@ -135,6 +72,10 @@
         <dependency>
             <groupId>cn.hfbin</groupId>
             <artifactId>libra-plugin-gateway</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hfbin</groupId>
+            <artifactId>libra-common-token</artifactId>
         </dependency>
     </dependencies>
 

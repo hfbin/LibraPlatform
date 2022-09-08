@@ -16,16 +16,12 @@
 
 package cn.hfbin.gateway;
 
-import cn.hfbin.common.core.constant.LibraConstant;
-import cn.hfbin.gateway.constant.GatewayConstant;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.context.annotation.ComponentScan;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-@ComponentScan({LibraConstant.LIBRA_JWT_PACKAGE, GatewayConstant.LIBRA_GATEWAY_PACKAGE})
 public class LibraGatewayApplication {
 
     public static void main(String[] args) {
