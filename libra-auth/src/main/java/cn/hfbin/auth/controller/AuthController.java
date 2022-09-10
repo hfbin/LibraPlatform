@@ -2,7 +2,7 @@ package cn.hfbin.auth.controller;
 
 import cn.hfbin.auth.provider.CompositeTokenGranterContext;
 import cn.hfbin.common.core.api.ResponseData;
-import cn.hfbin.common.core.constant.AuthRedisKeyConstant;
+import cn.hfbin.auth.constant.AuthRedisKeyConstant;
 import cn.hfbin.common.core.constant.SpecialCharacterPool;
 import cn.hfbin.common.core.context.SpringContextUtils;
 import cn.hfbin.common.token.model.AuthUserInfo;
@@ -45,8 +45,8 @@ public class AuthController {
     @Log(desc = "认证服务-退出接口", logType = LogTypeEnum.LOGIN_LOG, optBehavior = OptBehaviorEnum.LOGOUT)
     public ResponseData<String> logout(){
         //  key + client + identityId
-        redisUtil.del(AuthRedisKeyConstant.USER_INFO_KEY + SpringContextUtils.getClientCode() + SpecialCharacterPool.DOUBLE_COLON + SpringContextUtils.getIdentityId(),
-                AuthRedisKeyConstant.USER_INTERFACE_KEY + SpringContextUtils.getClientCode() + SpecialCharacterPool.DOUBLE_COLON + SpringContextUtils.getIdentityId());
+        redisUtil.del(AuthRedisKeyConstant.USER_INFO_KEY + SpringContextUtils.getClientCode() + SpecialCharacterPool.S_COLON + SpringContextUtils.getIdentityId(),
+                AuthRedisKeyConstant.USER_INTERFACE_KEY + SpringContextUtils.getClientCode() + SpecialCharacterPool.S_COLON + SpringContextUtils.getIdentityId());
         return ResponseData.ok(String.valueOf(System.currentTimeMillis()));
     }
 

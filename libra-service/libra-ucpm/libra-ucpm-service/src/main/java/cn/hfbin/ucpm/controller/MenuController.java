@@ -24,7 +24,7 @@ import cn.hfbin.ucpm.params.TreeParams;
 import cn.hfbin.ucpm.service.AccountIdentityService;
 import cn.hfbin.ucpm.service.MenuService;
 import cn.hfbin.ucpm.vo.MenuInterfaceVo;
-import cn.hfbin.ucpm.vo.MenuResourceVo;
+import cn.hfbin.ucpm.vo.PermissionResourceVo;
 import cn.hfbin.ucpm.vo.TreeVo;
 import cn.hfbin.common.core.api.ResponseData;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -160,7 +160,7 @@ public class MenuController implements MenuApiService {
      */
     @Override
     @ApiOperation(value = "[auth-service]查询当前用户菜单", notes = "查询当前用户菜单")
-    public ResponseData<MenuResourceVo> queryUserMenu(TreeParams treeParams) {
+    public ResponseData<PermissionResourceVo> queryUserMenu(TreeParams treeParams) {
         return ResponseData.ok(accountIdentityService.selectUserMenu(treeParams));
     }
 

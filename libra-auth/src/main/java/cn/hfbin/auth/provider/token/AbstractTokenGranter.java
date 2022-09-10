@@ -2,7 +2,7 @@ package cn.hfbin.auth.provider.token;
 
 import cn.hfbin.auth.enums.AuthExceptionCode;
 import cn.hfbin.auth.provider.TokenGranterStrategy;
-import cn.hfbin.common.core.constant.AuthRedisKeyConstant;
+import cn.hfbin.auth.constant.AuthRedisKeyConstant;
 import cn.hfbin.common.core.constant.ConfigValueConstant;
 import cn.hfbin.common.core.constant.SpecialCharacterPool;
 import cn.hfbin.common.core.context.SpringContextUtils;
@@ -114,7 +114,7 @@ public abstract class AbstractTokenGranter implements TokenGranterStrategy {
         jwtUserInfo.setIdentityType(SpringContextUtils.getIdentityType());
         AuthUserInfo authUserInfo = authUtil.createToken(jwtUserInfo);
         // key + client + identityId
-        redisUtil.strSet(AuthRedisKeyConstant.USER_INFO_KEY + SpringContextUtils.getClientCode() + SpecialCharacterPool.DOUBLE_COLON + identityInfoVo.getId(), identityInfoVo, expire);
+        redisUtil.strSet(AuthRedisKeyConstant.USER_INFO_KEY + SpringContextUtils.getClientCode() + SpecialCharacterPool.S_COLON + identityInfoVo.getId(), identityInfoVo, expire);
         return authUserInfo;
     }
 

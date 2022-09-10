@@ -18,19 +18,7 @@ package cn.hfbin.ucpm.client;
 
 import cn.hfbin.ucpm.api.MenuApiService;
 import cn.hfbin.ucpm.constant.UcPmConstant;
-import cn.hfbin.ucpm.entity.Menu;
-import cn.hfbin.ucpm.params.MenuInterfaceParams;
-import cn.hfbin.ucpm.params.MenuParams;
-import cn.hfbin.ucpm.params.TreeParams;
-import cn.hfbin.ucpm.vo.MenuInterfaceVo;
-import cn.hfbin.ucpm.vo.MenuResourceVo;
-import cn.hfbin.ucpm.vo.TreeVo;
-import cn.hfbin.common.core.api.ResponseData;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * @Author: huangfubin

@@ -11,8 +11,6 @@ import cn.hfbin.ucpm.params.AccountIdentityQueryParams;
 import cn.hfbin.ucpm.params.RelationRoleParams;
 import cn.hfbin.ucpm.params.TreeParams;
 import cn.hfbin.ucpm.service.*;
-import cn.hfbin.common.core.constant.AuthRedisKeyConstant;
-import cn.hfbin.common.core.constant.SpecialCharacterPool;
 import cn.hfbin.common.core.context.SpringContextUtils;
 import cn.hfbin.common.core.exception.CommonExceptionCode;
 import cn.hfbin.common.core.exception.LibraException;
@@ -140,7 +138,7 @@ public class AccountIdentityServiceImpl implements AccountIdentityService {
      * @return cn.hfbin.base.vo.AuthVo
      */
     @Override
-    public MenuResourceVo selectUserMenu(TreeParams treeParams) {
+    public PermissionResourceVo selectUserMenu(TreeParams treeParams) {
         IdentityInfoVo identityInfoVo = this.selectById(SpringContextUtils.getAccountId());
         List<Long> ids = new ArrayList<>();
         // 员工id
@@ -160,6 +158,7 @@ public class AccountIdentityServiceImpl implements AccountIdentityService {
         if(CollectionUtil.isEmpty(menuIds)){
             throw new LibraException(CommonExceptionCode.TENANT_AUTH_NULL);
         }
+        PermissionResourceVo permissionResourceVo = new PermissionResourceVo();
         // 查询用户菜单权限
         List<Menu> menuLists = accountService.selectUserMenu(relationRoleParams);
 
@@ -170,17 +169,16 @@ public class AccountIdentityServiceImpl implements AccountIdentityService {
         if(CollectionUtil.isNotEmpty(interfaceCodes)){
             // 将接口权限code放到缓存，在鉴权时候会使用到
             //  key + client + identityId
-            redisUtil.strSet(AuthRedisKeyConstant.USER_INTERFACE_KEY + SpringContextUtils.getClientCode() + SpecialCharacterPool.DOUBLE_COLON + identityInfoVo.getId(), interfaceCodes);
+            permissionResourceVo.setInterfaces(interfaceCodes);
         }
         // 菜单
         List<Menu> routerMenuList = menuList.stream().filter(o -> (o.getMenuType() == MenuTypeEnum.MASTER_MENU.getCode() || o.getMenuType() == MenuTypeEnum.SUN_MENU.getCode())).collect(Collectors.toList());
         // 按钮
         List<String> btnList = menuList.stream().filter(o -> (o.getMenuType() == MenuTypeEnum.BTN.getCode())).map(Menu::getPerms).distinct().collect(Collectors.toList());
-        MenuResourceVo menuResourceVo = new MenuResourceVo();
         // 菜单处理
-        menuResourceVo.setRouterVos(CollectionUtil.isNotEmpty(routerMenuList) ? RouterVo.listToTree(routerMenuList) : null);
-        menuResourceVo.setBtnAuths(btnList);
-        return menuResourceVo;
+        permissionResourceVo.setRouterVos(CollectionUtil.isNotEmpty(routerMenuList) ? RouterVo.listToTree(routerMenuList) : null);
+        permissionResourceVo.setBtnAuths(btnList);
+        return permissionResourceVo;
     }
 
 }

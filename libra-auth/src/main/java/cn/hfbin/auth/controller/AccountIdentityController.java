@@ -2,7 +2,7 @@ package cn.hfbin.auth.controller;
 
 import cn.hfbin.auth.enums.AuthExceptionCode;
 import cn.hfbin.common.core.api.ResponseData;
-import cn.hfbin.common.core.constant.AuthRedisKeyConstant;
+import cn.hfbin.auth.constant.AuthRedisKeyConstant;
 import cn.hfbin.common.core.constant.SpecialCharacterPool;
 import cn.hfbin.common.core.context.SpringContextUtils;
 import cn.hfbin.common.core.exception.LibraException;
@@ -31,7 +31,7 @@ public class AccountIdentityController {
     @GetMapping("/user-info")
     @ApiOperation(value = "查询用户信息", notes = "查询用户信息")
     public ResponseData<IdentityInfoVo> info(){
-        IdentityInfoVo identityInfoVo = (IdentityInfoVo)redisUtil.strGet(AuthRedisKeyConstant.USER_INFO_KEY + SpringContextUtils.getClientCode() + SpecialCharacterPool.DOUBLE_COLON + SpringContextUtils.getIdentityId());
+        IdentityInfoVo identityInfoVo = (IdentityInfoVo)redisUtil.strGet(AuthRedisKeyConstant.USER_INFO_KEY + SpringContextUtils.getClientCode() + SpecialCharacterPool.S_COLON + SpringContextUtils.getIdentityId());
         Optional.ofNullable(identityInfoVo).orElseThrow(() -> new LibraException(AuthExceptionCode.SELECT_ERROR));
         return ResponseData.ok(identityInfoVo);
     }

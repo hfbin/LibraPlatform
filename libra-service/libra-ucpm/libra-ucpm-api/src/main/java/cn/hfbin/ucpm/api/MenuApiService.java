@@ -21,7 +21,7 @@ import cn.hfbin.ucpm.params.MenuInterfaceParams;
 import cn.hfbin.ucpm.params.MenuParams;
 import cn.hfbin.ucpm.params.TreeParams;
 import cn.hfbin.ucpm.vo.MenuInterfaceVo;
-import cn.hfbin.ucpm.vo.MenuResourceVo;
+import cn.hfbin.ucpm.vo.PermissionResourceVo;
 import cn.hfbin.ucpm.vo.TreeVo;
 import cn.hfbin.common.core.api.ResponseData;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -119,6 +119,6 @@ public interface MenuApiService {
      * @return
      */
     @PostMapping("user/menu")
-    ResponseData<MenuResourceVo> queryUserMenu(@RequestBody TreeParams treeParams);
+    ResponseData<PermissionResourceVo> queryUserMenu(@RequestBody TreeParams treeParams);
 
 }

@@ -4,7 +4,7 @@ import cn.hfbin.ucpm.params.AccountIdentityQueryParams;
 import cn.hfbin.ucpm.params.TreeParams;
 import cn.hfbin.ucpm.vo.AccountVo;
 import cn.hfbin.ucpm.vo.IdentityInfoVo;
-import cn.hfbin.ucpm.vo.MenuResourceVo;
+import cn.hfbin.ucpm.vo.PermissionResourceVo;
 
 /**
  * @Author: huangfubin
@@ -27,7 +27,7 @@ public interface AccountIdentityService {
      * @date 2021/8/8
      * @return
      */
-    MenuResourceVo selectUserMenu(TreeParams treeParams);
+    PermissionResourceVo selectUserMenu(TreeParams treeParams);
 
     /**
      * 根据id查询账号身份信息

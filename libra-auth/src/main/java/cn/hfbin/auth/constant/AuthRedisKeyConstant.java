@@ -14,7 +14,9 @@
  *    limitations under the License.
  */
 
-package cn.hfbin.common.core.constant;
+package cn.hfbin.auth.constant;
+
+import cn.hfbin.common.core.constant.SpecialCharacterPool;
 
 /**
  * @author hfbin
@@ -24,15 +26,15 @@ package cn.hfbin.common.core.constant;
  */
 public interface AuthRedisKeyConstant {
 
-    String AUTH = "AUTH" + SpecialCharacterPool.DOUBLE_COLON;
+    String AUTH = "AUTH" + SpecialCharacterPool.S_COLON;
 
     // 用户菜单key [AUTH::MENU::clientCode::userId]
-    String USER_MENU_KEY = AUTH + "MENU" + SpecialCharacterPool.DOUBLE_COLON;
+    String USER_MENU_KEY = AUTH + "MENU" + SpecialCharacterPool.S_COLON;
 
     // 用户权限key [AUTH::INTERFACE::clientCode::userId]
-    String USER_INTERFACE_KEY = AUTH + "INTERFACE" + SpecialCharacterPool.DOUBLE_COLON;
+    String USER_INTERFACE_KEY = AUTH + "INTERFACE" + SpecialCharacterPool.S_COLON;
 
     // 用户信息key [AUTH::AUTH::clientCode::userId]
-    String USER_INFO_KEY = AUTH + "INFO" + SpecialCharacterPool.DOUBLE_COLON;
+    String USER_INFO_KEY = AUTH + "INFO" + SpecialCharacterPool.S_COLON;
 
 }

@@ -3,6 +3,8 @@ package cn.hfbin.ucpm.vo;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * @Author: huangfubin
@@ -10,10 +12,10 @@ import java.util.List;
  * @Date: 2021/8/3
  */
 @Data
-public class MenuResourceVo {
+public class PermissionResourceVo {
 
     /**
-     * 路由
+     * 菜单权限
      */
     private List<RouterVo> routerVos;
 
@@ -21,4 +23,14 @@ public class MenuResourceVo {
      * 按钮权限
      */
     private List<String> btnAuths;
+
+    /**
+     * 接口权限code
+     */
+    private List<String> interfaces;
+
+    /**
+     * 数据权限
+     */
+    private Map<String, Objects> dsMap;
 }
