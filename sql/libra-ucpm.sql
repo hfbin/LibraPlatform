@@ -1,22 +1,3 @@
-/*
- Navicat Premium Data Transfer
-
- Source Server         : node1
- Source Server Type    : MySQL
- Source Server Version : 50734
- Source Host           : 180.163.81.139:3306
- Source Schema         : libra-ucpm
-
- Target Server Type    : MySQL
- Target Server Version : 50734
- File Encoding         : 65001
-
- Date: 11/10/2021 08:56:17
-*/
-
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
-
 -- ----------------------------
 -- Table structure for ucpm_account
 -- ----------------------------
@@ -2846,4 +2827,3 @@ CREATE TABLE `ucpm_version`  (
 -- ----------------------------
 INSERT INTO `ucpm_version` VALUES (1431194227035459586, '功能优化', 'V1.1.1', '常规功能优化', NULL, '2021-08-27 17:57:48', 1428975711003615234, '2021-08-30 10:01:02', 0);
 
-SET FOREIGN_KEY_CHECKS = 1;
