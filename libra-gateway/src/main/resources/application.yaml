@@ -1,0 +1,58 @@
+server:
+  port: 9999
+
+spring:
+  profiles:
+    active: dev
+  cloud:
+    # 网关服务转发配置
+    gateway:
+      discovery:
+        locator:
+          enabled: true  #开启从注册中心动态创建路由的功能，利用微服务名进行路由
+      routes:
+        - id: base # 基础服务
+          uri: lb://libra-base #匹配后提供服务的路由地址
+          predicates:
+            - Path=/api/base/** #断言，路径相匹配的进行路由
+          filters:
+            - StripPrefix=1
+        - id: ucpm # 提供用户中心、资源权限相关
+          uri: lb://libra-ucpm #匹配后提供服务的路由地址
+          predicates:
+            - Path=/api/ucpm/** #断言，路径相匹配的进行路由
+          filters:
+            - StripPrefix=1
+        - id: tenant # 租户服务
+          uri: lb://libra-tenant #匹配后提供服务的路由地址
+          predicates:
+            - Path=/api/tr/**  #断言，路径相匹配的进行路由
+          filters:
+            - StripPrefix=1
+        - id: auth # 认证授权服务
+          uri: lb://libra-auth #匹配后提供服务的路由地址
+          predicates:
+            - Path=/api/auth/**  #断言，路径相匹配的进行路由
+          filters:
+            - StripPrefix=1
+        - id: gen #代码生成服务
+          uri: lb://libra-gen #匹配后提供服务的路由地址
+          predicates:
+            - Path=/api/gen/**  #断言，路径相匹配的进行路由
+          filters:
+            - StripPrefix=1
+# prometheus
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: ${spring.application.name}

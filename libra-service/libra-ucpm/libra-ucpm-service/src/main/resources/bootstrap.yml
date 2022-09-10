@@ -1,31 +1,12 @@
-server:
-  port: 7827
-  servlet:
-    context-path: /ucpm
-
 spring:
   profiles:
     active: dev
   application:
     name: libra-ucpm
-  main:
-    allow-bean-definition-overriding: true
   cloud:
     nacos:
       # nacos 地址
       server-addr: http://localhost:8848
-      config:
-        namespace: ${spring.profiles.active}
-        file-extension: yml
-        shared-configs:
-          - dataId: common.yml
-            group: COMMON
-          - dataId: sentinel.yml
-            group: COMMON
-          - dataId: prometheus.yml
-            group: COMMON
-          - dataId: redis.yml
-            group: COMMON
       discovery:
         namespace: ${spring.profiles.active}
         metadata:

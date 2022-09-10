@@ -1,6 +1,3 @@
-server:
-  port: 9999
-
 spring:
   profiles:
     active: dev
@@ -11,19 +8,12 @@ spring:
     nacos:
       # nacos 地址
       server-addr: http://localhost:8848
-      config:
-        namespace: ${spring.profiles.active}
-        file-extension: yml
-        shared-configs:
-          - dataId: sentinel.yml
-            group: COMMON
-          - dataId: prometheus.yml
-            group: COMMON
       discovery:
         namespace: ${spring.profiles.active}
         metadata:
           version: 1.0
           service-type: gateway
+
 
 libra:
   # 如果nacos config配置没有配置文件则自动创建文件 默认开启

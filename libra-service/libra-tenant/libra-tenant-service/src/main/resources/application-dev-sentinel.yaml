@@ -1,0 +1,71 @@
+feign:
+  # Sentinel 对 Feign 的支持开启
+  sentinel:
+    enabled: true
+spring:
+  cloud:
+    sentinel:
+      transport:
+        #配置sentinel dashboard地址
+        dashboard: 127.0.0.1:8808
+        # 指定和控制通信的端口，默认值8719，如不设置，会自动从8719开始扫描，依次+1，直到找到未被占用的端口
+        port: 8719
+        #心跳发送周期，默认值null，但在SimpleHttpHeartbeatSender会用默认值10秒
+        heartbeat-interval-ms: 10000
+      filter:
+        # spring mav端点的保护 默认true
+        enabled: true
+      #服务启动直接建立心跳连接
+      eager: true
+      # authority（授权规则），degrade（降级规则），flow（流控规则），param（热点规则），system（系统规则）
+      datasource:
+        # flow（流控规则）
+        flow:
+          nacos:
+            server-addr: ${spring.cloud.nacos.server-addr}
+            username: ${spring.cloud.nacos.username}
+            password: ${spring.cloud.nacos.password}
+            namespace: sentinel-${spring.profiles.active}
+            groupId: SENTINEL_GROUP
+            dataId: ${spring.application.name}-flow-rules
+            rule-type: flow
+        # degrade（降级规则）
+        degrade:
+          nacos:
+            server-addr: ${spring.cloud.nacos.server-addr}
+            username: ${spring.cloud.nacos.username}
+            password: ${spring.cloud.nacos.password}
+            namespace: sentinel-${spring.profiles.active}
+            groupId: SENTINEL_GROUP
+            dataId: ${spring.application.name}-degrade-rules
+            rule-type: degrade
+        # param（热点规则）
+        param-flow:
+          nacos:
+            server-addr: ${spring.cloud.nacos.server-addr}
+            username: ${spring.cloud.nacos.username}
+            password: ${spring.cloud.nacos.password}
+            namespace: sentinel-${spring.profiles.active}
+            groupId: SENTINEL_GROUP
+            dataId: ${spring.application.name}-param-rules
+            rule-type: param-flow
+        # system（系统规则）
+        system:
+          nacos:
+            server-addr: ${spring.cloud.nacos.server-addr}
+            username: ${spring.cloud.nacos.username}
+            password: ${spring.cloud.nacos.password}
+            namespace: sentinel-${spring.profiles.active}
+            groupId: SENTINEL_GROUP
+            dataId: ${spring.application.name}-system-rules
+            rule-type: system
+        # authority（授权规则）
+        authority:
+          nacos:
+            server-addr: ${spring.cloud.nacos.server-addr}
+            username: ${spring.cloud.nacos.username}
+            password: ${spring.cloud.nacos.password}
+            namespace: sentinel-${spring.profiles.active}
+            groupId: SENTINEL_GROUP
+            dataId: ${spring.application.name}-authority-rules
+            rule-type: authority

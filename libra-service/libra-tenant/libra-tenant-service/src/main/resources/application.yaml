@@ -1,0 +1,38 @@
+server:
+  port: 7824
+  servlet:
+    context-path: /tr
+
+spring:
+  profiles:
+    active: dev
+    include: sentinel
+  main:
+    allow-bean-definition-overriding: true
+
+libra:
+  mybatisPlus:
+    ignoreTable: tr_menu_template_ref,tr_tenant
+    openTenant: false
+  log:
+    enabled: false
+
+logging:
+  level:
+    cn.hfbin: info
+
+# prometheus
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: ${spring.application.name}

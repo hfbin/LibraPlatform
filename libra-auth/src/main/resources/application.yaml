@@ -1,0 +1,28 @@
+server:
+  port: 7877
+  servlet:
+    context-path: /auth
+
+spring:
+  profiles:
+    active: dev
+    include: sentinel
+  main:
+    allow-bean-definition-overriding: true
+
+
+# prometheus
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: ${spring.application.name}

@@ -8,5 +8,4 @@ libra-base.sql      基础服务数据库
 libra-gen.sql       在线开发服务数据库
 libra-tr.sql        租户服务数据库
 libra-ucpm.sql      用户权限服务数据库
-nacos.sql           nacos数据库【里面默认包含dev、prod配置中心文件】
 ```
