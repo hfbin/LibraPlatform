@@ -16,14 +16,14 @@
 
 package cn.hfbin.common.security.aspect;
 
-import cn.hfbin.common.core.constant.AuthRedisKeyConstant;
 import cn.hfbin.common.core.constant.ConfigValueConstant;
 import cn.hfbin.common.core.constant.SpecialCharacterPool;
 import cn.hfbin.common.core.context.SpringContextUtils;
 import cn.hfbin.common.core.exception.CommonExceptionCode;
 import cn.hfbin.common.core.exception.LibraException;
-import cn.hfbin.common.redis.util.RedisUtil;
+import cn.hfbin.common.core.utils.FeignResponseUtil;
 import cn.hfbin.common.security.annotation.PreAuthorize;
+import cn.hfbin.common.security.feign.AuthClient;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +37,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * @Author: huangfubin
@@ -51,8 +52,7 @@ public class SecurityPreAuthAspect {
     private boolean securityEnabled;
 
     @Autowired
-    private RedisUtil redisUtil;
-
+    private AuthClient authClient;
 
     /**
      * 避免所有接口都进入切面，只有加了注解才会扫描
@@ -106,11 +106,8 @@ public class SecurityPreAuthAspect {
      * @return true and false
      */
     private boolean checkPreAuthorize(String authName) {
-        List<String> PreAuthorizeCodes = (List<String>) redisUtil.strGet(AuthRedisKeyConstant.USER_INTERFACE_KEY + SpringContextUtils.getClientCode() + SpecialCharacterPool.DOUBLE_COLON + SpringContextUtils.getIdentityId());
-        if (CollectionUtil.isEmpty(PreAuthorizeCodes) || !PreAuthorizeCodes.contains(authName)) {
-            return true;
-        }
-        return false;
+        List<String> PreAuthorizeCodes = FeignResponseUtil.get(authClient.interfacePer());
+        return CollectionUtil.isEmpty(PreAuthorizeCodes) || !PreAuthorizeCodes.contains(authName);
     }
 
     /**

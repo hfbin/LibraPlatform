@@ -14,18 +14,21 @@
  *    limitations under the License.
  */
 
-package cn.hfbin.common.security.configuration;
+package cn.hfbin.common.security.feign;
 
-import cn.hfbin.common.security.aspect.SecurityPreAuthAspect;
-import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import cn.hfbin.common.core.api.ResponseData;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 
-@Configuration
-@EnableFeignClients("cn.hfbin.common.security.feign")
-public class SecurityAutoConfiguration {
-    @Bean
-    public SecurityPreAuthAspect securityPreAuthAspect(){
-        return new SecurityPreAuthAspect();
-    }
+import java.util.List;
+
+@FeignClient(name = AuthClient.AUTH_SERVICE)
+public interface AuthClient {
+
+    String AUTH_SERVICE = "libra-auth";
+
+    String AUTH_CONTEXT_PATH = "/auth";
+
+    @GetMapping(AuthClient.AUTH_CONTEXT_PATH +"/interface-per")
+    ResponseData<List<String>> interfacePer();
 }
