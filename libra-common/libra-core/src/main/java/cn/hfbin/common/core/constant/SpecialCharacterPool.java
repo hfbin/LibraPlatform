@@ -26,8 +26,8 @@ import cn.hutool.core.text.StrPool;
  */
 public interface SpecialCharacterPool extends StrPool {
 
-    // 双冒号
-    String DOUBLE_COLON = "::";
+    // 冒号
+    String S_COLON = ":";
 
     // 双冒号
     String TRUE = "true";
