@@ -54,7 +54,7 @@ libra-platform -- 父项目
 其它说明：全链路蓝绿灰度发布及动态路由使用说明在目录libra-plugin下README.md
 
 ## 如何运行项目
-
+建议看此地址教程，五分钟快速启动：https://www.yuque.com/u28664875/xvkb5a/pgczao
 ```
 # 后端工程
 git clone https://gitee.com/huangfubin/LibraPlatform.git
