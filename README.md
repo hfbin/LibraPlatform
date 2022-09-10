@@ -1,37 +1,23 @@
 # Libra-Platform 微服务平台
-Libra-Platform微服务平台基于SpringCloud(2020.0.x) + SpringCloudAlibaba(2021.x) + SpringBoot(2.4.x) + Vue3开发，基于多租户SaaS模式的设计，拥有强大的用户中心，权限基于RBAC设计，支持蓝绿灰度发布、网关动态路由等功能。Libra-Platform平台架构清晰、代码简介、注解齐全，很适合作为基础框架使用。
+Libra-Platform微服务平台基于SpringCloud(2020.0.x) + SpringCloudAlibaba(2021.x) + SpringBoot(2.4.x) + Vue3开发，基于多租户SaaS模式的设计，拥有强大的用户中心（一个账号对应多业务身份），权限基于RBAC设计，支持蓝绿灰度发布、网关动态路由、服务治理（流量控制、熔断降级、系统自适应保护、服务鉴权）等功能。Libra-Platform平台架构清晰、代码简介、注解齐全，很适合作为基础框架使用。
 
-
-    最新代码分支：2.0.x
-    稳定分支：master 
-
-## 仓库地址
-
-【github】
-
-后端：https://github.com/hfbin/LibraPlatform
-
-前端：https://github.com/hfbin/LibraPlatformUi
-
-【gitee】
-
-后端：https://gitee.com/huangfubin/LibraPlatform
-
-前端：https://gitee.com/huangfubin/LibraPlatformUi
+## 架构图
+![相关功能](./docs/img/libra-架构图.jpg)
 
 ## 相关功能
 ![相关功能](./docs/img/Libra-Platform平台规划.png)
 
-## 总体架构图
-![相关功能](./docs/img/libra-架构图.jpg)
-
 ## 在线体验
 
-http://www.librayun.net:8888 (服务器到期，暂时无法提供在线体验)
+演示地址：http://www.librayun.net:8888 (服务器到期，暂时无法提供在线体验)
+
+文档地址：https://www.yuque.com/u28664875/xvkb5a/fl6d3y
+
 
 **商业合作、技术问题可加微信：Jack-hfbin (添加时请备注好意图)**
 
 欢迎关注我的公众号：java技术会所。  技术干货源源不断。
+
 ![img.png](./docs/img/wx_code.jpg)
 
 ## 模块说明
