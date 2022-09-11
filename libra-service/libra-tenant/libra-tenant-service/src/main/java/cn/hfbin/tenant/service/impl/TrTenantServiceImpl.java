@@ -159,12 +159,12 @@ public class TrTenantServiceImpl extends ServiceImpl<TrTenantMapper, TrTenant> i
      */
     @Override
     public List<Long> selectMenu(String tenantCode){
-        List<Long> ids = (List<Long>) redisUtil.strGet(TenantRedisKeyConstant.TENANT_NENU + tenantCode);
+        List<Long> ids = (List<Long>) redisUtil.strGet(TenantRedisKeyConstant.TENANT_MENU + tenantCode);
         if(CollectionUtil.isNotEmpty(ids)){
             return ids;
         }
         List<Long> menuIds = baseMapper.selectMenu(tenantCode);
-        redisUtil.strSet(TenantRedisKeyConstant.TENANT_NENU + tenantCode, menuIds);
+        redisUtil.strSet(TenantRedisKeyConstant.TENANT_MENU + tenantCode, menuIds);
         return menuIds;
     }
 
@@ -190,7 +190,7 @@ public class TrTenantServiceImpl extends ServiceImpl<TrTenantMapper, TrTenant> i
             BeanUtils.copyProperties(trMenuTemplateVo, trMenuTemplate);
             List<Long> menuIds = trMenuTemplateService.selectMenuTemplateRef(trMenuTemplate);
             // 刷新租户缓存中的数据
-            redisUtil.strSet(TenantRedisKeyConstant.TENANT_NENU + trTenant.getTenantCode(), menuIds);
+            redisUtil.strSet(TenantRedisKeyConstant.TENANT_MENU + trTenant.getTenantCode(), menuIds);
         }
         return baseMapper.updateById(baseTenant);
     }

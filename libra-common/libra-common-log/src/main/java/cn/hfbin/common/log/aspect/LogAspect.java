@@ -57,7 +57,6 @@ import java.util.Objects;
  */
 @Slf4j
 @Aspect
-@Component
 public class LogAspect {
 
     // 当前线程缓存
@@ -80,9 +79,6 @@ public class LogAspect {
     @Value("${" + ConfigValueConstant.LOG_ENABLED + ":true}")
     private boolean logEnabled;
 
-    /**
-     * 如果开启了db则需要在启动类EnableFeignClients添加包BaseConstant.LIBRA_BASE_PACKAGE扫描
-     */
     @Lazy
     @Autowired
     private OptLogServiceClient optLogServiceClient;

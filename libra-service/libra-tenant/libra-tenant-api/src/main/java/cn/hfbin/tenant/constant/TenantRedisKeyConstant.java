@@ -1,5 +1,7 @@
 package cn.hfbin.tenant.constant;
 
+import cn.hfbin.common.core.constant.SpecialCharacterPool;
+
 /**
  * @author hfbin
  * @email huangfubin00@gmail.com
@@ -8,9 +10,9 @@ package cn.hfbin.tenant.constant;
  */
 public interface TenantRedisKeyConstant {
 
-    String BASE = "TENANT::";
+    String BASE = "TENANT" + SpecialCharacterPool.S_COLON;
 
     // TENANT_NENU
-    String TENANT_NENU = BASE + "NENU::";
+    String TENANT_MENU = BASE + "MENU" + SpecialCharacterPool.S_COLON;
 
 }

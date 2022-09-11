@@ -12,7 +12,6 @@
   <artifactId>libra-common-log</artifactId>
 </dependency>
 ```
-2、启动类添加注解`@EnableAspectJAutoProxy(proxyTargetClass = true)`
 
 # libra-common-log 使用说明
 在对应接口层类或者方法上添加注解和相关字段标识即可，比如`@Log(desc = "员工管理-分页查询", logType = LogTypeEnum.OPT_LOG, optBehavior = OptBehaviorEnum.SELECT)`

@@ -152,7 +152,7 @@ public class TrMenuTemplateServiceImpl extends ServiceImpl<TrMenuTemplateMapper,
         List<TrTenant> trTenants = trTenantService.select(trTenantParams);
         List<Long> menuIds = selectMenuTemplateRef(trMenuTemplate);
         // 刷新redis缓存数据
-        trTenants.forEach(data -> redisUtil.strSet(TenantRedisKeyConstant.TENANT_NENU + data.getTenantCode(), menuIds));
+        trTenants.forEach(data -> redisUtil.strSet(TenantRedisKeyConstant.TENANT_MENU + data.getTenantCode(), menuIds));
 
         // 重新设置租户默认管理员权限
         InitTenantParams initTenantParams = new InitTenantParams();
