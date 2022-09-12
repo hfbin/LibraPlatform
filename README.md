@@ -13,6 +13,7 @@ Libra-Platform微服务平台基于SpringCloud(2020.0.x) + SpringCloudAlibaba(20
 
 文档地址：https://www.yuque.com/u28664875/xvkb5a/fl6d3y
 
+![img.png](./docs/img/docs.png)
 
 **商业合作、技术问题可加微信：Jack-hfbin (添加时请备注好意图)**
 
