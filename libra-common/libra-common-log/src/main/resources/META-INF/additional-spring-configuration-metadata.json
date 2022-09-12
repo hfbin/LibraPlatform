@@ -1,0 +1,18 @@
+{
+	"properties": [
+		{
+			"name": "libra.log.enabled",
+			"type": "java.lang.Boolean",
+			"defaultValue": true,
+			"sourceType": "cn.hfbin.common.log.aspect.LogAspect",
+			"description": "日志是否开启."
+		},
+		{
+			"name": "libra.log.db",
+			"type": "java.lang.Boolean",
+			"defaultValue": true,
+			"sourceType": "cn.hfbin.common.log.aspect.LogAspect",
+			"description": "如果日志开启了是否需要落库."
+		}
+	]
+}

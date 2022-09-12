@@ -4,7 +4,8 @@
 			"name": "libra.nacos-config-init",
 			"type": "java.lang.Boolean",
 			"defaultValue": true,
-			"description": "不存在nacos配置文件，是否自动创建，默认开启"
+			"sourceType": "cn.hfbin.plugin.nacos.processor.NacosListenerProcessor",
+			"description": "不存在nacos配置文件，是否自动创建，默认开启."
 		}
 	]
 }

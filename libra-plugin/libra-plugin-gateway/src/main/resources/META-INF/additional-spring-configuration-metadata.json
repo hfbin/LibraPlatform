@@ -1,10 +1,11 @@
 {
 	"properties": [
 		{
-			"name": "libra.gateway.dynamic.route.enabled",
+			"name": "libra.gateway.dynamic-route.enabled",
 			"type": "java.lang.Boolean",
 			"defaultValue": true,
-			"description": "网关动态更新路由配置，默认开启"
+			"sourceType": "cn.hfbin.plugin.gateway.configuration.GatewayAutoConfiguration",
+			"description": "网关动态更新路由配置，默认开启."
 		}
 	]
 }

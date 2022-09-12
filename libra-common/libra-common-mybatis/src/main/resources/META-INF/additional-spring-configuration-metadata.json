@@ -1,0 +1,18 @@
+{
+	"properties": [
+		{
+			"name": "libra.mybatisPlus.ignoreTable",
+			"type": "java.lang.String",
+			"defaultValue": true,
+			"sourceType": "cn.hfbin.common.database.MybatisPlusConfig",
+			"description": "开启多租户，不需要加上多租户条件表."
+		},
+		{
+			"name": "libra.mybatisPlus.openTenant",
+			"type": "java.lang.Boolean",
+			"defaultValue": true,
+			"sourceType": "cn.hfbin.common.database.MybatisPlusConfig",
+			"description": "是否开启多租户，默认开启."
+		}
+	]
+}
