@@ -1,5 +1,6 @@
 package cn.hfbin.ucpm.service.impl;
 
+import cn.hfbin.common.core.constant.ConfigValueConstant;
 import cn.hfbin.common.core.enums.IdentityEnum;
 import cn.hfbin.ucpm.entity.*;
 import cn.hfbin.ucpm.enums.UcPmExceptionCode;
@@ -15,12 +16,12 @@ import cn.hfbin.common.core.context.SpringContextUtils;
 import cn.hfbin.common.core.exception.CommonExceptionCode;
 import cn.hfbin.common.core.exception.LibraException;
 import cn.hfbin.common.core.utils.FeignResponseUtil;
-import cn.hfbin.common.redis.util.RedisUtil;
 import cn.hfbin.tenant.client.TrTenantServiceClient;
 import cn.hfbin.ucpm.strategy.identity.IdentityContext;
 import cn.hfbin.ucpm.vo.*;
 import cn.hutool.core.collection.CollectionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -53,10 +54,10 @@ public class AccountIdentityServiceImpl implements AccountIdentityService {
     private InterfaceService interfaceService;
 
     @Autowired
-    private RedisUtil redisUtil;
-
-    @Autowired
     private IdentityContext identityContext;
+    @Value("${" + ConfigValueConstant.MYBATIS_PLUS_OPEN_TENANT + ":true}")
+    private boolean openTenant;
+
 
     /**
      *
@@ -153,17 +154,19 @@ public class AccountIdentityServiceImpl implements AccountIdentityService {
         }
         RelationRoleParams relationRoleParams = new RelationRoleParams();
         relationRoleParams.setIds(ids);
-        // 查询租户已经开通的菜单权限
-        List<Long> menuIds = FeignResponseUtil.get(trTenantServiceClient.selectMenu(SpringContextUtils.getTenantCode()));
-        if(CollectionUtil.isEmpty(menuIds)){
-            throw new LibraException(CommonExceptionCode.TENANT_AUTH_NULL);
-        }
         PermissionResourceVo permissionResourceVo = new PermissionResourceVo();
         // 查询用户菜单权限
-        List<Menu> menuLists = accountService.selectUserMenu(relationRoleParams);
-
-        // 过滤不在租户内的菜单
-        List<Menu> menuList = menuLists.stream().filter(o -> menuIds.contains(o.getId())).collect(Collectors.toList());
+        List<Menu> menuList = accountService.selectUserMenu(relationRoleParams);
+        // 如果开启了多租户功能则需要获取此租户开工的菜单资源
+        if(openTenant){
+            // 查询租户已经开通的菜单权限
+            List<Long> menuIds = FeignResponseUtil.get(trTenantServiceClient.selectMenu(SpringContextUtils.getTenantCode()));
+            if(CollectionUtil.isEmpty(menuIds)){
+                throw new LibraException(CommonExceptionCode.TENANT_AUTH_NULL);
+            }
+            // 过滤不在租户内的菜单
+            menuList = menuList.stream().filter(o -> menuIds.contains(o.getId())).collect(Collectors.toList());
+        }
         // 查询接口权限code，接口鉴权使用
         List<String> interfaceCodes = interfaceService.selectInterfaceCode(menuList.stream().map(Menu::getId).collect(Collectors.toList()));
         if(CollectionUtil.isNotEmpty(interfaceCodes)){
