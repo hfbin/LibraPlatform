@@ -29,13 +29,13 @@ public class Rule implements Serializable {
     private static final long serialVersionUID = -6294291383078484829L;
     private StrategyRelease strategyRelease;
 
-    private Map<String, String> routes = new LinkedHashMap<>();
+    private Map<String, Map<String, String>> routes = new LinkedHashMap<>();
 
-    public Map<String, String> getRoutes() {
+    public Map<String, Map<String, String>> getRoutes() {
         return routes;
     }
 
-    public void setRoutes(Map<String, String> routes) {
+    public void setRoutes(Map<String, Map<String, String>> routes) {
         this.routes = routes;
     }
 

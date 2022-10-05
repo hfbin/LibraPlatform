@@ -28,11 +28,11 @@ public class BlueGreenGray implements Serializable {
     private static final long serialVersionUID = 8132971609944999016L;
     private List<Condition> conditionList;
 
-    private String basicCondition;
+    private Object basicRouteKey;
 
     public BlueGreenGray(List<Condition> conditionList, String basicCondition) {
         this.conditionList = conditionList;
-        this.basicCondition = basicCondition;
+        this.basicRouteKey = basicCondition;
     }
 
     public List<Condition> getConditionList() {
@@ -43,11 +43,11 @@ public class BlueGreenGray implements Serializable {
         this.conditionList = conditionList;
     }
 
-    public String getBasicCondition() {
-        return basicCondition;
+    public Object getBasicRouteKey() {
+        return basicRouteKey;
     }
 
-    public void setBasicCondition(String basicCondition) {
-        this.basicCondition = basicCondition;
+    public void setBasicRouteKey(Object basicRouteKey) {
+        this.basicRouteKey = basicRouteKey;
     }
 }

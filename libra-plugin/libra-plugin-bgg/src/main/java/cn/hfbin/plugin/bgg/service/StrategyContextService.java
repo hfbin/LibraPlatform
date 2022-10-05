@@ -21,10 +21,13 @@ import cn.hfbin.plugin.bgg.context.StrategyContextHolder;
 import cn.hfbin.plugin.common.constant.CommonConstant;
 import cn.hfbin.plugin.bgg.weight.MapWeightRandom;
 import cn.hfbin.plugin.common.entity.*;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
@@ -39,6 +42,7 @@ import java.util.regex.Pattern;
  * @Date: 2021/10/14
  */
 public class StrategyContextService {
+    private static final Logger log = LoggerFactory.getLogger(StrategyContextService.class);
 
     @Autowired
     private BggPluginAdapter pluginAdapter;
@@ -49,7 +53,7 @@ public class StrategyContextService {
     private final Pattern pattern = Pattern.compile(CommonConstant.EXPRESSION_REGEX);
 
     /**
-     * 执行优先级为: 蓝绿路由配置 -> 灰度路由配置 -> 全局兜底路由配置
+     * 执行优先级为: 蓝绿路由配置(条件 -> 兜底) -> 灰度路由配置(条件 -> 兜底)
      * @return 链路
      */
     public String getRouteVersion() {
@@ -66,16 +70,16 @@ public class StrategyContextService {
      */
     private String getConditionGrayRouteVersion() {
         String routeKey = null;
-        Rule localRule = pluginAdapter.getRule();
-        if(Objects.nonNull(localRule)){
-            StrategyRelease strategyRelease = localRule.getStrategyRelease();
+        Rule rule = pluginAdapter.getRule();
+        if(Objects.nonNull(rule)){
+            StrategyRelease strategyRelease = rule.getStrategyRelease();
             if(Objects.nonNull(strategyRelease)){
                 BlueGreenGray gray = strategyRelease.getGray();
-                routeKey = getRouteKey(gray);
+                routeKey = getRouteKey(gray, CommonConstant.GRAY);
             }
         }
         if(StringUtils.isNotBlank(routeKey)){
-            return localRule.getRoutes().get(getRouteByWeightRandom(routeKey));
+            return JSONObject.toJSONString(rule.getRoutes().get(routeKey));
         }
         return null;
     }
@@ -85,30 +89,49 @@ public class StrategyContextService {
      */
     private String getConditionBlueGreenRouteVersion() {
         String routeKey = null;
-        Rule localRule = pluginAdapter.getRule();
-        if(Objects.nonNull(localRule)){
-            StrategyRelease strategyRelease = localRule.getStrategyRelease();
+        Rule rule = pluginAdapter.getRule();
+        if(Objects.nonNull(rule)){
+            StrategyRelease strategyRelease = rule.getStrategyRelease();
             if(Objects.nonNull(strategyRelease)){
                 BlueGreenGray blueGreen = strategyRelease.getBlueGreen();
-                routeKey = getRouteKey(blueGreen);
+                routeKey = getRouteKey(blueGreen, CommonConstant.BLUE_GREEN);
             }
         }
         if(StringUtils.isNotBlank(routeKey)){
-            return localRule.getRoutes().get(routeKey);
+            return JSONObject.toJSONString(rule.getRoutes().get(routeKey));
         }
         return null;
     }
 
-    private String getRouteKey(BlueGreenGray gray) {
+    @SuppressWarnings("all")
+    private String getRouteKey(BlueGreenGray gray, String type) {
         String routeKey = null;
         if(Objects.nonNull(gray)){
             List<Condition> conditionList = gray.getConditionList();
             if(CollectionUtils.isNotEmpty(conditionList)){
                 Condition condition = this.matchingExpressionStrategyCondition(conditionList);
                 if(Objects.nonNull(condition)){
-                    routeKey = condition.getRouteKey();
+                    if(CommonConstant.BLUE_GREEN.equals(type)){
+                        routeKey = (String) condition.getRouteKey();
+                    }else {
+                        try {
+                            Map<String, Integer> routeMap = (Map<String, Integer>) condition.getRouteKey();
+                            routeKey = getRouteByWeightRandom(routeMap);
+                        }catch (Exception e){
+                            log.error("RouteKey ERROR");
+                        }
+                    }
                 }else {
-                    routeKey = gray.getBasicCondition();
+                    if(CommonConstant.BLUE_GREEN.equals(type)){
+                        routeKey = (String) gray.getBasicRouteKey();
+                    }else {
+                        try {
+                            Map<String, Integer> routeMap = (Map<String, Integer>) gray.getBasicRouteKey();
+                            routeKey = getRouteByWeightRandom(routeMap);
+                        }catch (Exception e){
+                            log.error("RouteKey ERROR");
+                        }
+                    }
                 }
             }
         }
@@ -124,13 +147,9 @@ public class StrategyContextService {
      * @return java.lang.String
      */
 
-    private String getRouteByWeightRandom(String routeKey) {
-        String[] routeKeys = routeKey.split(CommonConstant.SPLIT_FH);
+    private String getRouteByWeightRandom(Map<String, Integer> routeKey) {
         List<Pair<String, Integer>> weightList = new ArrayList<>();
-        for (String key : routeKeys) {
-            String[] route = key.split(CommonConstant.SPLIT_DY);
-            weightList.add(new ImmutablePair<>(route[0], Integer.valueOf(route[1])));
-        }
+        routeKey.forEach((k, v) -> weightList.add(new ImmutablePair<>(k, v)));
         return new MapWeightRandom<>(weightList).random();
     }
 

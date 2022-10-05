@@ -53,4 +53,9 @@ public interface CommonConstant {
     String DYNAMIC_ROUTE_KEY = "dynamic-route";
     String DYNAMIC_BGG_ROUTE_KEY = "bgg-dynamic-route";
 
+    String BLUE_GREEN = "blue_green";
+
+    String GRAY = "gray";
+
+
 }

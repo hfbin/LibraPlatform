@@ -26,7 +26,7 @@ import java.io.Serializable;
 public class Condition implements Serializable {
     private static final long serialVersionUID = -4958997347620640664L;
     private String expression;
-    private String routeKey;
+    private Object routeKey;
 
     public Condition(String expression, String routeKey) {
         this.expression = expression;
@@ -43,11 +43,11 @@ public class Condition implements Serializable {
         this.expression = expression;
     }
 
-    public String getRouteKey() {
+    public Object getRouteKey() {
         return routeKey;
     }
 
-    public void setRouteKey(String routeKey) {
+    public void setRouteKey(Object routeKey) {
         this.routeKey = routeKey;
     }
 }

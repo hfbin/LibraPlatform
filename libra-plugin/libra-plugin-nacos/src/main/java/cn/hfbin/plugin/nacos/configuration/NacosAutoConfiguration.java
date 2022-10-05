@@ -47,17 +47,10 @@ public class NacosAutoConfiguration {
 
     @Bean
     public ConfigService configService() throws NacosException {
-        Properties properties = createNacosProperties(environment, true);
-
-        return NacosFactory.createConfigService(properties);
-    }
-
-    public static Properties createNacosProperties(Environment environment, boolean enableRemoteSyncConfig) {
         Properties properties = new Properties();
         PropertiesUtil.enrichProperties(properties, environment, NacosConstant.SPRING_CLOUD_NACOS_CONFIG_PREFIX, true, true);
-        properties.put(NacosConstant.ENABLE_REMOTE_SYNC_CONFIG, Boolean.toString(enableRemoteSyncConfig));
+        properties.put(NacosConstant.ENABLE_REMOTE_SYNC_CONFIG, Boolean.TRUE);
         properties.put(NacosConstant.NAMESPACE, environment.getProperty(CommonConstant.SPRING_PROFILES_ACTIVE));
-        return properties;
+        return NacosFactory.createConfigService(properties);
     }
-
 }

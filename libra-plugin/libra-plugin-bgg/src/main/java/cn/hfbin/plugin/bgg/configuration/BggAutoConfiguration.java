@@ -19,7 +19,7 @@ package cn.hfbin.plugin.bgg.configuration;
 import cn.hfbin.plugin.bgg.adapter.BggPluginAdapterImpl;
 import cn.hfbin.plugin.bgg.adapter.BggPluginAdapter;
 import cn.hfbin.plugin.bgg.cache.RuleCache;
-import cn.hfbin.plugin.bgg.initializer.ConfigInitializer;
+import cn.hfbin.plugin.bgg.initializer.LocalConfigInitializer;
 import cn.hfbin.plugin.bgg.loader.LocalConfigLoader;
 import cn.hfbin.plugin.bgg.processor.BggRouteNacosProcessor;
 import cn.hfbin.plugin.bgg.service.StrategyContextService;
@@ -60,8 +60,8 @@ public class BggAutoConfiguration {
 
     @Bean
     @ConditionalOnProperty(value = CommonConstant.LIBRA_BGG_ENABLED, matchIfMissing = true)
-    public ConfigInitializer configInitializer() {
-        return new ConfigInitializer();
+    public LocalConfigInitializer configInitializer() {
+        return new LocalConfigInitializer();
     }
 
     @Bean

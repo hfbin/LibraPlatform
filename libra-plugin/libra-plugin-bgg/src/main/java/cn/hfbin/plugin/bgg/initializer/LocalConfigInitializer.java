@@ -29,11 +29,11 @@ import java.util.Objects;
 
 /**
  * @Author: huangfubin
- * @Description: ConfigInitializer 类
+ * @Description: 初始化本地全链路蓝绿灰度发布配置文件
  * @Date: 2021/10/14
  */
-public class ConfigInitializer {
-    private static final Logger log = LoggerFactory.getLogger(ConfigInitializer.class);
+public class LocalConfigInitializer {
+    private static final Logger log = LoggerFactory.getLogger(LocalConfigInitializer.class);
 
     @Autowired
     private BggPluginAdapter pluginAdapter;
