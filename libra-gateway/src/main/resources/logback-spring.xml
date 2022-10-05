@@ -20,7 +20,6 @@
     <springProperty scope="context" name="spring.application.name" source="spring.application.name"/>
     <springProperty scope="context" name="spring.profiles.active" source="spring.profiles.active"/>
     <springProperty scope="context" name="log.level.console" source="logging.level.console" defaultValue="INFO"/>
-    <springProperty scope="context" name="server.port" source="server.port" defaultValue="0000"/>
     <!-- 彩色日志 彩色日志依赖的渲染类-->
     <conversionRule conversionWord="clr"
                     converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
@@ -31,9 +30,9 @@
 
     <!-- 彩色日志格式 -->
     <springProperty scope="context" name="common-pattern-color" source="logging.common-pattern-color"
-                    defaultValue="[${spring.application.name}:${server.port}:%X{Tenant-Code}:%X{Identity-Id}] %clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint}:%clr([%5p]){blue} %clr([${PID}]){magenta} %clr([%X{Trace-Id}]){yellow} %clr([%t:%r]){orange} %clr([%logger{50}.%M:%L]){cyan} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+                    defaultValue="[%X{Tenant-Code}:%X{Identity-Id}] %clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint}:%clr([%5p]){blue} %clr([${PID}]){magenta} %clr([%X{Trace-Id}]){yellow} %clr([%t:%r]){orange} %clr([%logger{50}.%M:%L]){cyan} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
     <springProperty scope="context" name="common-pattern" source="logging.common-pattern"
-                    defaultValue="[${spring.application.name}:${server.port}:%X{Tenant-Code}:%X{Identity-Id}] %d{yyyy-MM-dd HH:mm:ss.SSS}[%5p] ${PID} [%X{Trace-Id}] [%t:%r] [%logger{50}.%M:%L] %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+                    defaultValue="[%X{Tenant-Code}:%X{Identity-Id}] %d{yyyy-MM-dd HH:mm:ss.SSS}[%5p] ${PID} [%X{Trace-Id}] [%t:%r] [%logger{50}.%M:%L] %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
 
     <property name="FILE" value="${log.path}/${spring.application.name}"/>
 
