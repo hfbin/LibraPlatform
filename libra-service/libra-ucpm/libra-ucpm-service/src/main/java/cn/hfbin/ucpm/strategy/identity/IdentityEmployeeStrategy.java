@@ -23,11 +23,9 @@ import cn.hfbin.ucpm.service.IdentityEmployeeService;
 import cn.hfbin.ucpm.vo.IdentityInfoVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
-import static cn.hfbin.ucpm.strategy.identity.IdentityEmployeeStrategy.EMPLOYEE;
 
 
 /**
@@ -35,10 +33,8 @@ import static cn.hfbin.ucpm.strategy.identity.IdentityEmployeeStrategy.EMPLOYEE;
  * @Description: 内部员工身份
  * @Date: 2021/9/30
  */
-@Component(EMPLOYEE)
+@Service
 public class IdentityEmployeeStrategy implements IdentityStrategy {
-
-    protected final static String EMPLOYEE = "EMPLOYEE";
 
     @Autowired
     private IdentityEmployeeService identityEmployeeService;

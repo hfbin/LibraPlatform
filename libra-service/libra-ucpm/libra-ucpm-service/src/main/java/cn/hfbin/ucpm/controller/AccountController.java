@@ -129,8 +129,8 @@ public class AccountController implements AccountApiService {
      */
     @Override
     @ApiOperation(value = "查询用户账号身份信息", notes = "查询用户账号身份信息")
-    public ResponseData<IdentityInfoVo> selectIdentityInfo(Long id) {
-        return ResponseData.ok(accountIdentityService.selectById(id));
+    public ResponseData<IdentityInfoVo> selectIdentityInfo(Long accountId) {
+        return ResponseData.ok(accountIdentityService.selectById(accountId));
     }
 
     /**

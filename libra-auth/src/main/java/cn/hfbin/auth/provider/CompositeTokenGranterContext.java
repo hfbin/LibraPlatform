@@ -1,6 +1,7 @@
 package cn.hfbin.auth.provider;
 
 import cn.hfbin.auth.enums.AuthExceptionCode;
+import cn.hfbin.auth.enums.GrantTypeEnum;
 import cn.hfbin.common.core.exception.LibraException;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +28,7 @@ public class CompositeTokenGranterContext {
      * @return
      */
     public CompositeTokenGranterContext(Map<String, TokenGranterStrategy> granterMap) {
-        granterMap.forEach(this.granterMap::put);
+        this.granterMap.putAll(granterMap);
     }
 
     /**
@@ -38,8 +39,8 @@ public class CompositeTokenGranterContext {
      * @date 2021/7/29
      * @return cn.hfbin.auth.provider.TokenGranter
      */
-    public TokenGranterStrategy getGranter(String grantType) {
-        TokenGranterStrategy tokenGranter = granterMap.get(grantType);
+    public TokenGranterStrategy getGranter(GrantTypeEnum grantType) {
+        TokenGranterStrategy tokenGranter = granterMap.get(grantType.getBeanName());
         Optional.ofNullable(tokenGranter).orElseThrow(()->new LibraException(AuthExceptionCode.GRANTER_INEXISTENCE));
         return tokenGranter;
     }

@@ -42,7 +42,7 @@ public class IdentityContext {
      * @return
      */
     public IdentityContext(Map<String, IdentityStrategy> identityMap) {
-        identityMap.forEach(this.identityMap::put);
+        this.identityMap.putAll(identityMap);
     }
 
     /**
@@ -53,7 +53,7 @@ public class IdentityContext {
      * @return IdentityStrategyr
      */
     public IdentityStrategy getIdentityStrategy(IdentityEnum identityEnum) {
-        IdentityStrategy tokenGranter = identityMap.get(identityEnum.name());
+        IdentityStrategy tokenGranter = identityMap.get(identityEnum.getBeanName());
         Optional.ofNullable(tokenGranter).orElseThrow(()->new LibraException(UcPmExceptionCode.IDENTITY_INEXISTENCE));
         return tokenGranter;
     }

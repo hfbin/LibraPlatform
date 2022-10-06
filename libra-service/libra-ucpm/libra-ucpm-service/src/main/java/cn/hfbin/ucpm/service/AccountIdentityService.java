@@ -31,8 +31,8 @@ public interface AccountIdentityService {
 
     /**
      * 根据id查询账号身份信息
-     * @param id
+     * @param accountId
      * @return
      */
-    IdentityInfoVo selectById(Long id);
+    IdentityInfoVo selectById(Long accountId);
 }

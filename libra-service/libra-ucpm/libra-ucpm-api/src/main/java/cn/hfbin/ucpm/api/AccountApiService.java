@@ -88,9 +88,9 @@ public interface AccountApiService {
 
     /**
      * 查询用户账号身份信息
-     * @param id 账号id accountId
+     * @param accountId 账号id accountId
      * @return ResponseData
      */
-    @GetMapping("/select-identity-info/{id}")
-    ResponseData<IdentityInfoVo> selectIdentityInfo(@PathVariable("id") Long id);
+    @GetMapping("/select-identity-info/{accountId}")
+    ResponseData<IdentityInfoVo> selectIdentityInfo(@PathVariable("accountId") Long accountId);
 }

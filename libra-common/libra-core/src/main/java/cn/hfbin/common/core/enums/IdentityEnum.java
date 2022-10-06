@@ -16,28 +16,27 @@
 
 package cn.hfbin.common.core.enums;
 
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
  * @Author: huangfubin
  * @Description: BaseExceptionCode 类
+ *
  * @Date: 2021/7/7
  */
+@Getter
+@AllArgsConstructor
 public enum IdentityEnum {
 
-    EMPLOYEE(10, "内部员工身份"),
-    DOMESTIC_CONSUMER(20, "普通用户身份");
+    EMPLOYEE(10, "identityEmployeeStrategy", "内部员工身份"),
+    DOMESTIC_CONSUMER(20, "identityTocStrategy","普通用户身份"),
 
     ;
-    @Getter
-    private int code;
-    @Getter
-    private String msg;
-
-    IdentityEnum(int code, String msg) {
-        this.code = code;
-        this.msg = msg;
-    }
+    private final int code;
+    private final String beanName;
+    private final String msg;
 
     /**
      *

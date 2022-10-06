@@ -1,15 +1,19 @@
 package cn.hfbin.auth.controller;
 
+import cn.hfbin.auth.enums.AuthExceptionCode;
+import cn.hfbin.auth.enums.GrantTypeEnum;
 import cn.hfbin.auth.provider.CompositeTokenGranterContext;
 import cn.hfbin.common.core.api.ResponseData;
 import cn.hfbin.auth.constant.AuthRedisKeyConstant;
 import cn.hfbin.common.core.constant.SpecialCharacterPool;
 import cn.hfbin.common.core.context.SpringContextUtils;
+import cn.hfbin.common.core.exception.LibraException;
 import cn.hfbin.common.token.model.AuthUserInfo;
 import cn.hfbin.common.log.annotation.Log;
 import cn.hfbin.common.log.enums.LogTypeEnum;
 import cn.hfbin.common.log.enums.OptBehaviorEnum;
 import cn.hfbin.common.redis.util.RedisUtil;
+import cn.hfbin.ucpm.enums.UcPmExceptionCode;
 import cn.hfbin.ucpm.params.LoginParams;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Objects;
 
 /**
  * @Author: huangfubin
@@ -36,7 +42,11 @@ public class AuthController {
     @ApiOperation(value = "登录接口", notes = "登录接口支持用户名密码和手机号登录")
     @Log(desc = "认证服务-登录接口", logType = LogTypeEnum.LOGIN_LOG, optBehavior = OptBehaviorEnum.LOGIN)
     public ResponseData<AuthUserInfo> login(@RequestBody LoginParams loginParams){
-        return ResponseData.ok(compositeTokenGranterContext.getGranter(loginParams.getGrantType()).grant(loginParams));
+        GrantTypeEnum grantType = GrantTypeEnum.getEnumByCode(loginParams.getGrantType());
+        if(Objects.isNull(grantType)){
+            throw new LibraException(AuthExceptionCode.GRANTER_INEXISTENCE);
+        }
+        return ResponseData.ok(compositeTokenGranterContext.getGranter(grantType).grant(loginParams));
     }
 
 

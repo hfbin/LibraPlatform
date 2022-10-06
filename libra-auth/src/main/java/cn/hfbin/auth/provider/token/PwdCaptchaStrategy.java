@@ -1,7 +1,6 @@
 package cn.hfbin.auth.provider.token;
 
 import cn.hfbin.auth.enums.AuthExceptionCode;
-import cn.hfbin.auth.constant.GrantTypeConstant;
 import cn.hfbin.common.core.exception.LibraException;
 import cn.hfbin.common.core.utils.FeignResponseUtil;
 import cn.hfbin.common.token.model.AuthUserInfo;
@@ -11,7 +10,7 @@ import cn.hfbin.ucpm.vo.AccountVo;
 import cn.hfbin.ucpm.vo.IdentityInfoVo;
 import cn.hutool.crypto.SecureUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
@@ -21,7 +20,7 @@ import java.util.Optional;
  * @Date: 2021/7/29
  */
 @Slf4j
-@Component(GrantTypeConstant.PASSWORD)
+@Service
 public class PwdCaptchaStrategy extends AbstractTokenGranter {
 
     @Override
