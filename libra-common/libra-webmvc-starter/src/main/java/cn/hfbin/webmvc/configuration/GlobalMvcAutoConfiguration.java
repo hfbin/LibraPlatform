@@ -89,7 +89,11 @@ public class GlobalMvcAutoConfiguration implements WebMvcConfigurer {
          */
         @Override
         public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
+            // 移除相关缓存数据，避免内溢出
             SpringContextUtils.removeLocalMap();
+            MDC.remove(HeaderCode.TENANT_CODE);
+            MDC.remove(HeaderCode.IDENTITY_ID);
+            MDC.remove(HeaderCode.TRACE_ID);
         }
     }
 
